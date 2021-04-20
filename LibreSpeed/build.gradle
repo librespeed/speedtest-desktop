@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+}
+
+group 'com.dosse.speedtest'
+version '1.0'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    compile 'com.jfoenix:jfoenix:9.0.10'
+    compile 'org.hildan.fxgson:fx-gson:3.1.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+javafx {
+    version = "15.0.1"
+    modules = [ 'javafx.controls' , 'javafx.base' , 'javafx.graphics' , 'javafx.fxml' , 'javafx.web']
+}
+
+
+mainClassName = 'com.dosse.speedtest.Main'
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+};

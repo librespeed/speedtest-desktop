@@ -1,0 +1,287 @@
+com/dosse/speedtest/widget/TickLabelOrientation.java
+ com.dosse.speedtest.widget.TickLabelOrientation
+com/dosse/speedtest/widget/tools/AngleConicalGradient.java
+ com.dosse.speedtest.widget.tools.AngleConicalGradient
+com/dosse/speedtest/widget/Marker.java
+ com.dosse.speedtest.widget.Marker
+ com.dosse.speedtest.widget.Marker$1
+ com.dosse.speedtest.widget.Marker$MarkerEvent
+ com.dosse.speedtest.widget.Marker$MarkerType
+com/dosse/speedtest/widget/skins/GaugeSkin.java
+ com.dosse.speedtest.widget.skins.GaugeSkin
+ com.dosse.speedtest.widget.skins.GaugeSkin$1
+com/dosse/speedtest/widget/Needle.java
+ com.dosse.speedtest.widget.Needle
+ com.dosse.speedtest.widget.Needle$1
+com/dosse/speedtest/widget/MarkerBuilder.java
+ com.dosse.speedtest.widget.MarkerBuilder
+com/dosse/speedtest/widget/LcdFont.java
+ com.dosse.speedtest.widget.LcdFont
+com/dosse/speedtest/widget/skins/BarSkin.java
+ com.dosse.speedtest.widget.skins.BarSkin
+com/dosse/speedtest/widget/events/UpdateEventListener.java
+ com.dosse.speedtest.widget.events.UpdateEventListener
+com/dosse/speedtest/widget/skins/GaugeSkinBase.java
+ com.dosse.speedtest.widget.skins.GaugeSkinBase
+com/dosse/speedtest/controllers/DialogSelectServer.java
+ com.dosse.speedtest.controllers.DialogSelectServer
+ com.dosse.speedtest.controllers.DialogSelectServer$1
+ com.dosse.speedtest.controllers.DialogSelectServer$2
+ com.dosse.speedtest.controllers.DialogSelectServer$3
+ com.dosse.speedtest.controllers.DialogSelectServer$4
+ com.dosse.speedtest.controllers.DialogSelectServer$5
+ com.dosse.speedtest.controllers.DialogSelectServer$DialogSelectServerController
+ com.dosse.speedtest.controllers.DialogSelectServer$onConfirmListener
+com/dosse/speedtest/widget/json/JSONArray.java
+ com.dosse.speedtest.widget.json.JSONArray
+com/dosse/speedtest/widget/tools/MovingAverage.java
+ com.dosse.speedtest.widget.tools.MovingAverage
+com/dosse/speedtest/widget/LcdDesign.java
+ com.dosse.speedtest.widget.LcdDesign
+ com.dosse.speedtest.widget.LcdDesign$1
+ com.dosse.speedtest.widget.LcdDesign$10
+ com.dosse.speedtest.widget.LcdDesign$11
+ com.dosse.speedtest.widget.LcdDesign$12
+ com.dosse.speedtest.widget.LcdDesign$13
+ com.dosse.speedtest.widget.LcdDesign$14
+ com.dosse.speedtest.widget.LcdDesign$15
+ com.dosse.speedtest.widget.LcdDesign$16
+ com.dosse.speedtest.widget.LcdDesign$17
+ com.dosse.speedtest.widget.LcdDesign$18
+ com.dosse.speedtest.widget.LcdDesign$19
+ com.dosse.speedtest.widget.LcdDesign$2
+ com.dosse.speedtest.widget.LcdDesign$20
+ com.dosse.speedtest.widget.LcdDesign$21
+ com.dosse.speedtest.widget.LcdDesign$22
+ com.dosse.speedtest.widget.LcdDesign$23
+ com.dosse.speedtest.widget.LcdDesign$24
+ com.dosse.speedtest.widget.LcdDesign$25
+ com.dosse.speedtest.widget.LcdDesign$26
+ com.dosse.speedtest.widget.LcdDesign$27
+ com.dosse.speedtest.widget.LcdDesign$28
+ com.dosse.speedtest.widget.LcdDesign$29
+ com.dosse.speedtest.widget.LcdDesign$3
+ com.dosse.speedtest.widget.LcdDesign$30
+ com.dosse.speedtest.widget.LcdDesign$31
+ com.dosse.speedtest.widget.LcdDesign$32
+ com.dosse.speedtest.widget.LcdDesign$33
+ com.dosse.speedtest.widget.LcdDesign$34
+ com.dosse.speedtest.widget.LcdDesign$35
+ com.dosse.speedtest.widget.LcdDesign$36
+ com.dosse.speedtest.widget.LcdDesign$37
+ com.dosse.speedtest.widget.LcdDesign$4
+ com.dosse.speedtest.widget.LcdDesign$5
+ com.dosse.speedtest.widget.LcdDesign$6
+ com.dosse.speedtest.widget.LcdDesign$7
+ com.dosse.speedtest.widget.LcdDesign$8
+ com.dosse.speedtest.widget.LcdDesign$9
+com/dosse/speedtest/widget/Fonts.java
+ com.dosse.speedtest.widget.Fonts
+com/dosse/speedtest/widget/json/JSONObject.java
+ com.dosse.speedtest.widget.json.JSONObject
+ com.dosse.speedtest.widget.json.JSONObject$1
+com/dosse/speedtest/widget/TickMarkType.java
+ com.dosse.speedtest.widget.TickMarkType
+com/dosse/speedtest/widget/json/JSONException.java
+ com.dosse.speedtest.widget.json.JSONException
+com/dosse/speedtest/widget/json/JSONString.java
+ com.dosse.speedtest.widget.json.JSONString
+com/dosse/speedtest/widget/tools/SectionComparator.java
+ com.dosse.speedtest.widget.tools.SectionComparator
+com/dosse/speedtest/widget/json/JSONTokener.java
+ com.dosse.speedtest.widget.json.JSONTokener
+com/dosse/speedtest/ServerItemCreator.java
+ com.dosse.speedtest.ServerItemCreator
+ com.dosse.speedtest.ServerItemCreator$1
+ com.dosse.speedtest.ServerItemCreator$onItemSelectListener
+com/dosse/speedtest/widget/tools/Statistics.java
+ com.dosse.speedtest.widget.tools.Statistics
+com/dosse/speedtest/widget/json/JSONStringer.java
+ com.dosse.speedtest.widget.json.JSONStringer
+ com.dosse.speedtest.widget.json.JSONStringer$Scope
+com/dosse/speedtest/widget/Gauge.java
+ com.dosse.speedtest.widget.Gauge
+ com.dosse.speedtest.widget.Gauge$1
+ com.dosse.speedtest.widget.Gauge$10
+ com.dosse.speedtest.widget.Gauge$100
+ com.dosse.speedtest.widget.Gauge$101
+ com.dosse.speedtest.widget.Gauge$102
+ com.dosse.speedtest.widget.Gauge$103
+ com.dosse.speedtest.widget.Gauge$104
+ com.dosse.speedtest.widget.Gauge$105
+ com.dosse.speedtest.widget.Gauge$106
+ com.dosse.speedtest.widget.Gauge$107
+ com.dosse.speedtest.widget.Gauge$108
+ com.dosse.speedtest.widget.Gauge$109
+ com.dosse.speedtest.widget.Gauge$11
+ com.dosse.speedtest.widget.Gauge$110
+ com.dosse.speedtest.widget.Gauge$111
+ com.dosse.speedtest.widget.Gauge$112
+ com.dosse.speedtest.widget.Gauge$12
+ com.dosse.speedtest.widget.Gauge$13
+ com.dosse.speedtest.widget.Gauge$14
+ com.dosse.speedtest.widget.Gauge$15
+ com.dosse.speedtest.widget.Gauge$16
+ com.dosse.speedtest.widget.Gauge$17
+ com.dosse.speedtest.widget.Gauge$18
+ com.dosse.speedtest.widget.Gauge$19
+ com.dosse.speedtest.widget.Gauge$2
+ com.dosse.speedtest.widget.Gauge$20
+ com.dosse.speedtest.widget.Gauge$21
+ com.dosse.speedtest.widget.Gauge$22
+ com.dosse.speedtest.widget.Gauge$23
+ com.dosse.speedtest.widget.Gauge$24
+ com.dosse.speedtest.widget.Gauge$25
+ com.dosse.speedtest.widget.Gauge$26
+ com.dosse.speedtest.widget.Gauge$27
+ com.dosse.speedtest.widget.Gauge$28
+ com.dosse.speedtest.widget.Gauge$29
+ com.dosse.speedtest.widget.Gauge$3
+ com.dosse.speedtest.widget.Gauge$30
+ com.dosse.speedtest.widget.Gauge$31
+ com.dosse.speedtest.widget.Gauge$32
+ com.dosse.speedtest.widget.Gauge$33
+ com.dosse.speedtest.widget.Gauge$34
+ com.dosse.speedtest.widget.Gauge$35
+ com.dosse.speedtest.widget.Gauge$36
+ com.dosse.speedtest.widget.Gauge$37
+ com.dosse.speedtest.widget.Gauge$38
+ com.dosse.speedtest.widget.Gauge$39
+ com.dosse.speedtest.widget.Gauge$4
+ com.dosse.speedtest.widget.Gauge$40
+ com.dosse.speedtest.widget.Gauge$41
+ com.dosse.speedtest.widget.Gauge$42
+ com.dosse.speedtest.widget.Gauge$43
+ com.dosse.speedtest.widget.Gauge$44
+ com.dosse.speedtest.widget.Gauge$45
+ com.dosse.speedtest.widget.Gauge$46
+ com.dosse.speedtest.widget.Gauge$47
+ com.dosse.speedtest.widget.Gauge$48
+ com.dosse.speedtest.widget.Gauge$49
+ com.dosse.speedtest.widget.Gauge$5
+ com.dosse.speedtest.widget.Gauge$50
+ com.dosse.speedtest.widget.Gauge$51
+ com.dosse.speedtest.widget.Gauge$52
+ com.dosse.speedtest.widget.Gauge$53
+ com.dosse.speedtest.widget.Gauge$54
+ com.dosse.speedtest.widget.Gauge$55
+ com.dosse.speedtest.widget.Gauge$56
+ com.dosse.speedtest.widget.Gauge$57
+ com.dosse.speedtest.widget.Gauge$58
+ com.dosse.speedtest.widget.Gauge$59
+ com.dosse.speedtest.widget.Gauge$6
+ com.dosse.speedtest.widget.Gauge$60
+ com.dosse.speedtest.widget.Gauge$61
+ com.dosse.speedtest.widget.Gauge$62
+ com.dosse.speedtest.widget.Gauge$63
+ com.dosse.speedtest.widget.Gauge$64
+ com.dosse.speedtest.widget.Gauge$65
+ com.dosse.speedtest.widget.Gauge$66
+ com.dosse.speedtest.widget.Gauge$67
+ com.dosse.speedtest.widget.Gauge$68
+ com.dosse.speedtest.widget.Gauge$69
+ com.dosse.speedtest.widget.Gauge$7
+ com.dosse.speedtest.widget.Gauge$70
+ com.dosse.speedtest.widget.Gauge$71
+ com.dosse.speedtest.widget.Gauge$72
+ com.dosse.speedtest.widget.Gauge$73
+ com.dosse.speedtest.widget.Gauge$74
+ com.dosse.speedtest.widget.Gauge$75
+ com.dosse.speedtest.widget.Gauge$76
+ com.dosse.speedtest.widget.Gauge$77
+ com.dosse.speedtest.widget.Gauge$78
+ com.dosse.speedtest.widget.Gauge$79
+ com.dosse.speedtest.widget.Gauge$8
+ com.dosse.speedtest.widget.Gauge$80
+ com.dosse.speedtest.widget.Gauge$81
+ com.dosse.speedtest.widget.Gauge$82
+ com.dosse.speedtest.widget.Gauge$83
+ com.dosse.speedtest.widget.Gauge$84
+ com.dosse.speedtest.widget.Gauge$85
+ com.dosse.speedtest.widget.Gauge$86
+ com.dosse.speedtest.widget.Gauge$87
+ com.dosse.speedtest.widget.Gauge$88
+ com.dosse.speedtest.widget.Gauge$89
+ com.dosse.speedtest.widget.Gauge$9
+ com.dosse.speedtest.widget.Gauge$90
+ com.dosse.speedtest.widget.Gauge$91
+ com.dosse.speedtest.widget.Gauge$92
+ com.dosse.speedtest.widget.Gauge$93
+ com.dosse.speedtest.widget.Gauge$94
+ com.dosse.speedtest.widget.Gauge$95
+ com.dosse.speedtest.widget.Gauge$96
+ com.dosse.speedtest.widget.Gauge$97
+ com.dosse.speedtest.widget.Gauge$98
+ com.dosse.speedtest.widget.Gauge$99
+ com.dosse.speedtest.widget.Gauge$ButtonEvent
+ com.dosse.speedtest.widget.Gauge$KnobType
+ com.dosse.speedtest.widget.Gauge$LedType
+ com.dosse.speedtest.widget.Gauge$NeedleBehavior
+ com.dosse.speedtest.widget.Gauge$NeedleShape
+ com.dosse.speedtest.widget.Gauge$NeedleSize
+ com.dosse.speedtest.widget.Gauge$NeedleType
+ com.dosse.speedtest.widget.Gauge$ScaleDirection
+ com.dosse.speedtest.widget.Gauge$SkinType
+ com.dosse.speedtest.widget.Gauge$ThresholdEvent
+com/dosse/speedtest/widget/events/UpdateEvent.java
+ com.dosse.speedtest.widget.events.UpdateEvent
+ com.dosse.speedtest.widget.events.UpdateEvent$EventType
+com/dosse/speedtest/widget/TickLabelLocation.java
+ com.dosse.speedtest.widget.TickLabelLocation
+com/dosse/speedtest/widget/json/JSON.java
+ com.dosse.speedtest.widget.json.JSON
+com/dosse/speedtest/widget/GaugeBuilder.java
+ com.dosse.speedtest.widget.GaugeBuilder
+ com.dosse.speedtest.widget.GaugeBuilder$1
+com/dosse/speedtest/widget/Section.java
+ com.dosse.speedtest.widget.Section
+ com.dosse.speedtest.widget.Section$1
+ com.dosse.speedtest.widget.Section$2
+ com.dosse.speedtest.widget.Section$3
+ com.dosse.speedtest.widget.Section$4
+ com.dosse.speedtest.widget.Section$5
+ com.dosse.speedtest.widget.Section$6
+ com.dosse.speedtest.widget.Section$7
+ com.dosse.speedtest.widget.Section$8
+ com.dosse.speedtest.widget.Section$SectionEvent
+com/dosse/speedtest/widget/tools/ConicalGradient.java
+ com.dosse.speedtest.widget.tools.ConicalGradient
+com/dosse/speedtest/widget/tools/Helper.java
+ com.dosse.speedtest.widget.tools.Helper
+ com.dosse.speedtest.widget.tools.Helper$1
+com/dosse/speedtest/widget/tools/GradientLookup.java
+ com.dosse.speedtest.widget.tools.GradientLookup
+com/dosse/speedtest/controllers/DialogShowPrivacy.java
+ com.dosse.speedtest.controllers.DialogShowPrivacy
+ com.dosse.speedtest.controllers.DialogShowPrivacy$1
+ com.dosse.speedtest.controllers.DialogShowPrivacy$2
+ com.dosse.speedtest.controllers.DialogShowPrivacy$3
+ com.dosse.speedtest.controllers.DialogShowPrivacy$4
+ com.dosse.speedtest.controllers.DialogShowPrivacy$DialogShowPrivacyController
+com/dosse/speedtest/widget/tools/MarkerComparator.java
+ com.dosse.speedtest.widget.tools.MarkerComparator
+com/dosse/speedtest/widget/tools/Data.java
+ com.dosse.speedtest.widget.tools.Data
+com/dosse/speedtest/widget/GaugeDesign.java
+ com.dosse.speedtest.widget.GaugeDesign
+ com.dosse.speedtest.widget.GaugeDesign$1
+ com.dosse.speedtest.widget.GaugeDesign$10
+ com.dosse.speedtest.widget.GaugeDesign$11
+ com.dosse.speedtest.widget.GaugeDesign$12
+ com.dosse.speedtest.widget.GaugeDesign$2
+ com.dosse.speedtest.widget.GaugeDesign$3
+ com.dosse.speedtest.widget.GaugeDesign$4
+ com.dosse.speedtest.widget.GaugeDesign$5
+ com.dosse.speedtest.widget.GaugeDesign$6
+ com.dosse.speedtest.widget.GaugeDesign$7
+ com.dosse.speedtest.widget.GaugeDesign$8
+ com.dosse.speedtest.widget.GaugeDesign$9
+ com.dosse.speedtest.widget.GaugeDesign$GaugeBackground
+ com.dosse.speedtest.widget.GaugeDesign$GaugeBackground$1
+ com.dosse.speedtest.widget.GaugeDesign$GaugeBackground$2
+ com.dosse.speedtest.widget.GaugeDesign$GaugeBackground$3
+ com.dosse.speedtest.widget.GaugeDesign$GaugeBackground$4
+ com.dosse.speedtest.widget.GaugeDesign$GaugeBackground$5
+ com.dosse.speedtest.widget.GaugeDesign$GaugeBackground$6
+ com.dosse.speedtest.widget.GaugeDesign$GaugeBackground$7
+ com.dosse.speedtest.widget.GaugeDesign$GaugeBackground$8

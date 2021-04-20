@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane maxHeight="450.0" maxWidth="320.0" minHeight="450.0" minWidth="320.0" prefHeight="450.0" prefWidth="320.0" style="-fx-background-color: #ffffff; -fx-background-radius: 12;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosse.speedtest.controllers.DialogShowPrivacy">
+    <children>
+        <VBox alignment="TOP_CENTER" layoutX="9.0" layoutY="9.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox alignment="CENTER">
+                    <children>
+                        <JFXButton focusTraversable="false" layoutX="143.0" layoutY="10.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="40.0" ripplerFill="#17212b" style="-fx-background-radius: 100;" visible="false">
+                            <graphic>
+                                <SVGPath content="M3 11H15V13H3M3 18V16H21V18M3 6H9V8H3Z" fill="WHITE" />
+                            </graphic>
+                            <HBox.margin>
+                                <Insets left="15.0" />
+                            </HBox.margin>
+                        </JFXButton>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="240.0" style="-fx-font-family: ubvazir; -fx-font-size: 16; -fx-text-fill: #212121; -fx-text-alignment: center;" text="Privacy Policy" textAlignment="CENTER" textFill="WHITE" />
+                        <JFXButton fx:id="btn_close_dialog_show_privacy" focusTraversable="false" layoutX="143.0" layoutY="10.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" ripplerFill="#212121" style="-fx-background-radius: 100;" text="Button" visible="true">
+                            <graphic>
+                                <SVGPath content="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" fill="#212121" />
+                            </graphic>
+                            <HBox.margin>
+                                <Insets left="15.0" />
+                            </HBox.margin>
+                        </JFXButton>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="7.0" right="7.0" top="7.0" />
+                    </VBox.margin>
+                </HBox>
+            <WebView fx:id="webView_privacy" maxHeight="380.0" minHeight="380.0" prefHeight="380.0" prefWidth="-1.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </WebView>
+
+            </children>
+        </VBox>
+    </children>
+    <effect>
+        <DropShadow />
+    </effect>
+</AnchorPane>
