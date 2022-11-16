@@ -39,8 +39,8 @@ class SplashController : Initializable {
                     var root : Parent? = null
                     try {
                         root = FXMLLoader.load<Parent>(Objects.requireNonNull(javaClass.getResource("/layouts/layout_main.fxml")))
-                    } catch (ex : IOException) {}
-                    root!!.stylesheets.add(javaClass.getResource("/styles/styles.css").toExternalForm())
+                    } catch (_: IOException) {}
+                    root!!.stylesheets.add(javaClass.getResource("/styles/styles.css")!!.toExternalForm())
                     val stage = Stage()
                     stage.icons.add(Image(javaClass.getResourceAsStream("/images/icon_app.png")))
                     stage.title = "LibreSpeed"
@@ -49,7 +49,7 @@ class SplashController : Initializable {
                     stage.show()
                     onEndListener.onEnded()
                 }
-            } catch (ex : InterruptedException) {
+            } catch (_: InterruptedException) {
 
             }
         }

@@ -54,7 +54,7 @@ public class DialogSelectServer extends StackPane {
         });
         try {
             view = (Node) fxmlLoader.load();
-        } catch (IOException ex) {
+        } catch (IOException ignored) {
         }
 
         anim();

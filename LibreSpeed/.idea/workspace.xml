@@ -9,11 +9,429 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79168b23-251c-493f-9687-6bc54600be46" name="Default Changelist" comment="" />
+    <list default="true" id="79168b23-251c-493f-9687-6bc54600be46" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/META-INF/LibreSpeed.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/ServerItemCreator$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/ServerItemCreator$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/ServerItemCreator$onItemSelectListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/ServerItemCreator$onItemSelectListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/ServerItemCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/ServerItemCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/StarterKt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/Tools$Companion$fadeHide$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/Tools$Companion$fadeShow$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/Tools$Companion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/Tools.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$DialogSelectServerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$DialogSelectServerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$onConfirmListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer$onConfirmListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogSelectServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy$DialogShowPrivacyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy$DialogShowPrivacyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/DialogShowPrivacy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$1$onServerSelected$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$2$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onCriticalFailure$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onDownloadUpdate$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onEnd$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onIPInfoUpdate$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onPingJitterUpdate$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onTestIDReceived$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onUploadUpdate$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$3$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$defs$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$initialize$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController$initialize$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/SplashController$MainStarter$OnEndListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/SplashController$MainStarter$run$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/SplashController$MainStarter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/SplashController$initialize$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/controllers/SplashController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/SpeedTestHandler$OnServerSelectListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/SpeedTestHandler$fetchServers$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/SpeedTestHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/Speedtest$ServerListLoader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/Speedtest$ServerSelectedHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/Speedtest$SpeedtestHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/Speedtest$selectServer$$inlined$synchronized$lambda$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/Speedtest$start$$inlined$synchronized$lambda$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/Speedtest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/base/Connection$Companion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/base/Connection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/base/Utils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/config/SpeedtestConfig$Companion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/config/SpeedtestConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/config/TelemetryConfig$Companion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/config/TelemetryConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/download/DownloadStream$init$1$run$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/download/DownloadStream$init$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/download/DownloadStream.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/download/Downloader$Companion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/download/Downloader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/getIP/GetIP.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/log/Logger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/ping/PingStream$init$1$run$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/ping/PingStream$init$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/ping/PingStream.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/ping/Pinger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/serverSelector/ServerSelector$Companion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/serverSelector/ServerSelector$next$$inlined$synchronized$lambda$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/serverSelector/ServerSelector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/serverSelector/TestPoint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/telemetry/Telemetry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/upload/UploadStream$init$1$run$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/upload/UploadStream$init$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/upload/UploadStream.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/upload/Uploader$Companion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/upload/Uploader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/worker/SpeedtestWorker$dlTest$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/worker/SpeedtestWorker$iP$g$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/worker/SpeedtestWorker$pingTest$ps$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/worker/SpeedtestWorker$sendTelemetry$t$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/worker/SpeedtestWorker$ulTest$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/core/worker/SpeedtestWorker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Fonts.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Fonts.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$100.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$100.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$101.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$101.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$102.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$102.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$103.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$103.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$104.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$104.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$105.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$105.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$106.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$106.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$107.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$107.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$108.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$108.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$109.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$109.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$110.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$110.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$111.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$111.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$112.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$112.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$20.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$21.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$22.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$23.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$24.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$25.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$26.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$27.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$28.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$29.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$30.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$31.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$31.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$32.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$32.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$33.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$33.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$34.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$34.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$35.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$35.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$36.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$36.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$37.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$37.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$38.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$38.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$39.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$39.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$40.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$40.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$41.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$41.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$42.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$42.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$43.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$43.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$44.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$44.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$45.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$45.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$46.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$46.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$47.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$47.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$48.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$48.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$49.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$49.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$50.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$50.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$51.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$51.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$52.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$52.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$53.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$53.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$54.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$54.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$55.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$55.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$56.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$56.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$57.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$57.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$58.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$58.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$59.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$59.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$60.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$60.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$61.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$61.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$62.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$62.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$63.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$63.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$64.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$64.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$65.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$65.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$66.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$66.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$67.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$67.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$68.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$68.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$69.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$69.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$70.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$70.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$71.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$71.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$72.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$72.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$73.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$73.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$74.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$74.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$75.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$75.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$76.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$76.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$77.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$77.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$78.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$78.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$79.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$79.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$80.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$80.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$81.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$81.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$82.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$82.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$83.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$83.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$84.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$84.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$85.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$85.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$86.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$86.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$87.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$87.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$88.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$88.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$89.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$89.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$90.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$90.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$91.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$91.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$92.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$92.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$93.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$93.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$94.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$94.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$95.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$95.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$96.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$96.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$97.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$97.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$98.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$98.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$99.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$99.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$ButtonEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$ButtonEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$KnobType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$KnobType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$LedType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$LedType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$NeedleBehavior.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$NeedleBehavior.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$NeedleShape.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$NeedleShape.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$NeedleSize.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$NeedleSize.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$NeedleType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$NeedleType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$ScaleDirection.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$ScaleDirection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$SkinType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$SkinType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$ThresholdEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge$ThresholdEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Gauge.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeBuilder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeBuilder$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign$GaugeBackground.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/GaugeDesign.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$20.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$21.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$22.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$23.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$24.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$25.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$26.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$27.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$28.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$29.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$30.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$31.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$31.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$32.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$32.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$33.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$33.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$34.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$34.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$35.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$35.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$36.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$36.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$37.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$37.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdDesign.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdFont.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/LcdFont.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Marker$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Marker$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Marker$MarkerEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Marker$MarkerEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Marker$MarkerType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Marker$MarkerType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Marker.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Marker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/MarkerBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/MarkerBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Needle$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Needle$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Needle.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Needle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$SectionEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section$SectionEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/Section.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/TickLabelLocation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/TickLabelLocation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/TickLabelOrientation.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/TickLabelOrientation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/TickMarkType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/TickMarkType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/events/UpdateEvent$EventType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/events/UpdateEvent$EventType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/events/UpdateEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/events/UpdateEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/events/UpdateEventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/events/UpdateEventListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSON.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSON.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONArray.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONArray.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONException.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONObject$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONObject$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONString.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONString.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONStringer$Scope.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONStringer$Scope.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONStringer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONStringer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONTokener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/json/JSONTokener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/skins/BarSkin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/skins/BarSkin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/skins/GaugeSkin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/skins/GaugeSkin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/skins/GaugeSkin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/skins/GaugeSkin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/skins/GaugeSkinBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/skins/GaugeSkinBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/AngleConicalGradient.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/AngleConicalGradient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/ConicalGradient.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/ConicalGradient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/Data.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/GradientLookup.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/GradientLookup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/Helper$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/Helper$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/Helper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/Helper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/MarkerComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/MarkerComparator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/MovingAverage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/MovingAverage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/SectionComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/SectionComparator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/Statistics.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dosse/speedtest/widget/tools/Statistics.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/META-INF/LibreSpeed.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/META-INF/LibreSpeed.kotlin_module" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/StarterKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/StarterKt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/Tools$Companion$fadeHide$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/Tools$Companion$fadeShow$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/Tools$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/Tools$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/Tools.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/Tools.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$1$onServerSelected$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$2$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onCriticalFailure$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onDownloadUpdate$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onEnd$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onIPInfoUpdate$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onPingJitterUpdate$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onTestIDReceived$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$3$1$onUploadUpdate$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$3$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$3$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$defs$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$initialize$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController$initialize$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/SplashController$MainStarter$OnEndListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/SplashController$MainStarter$OnEndListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/SplashController$MainStarter$run$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/SplashController$MainStarter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/SplashController$MainStarter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/SplashController$initialize$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/SplashController$initialize$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/SplashController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/controllers/SplashController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/SpeedTestHandler$OnServerSelectListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/SpeedTestHandler$OnServerSelectListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/SpeedTestHandler$fetchServers$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/SpeedTestHandler$fetchServers$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/SpeedTestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/SpeedTestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/Speedtest$ServerListLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/Speedtest$ServerListLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/Speedtest$ServerSelectedHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/Speedtest$ServerSelectedHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/Speedtest$SpeedtestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/Speedtest$SpeedtestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/Speedtest$selectServer$$inlined$synchronized$lambda$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/Speedtest$start$$inlined$synchronized$lambda$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/Speedtest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/Speedtest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/base/Connection$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/base/Connection$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/base/Connection.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/base/Connection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/base/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/base/Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/config/SpeedtestConfig$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/config/SpeedtestConfig$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/config/SpeedtestConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/config/SpeedtestConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/config/TelemetryConfig$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/config/TelemetryConfig$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/config/TelemetryConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/config/TelemetryConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/download/DownloadStream$init$1$run$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/download/DownloadStream$init$1$run$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/download/DownloadStream$init$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/download/DownloadStream$init$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/download/DownloadStream.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/download/DownloadStream.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/download/Downloader$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/download/Downloader$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/download/Downloader.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/download/Downloader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/getIP/GetIP.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/getIP/GetIP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/log/Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/log/Logger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/ping/PingStream$init$1$run$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/ping/PingStream$init$1$run$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/ping/PingStream$init$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/ping/PingStream$init$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/ping/PingStream.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/ping/PingStream.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/ping/Pinger.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/ping/Pinger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/serverSelector/ServerSelector$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/serverSelector/ServerSelector$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/serverSelector/ServerSelector$next$$inlined$synchronized$lambda$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/serverSelector/ServerSelector.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/serverSelector/ServerSelector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/serverSelector/TestPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/serverSelector/TestPoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/telemetry/Telemetry.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/telemetry/Telemetry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/upload/UploadStream$init$1$run$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/upload/UploadStream$init$1$run$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/upload/UploadStream$init$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/upload/UploadStream$init$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/upload/UploadStream.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/upload/UploadStream.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/upload/Uploader$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/upload/Uploader$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/upload/Uploader.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/upload/Uploader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker$dlTest$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker$dlTest$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker$iP$g$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker$iP$g$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker$pingTest$ps$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker$pingTest$ps$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker$sendTelemetry$t$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker$sendTelemetry$t$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker$ulTest$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker$ulTest$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dosse/speedtest/core/worker/SpeedtestWorker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/layouts/layout_main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/layouts/layout_main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/layouts/layout_splash.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/layouts/layout_splash.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dosse/speedtest/controllers/DialogSelectServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dosse/speedtest/controllers/DialogSelectServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dosse/speedtest/controllers/DialogShowPrivacy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dosse/speedtest/controllers/DialogShowPrivacy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dosse/speedtest/controllers/MainController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dosse/speedtest/controllers/MainController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dosse/speedtest/controllers/SplashController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dosse/speedtest/controllers/SplashController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layouts/dialog_privacy.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layouts/dialog_privacy.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layouts/dialog_select_server.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layouts/dialog_select_server.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layouts/layout_main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layouts/layout_main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layouts/layout_splash.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layouts/layout_splash.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -30,20 +448,31 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1r14OAYB5lbEhTEcxydh7IoKUqG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/sudodios/Downloads/Libs/speedtest-desktop/LibreSpeed",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/images" />
@@ -53,7 +482,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources/configs" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.StarterKt">
+  <component name="RunManager" selected="Kotlin.StarterKt">
     <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="your.name.here.speedtest.widget.Demo" />
       <module name="LibreSpeed.main" />
@@ -83,21 +512,15 @@
       </method>
     </configuration>
     <configuration name="StarterKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="LibreSpeed.main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.dosse.speedtest.StarterKt" />
-      <option name="WORKING_DIRECTORY" />
+      <module name="LibreSpeed.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.StarterKt" />
+        <item itemvalue="Kotlin.StarterKt" />
         <item itemvalue="Application.Starter (1)" />
         <item itemvalue="Application.Starter" />
         <item itemvalue="Application.Demo" />
@@ -106,8 +529,29 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1668598255685</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668598255685</updated>
+      <workItem from="1668598257162" duration="2856000" />
+    </task>
+    <servers />
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

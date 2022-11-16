@@ -1,8 +1,8 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.9'
-    id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.20'
 }
 
 group 'com.dosse.speedtest'
@@ -14,11 +14,11 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
 
-    compile 'com.jfoenix:jfoenix:9.0.10'
-    compile 'org.hildan.fxgson:fx-gson:3.1.2'
+    implementation 'com.jfoenix:jfoenix:9.0.10'
+    implementation 'org.hildan.fxgson:fx-gson:4.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
 }
