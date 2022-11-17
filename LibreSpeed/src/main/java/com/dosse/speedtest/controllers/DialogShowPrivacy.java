@@ -49,7 +49,7 @@ public class DialogShowPrivacy extends StackPane {
         });
         try {
             view = (Node) fxmlLoader.load();
-        } catch (IOException ex) {
+        } catch (IOException ignored) {
         }
 
         anim();

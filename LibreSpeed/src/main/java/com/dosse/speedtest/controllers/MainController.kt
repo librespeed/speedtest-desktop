@@ -21,6 +21,7 @@ import com.dosse.speedtest.core.serverSelector.TestPoint
 import com.dosse.speedtest.widget.Gauge
 import java.net.URL
 import java.util.*
+import kotlin.math.roundToInt
 
 class MainController : Initializable {
 
@@ -118,8 +119,7 @@ class MainController : Initializable {
             dialogSelectServer.showDialog()
         }
         btn_start_test.onAction = EventHandler {
-            if (testPointMain == null) {
-            } else {
+            if (testPointMain != null) {
                 fadeHide(btn_copy_share)
                 btn_copy_share.isManaged = false
                 fadeShow(layout_testing)
@@ -208,6 +208,6 @@ class MainController : Initializable {
 
     private fun format(d: Double): String {
         if (d < 10) return String.format("%.2f", d)
-        return if (d < 100) String.format("%.1f", d) else "" + Math.round(d)
+        return if (d < 100) String.format("%.1f", d) else "" + d.roundToInt()
     }
 }

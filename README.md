@@ -7,6 +7,15 @@ It is still WIP, it's not documented yet, but it works and it can be configured 
 
 This application is developed and maintained by Sudo Dios.
 
+## Run or build
+You can run `java -jar ./LibreSpeed.jar` (tested with openjdk 11.0.17)
+
+Or Build with Gradle :
+```bash
+cd /LibreSpeed
+./gradlew run
+```
+
 ## License
 Copyright (C) 2016-2021 Federico Dossena
 Copyright (C) 2021 Sudo Dios

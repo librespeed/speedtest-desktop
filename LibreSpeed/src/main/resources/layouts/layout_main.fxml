@@ -13,199 +13,211 @@
 
 <?import com.dosse.speedtest.widget.Gauge?>
 <?import com.jfoenix.controls.JFXSpinner?>
-<AnchorPane fx:id="root_main" prefHeight="600.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosse.speedtest.controllers.MainController">
-   <children>
-      <VBox fx:id="layout_select_server" alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <SVGPath content="M13,19H14A1,1 0 0,1 15,20H22V22H15A1,1 0 0,1 14,23H10A1,1 0 0,1 9,22H2V20H9A1,1 0 0,1 10,19H11V17H4A1,1 0 0,1 3,16V12A1,1 0 0,1 4,11H20A1,1 0 0,1 21,12V16A1,1 0 0,1 20,17H13V19M4,3H20A1,1 0 0,1 21,4V8A1,1 0 0,1 20,9H4A1,1 0 0,1 3,8V4A1,1 0 0,1 4,3M9,7H10V5H9V7M9,15H10V13H9V15M5,5V7H7V5H5M5,13V15H7V13H5Z" fill="#212121" scaleX="3.0" scaleY="3.0">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </SVGPath>
-            <JFXSpinner fx:id="spinner_loading_servers" maxHeight="40.0" maxWidth="40.0">
-               <VBox.margin>
-                  <Insets top="60.0" />
-               </VBox.margin>
-            </JFXSpinner>
-            <JFXButton fx:id="btn_select_server" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" minHeight="35.0" prefHeight="35.0" ripplerFill="#212121" style="-fx-text-fill: #212121; -fx-background-color: #ffffff; -fx-background-radius: 10;" text="Select a server">
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-               <graphic>
-                  <HBox>
-                     <children>
-                        <SVGPath content="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" fill="#212121">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </SVGPath>
-                     </children>
-                  </HBox>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="btn_start_test" buttonType="RAISED" focusTraversable="false" layoutX="174.0" layoutY="210.0" minHeight="40.0" minWidth="80.0" prefHeight="40.0" prefWidth="80.0" ripplerFill="WHITE" style="-fx-text-fill: #ffffff; -fx-background-color: #6060AA; -fx-background-radius: 10; -fx-font-size: 17;" text="Start">
-               <VBox.margin>
-                  <Insets top="60.0" />
-               </VBox.margin>
-            </JFXButton>
-            <JFXButton fx:id="btn_privacy" focusTraversable="false" layoutX="185.0" layoutY="418.0" ripplerFill="#212121" style="-fx-text-fill: #212121; -fx-background-color: #fcfcfc; -fx-background-radius: 10;" text="Privacy">
-               <VBox.margin>
-                  <Insets top="12.0" />
-               </VBox.margin>
-            </JFXButton>
-         </children>
-      </VBox>
-      <VBox fx:id="layout_testing" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <HBox alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-                     <image>
-                        <Image url="@../images/icon_app.png" />
-                     </image>
-                  </ImageView>
-                  <Label style="-fx-text-fill: #212121; -fx-font-size: 24;" text="LibreSpeed">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-            </HBox>
-            <Label fx:id="txt_server_name" text="Server Name Here">
-               <VBox.margin>
-                  <Insets top="25.0" />
-               </VBox.margin>
-            </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox alignment="CENTER" depthTest="DISABLE" prefHeight="200.0" prefWidth="215.0">
-                     <children>
-                        <Label style="-fx-font-size: 16; -fx-text-fill: #212121;" text="Ping" />
-                        <Label fx:id="txt_ping" layoutX="102.0" layoutY="50.0" style="-fx-font-size: 25; -fx-text-fill: #AA6060; -fx-font-weight: bold;" text="0.0 ms">
-                           <VBox.margin>
-                              <Insets top="8.0" />
-                           </VBox.margin>
-                        </Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox alignment="CENTER" depthTest="DISABLE" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="215.0">
-                     <children>
-                        <Label style="-fx-font-size: 16; -fx-text-fill: #212121;" text="Jitter" />
-                        <Label fx:id="txt_jitter" layoutX="102.0" layoutY="50.0" style="-fx-font-size: 25; -fx-text-fill: #AA6060; -fx-font-weight: bold;" text="0.0 ms">
-                           <VBox.margin>
-                              <Insets top="8.0" />
-                           </VBox.margin>
-                        </Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="133.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox alignment="CENTER" depthTest="DISABLE" fillWidth="false" minHeight="230.0" prefWidth="215.0">
-                     <children>
-                        <Label style="-fx-font-size: 16; -fx-text-fill: #212121;" text="Download" />
-                        <AnchorPane>
-                           <children>
-                              <Gauge fx:id="gauge_download" valueColor="#6060AA" barEffectEnabled="true" barBorderColor="#6060AA" barColor="#6060AA" prefWidth="120" prefHeight="120" skinType="BAR" maxValue="50" value="0">
-                              </Gauge>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                        </AnchorPane>
-                        <Label layoutX="67.0" layoutY="10.0" style="-fx-font-size: 16; -fx-text-fill: #212121;" text="Mbps">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                        </Label>
-                        <JFXProgressBar fx:id="progress_download" prefHeight="6.0" prefWidth="70.0" progress="0" styleClass="custom-jfx-progress-bar">
-                           <VBox.margin>
-                              <Insets bottom="15.0" top="7.0" />
-                           </VBox.margin>
-                        </JFXProgressBar>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox alignment="CENTER" depthTest="DISABLE" fillWidth="false" layoutX="40.0" layoutY="10.0" prefWidth="215.0">
-                     <children>
-                        <Label style="-fx-font-size: 16; -fx-text-fill: #212121;" text="Upload" />
-                        <AnchorPane>
-                           <children>
-                              <Gauge fx:id="gauge_upload" barEffectEnabled="true" barBorderColor="#212121" barColor="#212121" prefWidth="120" prefHeight="120" skinType="BAR" maxValue="50" value="0">
-                              </Gauge>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                        </AnchorPane>
-                        <Label layoutX="67.0" layoutY="10.0" style="-fx-font-size: 16; -fx-text-fill: #212121;" text="Mbps">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                        </Label>
-                        <JFXProgressBar fx:id="progress_upload" prefHeight="6.0" prefWidth="70.0" progress="0" styleClass="custom-jfx-progress-bar2">
-                           <VBox.margin>
-                              <Insets bottom="15.0" top="7.0" />
-                           </VBox.margin>
-                        </JFXProgressBar>
-                     </children>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets top="12.0" />
-               </VBox.margin>
-            </HBox>
-            <Label fx:id="txt_ip_info" alignment="CENTER" style="-fx-text-alignment: center" textAlignment="CENTER" contentDisplay="CENTER" layoutX="171.0" layoutY="125.0" text="Server Name Here" wrapText="true">
-               <VBox.margin>
-                  <Insets left="35.0" right="35.0" top="15.0" />
-               </VBox.margin>
-            </Label>
-            <HBox alignment="CENTER">
-               <JFXButton fx:id="btn_new_test" buttonType="RAISED" focusTraversable="false" minHeight="40.0" minWidth="120.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="WHITE" style="-fx-text-fill: #ffffff; -fx-background-color: #6060AA; -fx-background-radius: 3; -fx-font-size: 17;" text="New Test">
+<AnchorPane fx:id="root_main" prefHeight="600.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/15.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosse.speedtest.controllers.MainController">
+   <VBox fx:id="layout_select_server" alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0"
+         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+         AnchorPane.topAnchor="0.0">
+      <SVGPath
+              content="M13,19H14A1,1 0 0,1 15,20H22V22H15A1,1 0 0,1 14,23H10A1,1 0 0,1 9,22H2V20H9A1,1 0 0,1 10,19H11V17H4A1,1 0 0,1 3,16V12A1,1 0 0,1 4,11H20A1,1 0 0,1 21,12V16A1,1 0 0,1 20,17H13V19M4,3H20A1,1 0 0,1 21,4V8A1,1 0 0,1 20,9H4A1,1 0 0,1 3,8V4A1,1 0 0,1 4,3M9,7H10V5H9V7M9,15H10V13H9V15M5,5V7H7V5H5M5,13V15H7V13H5Z"
+              fill="#212121" scaleX="3.0" scaleY="3.0">
+         <VBox.margin>
+            <Insets top="10.0"/>
+         </VBox.margin>
+      </SVGPath>
+      <JFXSpinner fx:id="spinner_loading_servers" maxHeight="40.0" maxWidth="40.0">
+         <VBox.margin>
+            <Insets top="60.0"/>
+         </VBox.margin>
+      </JFXSpinner>
+      <JFXButton fx:id="btn_select_server" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false"
+                 minHeight="35.0" prefHeight="35.0" ripplerFill="#212121"
+                 style="-fx-text-fill: #212121; -fx-background-color: #ffffff; -fx-background-radius: 10;"
+                 text="Select a server">
+         <VBox.margin>
+            <Insets top="30.0"/>
+         </VBox.margin>
+         <graphic>
+            <HBox>
+               <SVGPath content="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" fill="#212121">
                   <HBox.margin>
-                     <Insets top="20.0" />
+                     <Insets left="10.0"/>
                   </HBox.margin>
-               </JFXButton>
-               <JFXButton fx:id="btn_copy_share" managed="false" visible="false" buttonType="RAISED" focusTraversable="false" minHeight="40.0" minWidth="120.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="WHITE" style="-fx-text-fill: #ffffff; -fx-background-color: #BF360C; -fx-background-radius: 3; -fx-font-size: 10;" text="Copy Share Result">
-                  <HBox.margin>
-                     <Insets top="20.0" left="15" />
-                  </HBox.margin>
-               </JFXButton>
+               </SVGPath>
             </HBox>
-         </children>
-      </VBox>
-      <VBox fx:id="layout_error" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <SVGPath content="M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z" fill="#b00020" scaleX="3.0" scaleY="3.0" scaleZ="3.0" />
-            <Label text="Server Connection Error">
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="btn_start_test" buttonType="RAISED" focusTraversable="false" layoutX="174.0" layoutY="210.0"
+                 minHeight="40.0" minWidth="80.0" prefHeight="40.0" prefWidth="80.0" ripplerFill="WHITE"
+                 style="-fx-text-fill: #ffffff; -fx-background-color: #6060AA; -fx-background-radius: 10; -fx-font-size: 17;"
+                 text="Start">
+         <VBox.margin>
+            <Insets top="60.0"/>
+         </VBox.margin>
+      </JFXButton>
+      <JFXButton fx:id="btn_privacy" focusTraversable="false" layoutX="185.0" layoutY="418.0" ripplerFill="#212121"
+                 style="-fx-text-fill: #212121; -fx-background-color: #fcfcfc; -fx-background-radius: 10;"
+                 text="Privacy">
+         <VBox.margin>
+            <Insets top="12.0"/>
+         </VBox.margin>
+      </JFXButton>
+   </VBox>
+   <VBox fx:id="layout_testing" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false"
+         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+         AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER">
+         <VBox.margin>
+            <Insets top="30.0"/>
+         </VBox.margin>
+         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+            <Image url="@../images/icon_app.png"/>
+         </ImageView>
+         <Label style="-fx-text-fill: #212121; -fx-font-size: 24;" text="LibreSpeed">
+            <HBox.margin>
+               <Insets left="20.0"/>
+            </HBox.margin>
+         </Label>
+      </HBox>
+      <Label fx:id="txt_server_name" text="Server Name Here">
+         <VBox.margin>
+            <Insets top="25.0"/>
+         </VBox.margin>
+      </Label>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets/>
+         </VBox.margin>
+         <VBox alignment="CENTER" depthTest="DISABLE" prefHeight="200.0" prefWidth="215.0">
+            <HBox.margin>
+               <Insets left="30.0"/>
+            </HBox.margin>
+            <Label style="-fx-font-size: 16; -fx-text-fill: #212121;" text="Ping"/>
+            <Label fx:id="txt_ping" layoutX="102.0" layoutY="50.0"
+                   style="-fx-font-size: 25; -fx-text-fill: #AA6060; -fx-font-weight: bold;" text="0.0 ms">
                <VBox.margin>
-                  <Insets top="35.0" />
+                  <Insets top="8.0"/>
                </VBox.margin>
             </Label>
-            <JFXButton fx:id="btn_retry_error" buttonType="RAISED" focusTraversable="false" layoutX="174.0" layoutY="210.0" minHeight="40.0" minWidth="110.0" prefHeight="40.0" prefWidth="110.0" ripplerFill="WHITE" style="-fx-text-fill: #ffffff; -fx-background-color: #6060AA; -fx-background-radius: 10; -fx-font-size: 17;" text="Try Again">
+         </VBox>
+         <VBox alignment="CENTER" depthTest="DISABLE" layoutX="10.0" layoutY="10.0" prefHeight="200.0"
+               prefWidth="215.0">
+            <HBox.margin>
+               <Insets right="30.0"/>
+            </HBox.margin>
+            <Label style="-fx-font-size: 16; -fx-text-fill: #212121;" text="Jitter"/>
+            <Label fx:id="txt_jitter" layoutX="102.0" layoutY="50.0"
+                   style="-fx-font-size: 25; -fx-text-fill: #AA6060; -fx-font-weight: bold;" text="0.0 ms">
                <VBox.margin>
-                  <Insets top="40.0" />
+                  <Insets top="8.0"/>
                </VBox.margin>
-            </JFXButton>
-         </children>
-      </VBox>
-   </children>
+            </Label>
+         </VBox>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="133.0" prefHeight="100.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets top="12.0"/>
+         </VBox.margin>
+         <VBox alignment="CENTER" depthTest="DISABLE" fillWidth="false" minHeight="230.0" prefWidth="215.0">
+            <HBox.margin>
+               <Insets left="30.0"/>
+            </HBox.margin>
+            <Label style="-fx-font-size: 16; -fx-text-fill: #212121;" text="Download"/>
+            <AnchorPane>
+               <VBox.margin>
+                  <Insets top="15.0"/>
+               </VBox.margin>
+               <Gauge fx:id="gauge_download" valueColor="#6060AA" barEffectEnabled="true"
+                      barBorderColor="#6060AA" barColor="#6060AA" prefWidth="120" prefHeight="120"
+                      skinType="BAR" maxValue="50" value="0">
+               </Gauge>
+            </AnchorPane>
+            <Label layoutX="67.0" layoutY="10.0" style="-fx-font-size: 16; -fx-text-fill: #212121;"
+                   text="Mbps">
+               <VBox.margin>
+                  <Insets top="15.0"/>
+               </VBox.margin>
+            </Label>
+            <JFXProgressBar fx:id="progress_download" prefHeight="6.0" prefWidth="70.0" progress="0"
+                            styleClass="custom-jfx-progress-bar">
+               <VBox.margin>
+                  <Insets bottom="15.0" top="7.0"/>
+               </VBox.margin>
+            </JFXProgressBar>
+         </VBox>
+         <VBox alignment="CENTER" depthTest="DISABLE" fillWidth="false" layoutX="40.0" layoutY="10.0"
+               prefWidth="215.0">
+            <HBox.margin>
+               <Insets right="30.0"/>
+            </HBox.margin>
+            <Label style="-fx-font-size: 16; -fx-text-fill: #212121;" text="Upload"/>
+            <AnchorPane>
+               <VBox.margin>
+                  <Insets top="15.0"/>
+               </VBox.margin>
+               <Gauge fx:id="gauge_upload" barEffectEnabled="true" barBorderColor="#212121"
+                      barColor="#212121" prefWidth="120" prefHeight="120" skinType="BAR" maxValue="50"
+                      value="0">
+               </Gauge>
+            </AnchorPane>
+            <Label layoutX="67.0" layoutY="10.0" style="-fx-font-size: 16; -fx-text-fill: #212121;"
+                   text="Mbps">
+               <VBox.margin>
+                  <Insets top="15.0"/>
+               </VBox.margin>
+            </Label>
+            <JFXProgressBar fx:id="progress_upload" prefHeight="6.0" prefWidth="70.0" progress="0"
+                            styleClass="custom-jfx-progress-bar2">
+               <VBox.margin>
+                  <Insets bottom="15.0" top="7.0"/>
+               </VBox.margin>
+            </JFXProgressBar>
+         </VBox>
+      </HBox>
+      <Label fx:id="txt_ip_info" alignment="CENTER" style="-fx-text-alignment: center" textAlignment="CENTER"
+             contentDisplay="CENTER" layoutX="171.0" layoutY="125.0" text="Server Name Here" wrapText="true">
+         <VBox.margin>
+            <Insets left="35.0" right="35.0" top="15.0"/>
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER">
+         <JFXButton fx:id="btn_new_test" buttonType="RAISED" focusTraversable="false" minHeight="40.0"
+                    minWidth="120.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="WHITE"
+                    style="-fx-text-fill: #ffffff; -fx-background-color: #6060AA; -fx-background-radius: 3; -fx-font-size: 17;"
+                    text="New Test">
+            <HBox.margin>
+               <Insets top="20.0"/>
+            </HBox.margin>
+         </JFXButton>
+         <JFXButton fx:id="btn_copy_share" managed="false" visible="false" buttonType="RAISED"
+                    focusTraversable="false" minHeight="40.0" minWidth="120.0" prefHeight="40.0" prefWidth="120.0"
+                    ripplerFill="WHITE"
+                    style="-fx-text-fill: #ffffff; -fx-background-color: #BF360C; -fx-background-radius: 3; -fx-font-size: 10;"
+                    text="Copy Share Result">
+            <HBox.margin>
+               <Insets top="20.0" left="15"/>
+            </HBox.margin>
+         </JFXButton>
+      </HBox>
+   </VBox>
+   <VBox fx:id="layout_error" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false"
+         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+         AnchorPane.topAnchor="0.0">
+      <SVGPath
+              content="M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z"
+              fill="#b00020" scaleX="3.0" scaleY="3.0" scaleZ="3.0"/>
+      <Label text="Server Connection Error">
+         <VBox.margin>
+            <Insets top="35.0"/>
+         </VBox.margin>
+      </Label>
+      <JFXButton fx:id="btn_retry_error" buttonType="RAISED" focusTraversable="false" layoutX="174.0" layoutY="210.0"
+                 minHeight="40.0" minWidth="110.0" prefHeight="40.0" prefWidth="110.0" ripplerFill="WHITE"
+                 style="-fx-text-fill: #ffffff; -fx-background-color: #6060AA; -fx-background-radius: 10; -fx-font-size: 17;"
+                 text="Try Again">
+         <VBox.margin>
+            <Insets top="40.0"/>
+         </VBox.margin>
+      </JFXButton>
+   </VBox>
 </AnchorPane>
