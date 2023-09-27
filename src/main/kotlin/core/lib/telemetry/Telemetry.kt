@@ -52,18 +52,17 @@ abstract class Telemetry(
             ps!!.print(sb.toString())
             ps.flush()
             val h = c.parseResponseHeaders()
-            var data: String? = ""
             val transferEncoding = h["transfer-encoding"]
             if (transferEncoding != null && transferEncoding.equals("chunked", ignoreCase = true)) {
                 c.readLineUnbuffered()
             }
-            data = c.readLineUnbuffered()
+            val data: String? = c.readLineUnbuffered()
             onDataReceived(data)
             c.close()
         } catch (t: Throwable) {
             try {
                 c.close()
-            } catch (t1: Throwable) {
+            } catch (_: Throwable) {
             }
             onError(t.toString())
         }

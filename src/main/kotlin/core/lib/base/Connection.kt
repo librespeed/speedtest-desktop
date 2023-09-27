@@ -19,9 +19,9 @@ class Connection @JvmOverloads constructor(
     sendBuffer: Int = -1
 ) {
     private var socket: Socket? = null
-    var host: String? = null
-    var port = 0
-    var mode = MODE_NOT_SET
+    private var host: String? = null
+    private var port = 0
+    private var mode = MODE_NOT_SET
     val inputStream: InputStream?
         get() = try {
             socket!!.getInputStream()
@@ -69,7 +69,7 @@ class Connection @JvmOverloads constructor(
             val ps = printStream
             ps!!.print("GET $path2 HTTP/1.1\r\n")
             ps.print("Host: $host\r\n")
-            ps.print("User-Agent: " + USER_AGENT)
+            ps.print("User-Agent: $USER_AGENT")
             ps.print(
                 """Connection: ${if (keepAlive) "keep-alive" else "close"}
 """
@@ -125,7 +125,7 @@ class Connection @JvmOverloads constructor(
                 val c = `in`!!.read()
                 if (c == -1) break
                 sb.append(c.toChar())
-                if (c == '\n'.toInt()) break
+                if (c == '\n'.code) break
             }
             sb.toString()
         } catch (t: Throwable) {
@@ -143,7 +143,7 @@ class Connection @JvmOverloads constructor(
                 s = readLineUnbuffered()
                 if (s!!.trim { it <= ' ' }.isEmpty()) break
                 if (s.contains(":")) {
-                    ret[s.substring(0, s.indexOf(":")).trim { it <= ' ' }.toLowerCase()] =
+                    ret[s.substring(0, s.indexOf(":")).trim { it <= ' ' }.lowercase()] =
                         s.substring(s.indexOf(":") + 1).trim { it <= ' ' }
                 }
             }
@@ -156,8 +156,7 @@ class Connection @JvmOverloads constructor(
     fun close() {
         try {
             socket!!.close()
-        } catch (t: Throwable) {
-        }
+        } catch (_: Throwable) { }
         socket = null
     }
 
@@ -216,8 +215,7 @@ class Connection @JvmOverloads constructor(
                 }
                 mode = MODE_HTTPS
             }
-        } catch (t: Throwable) {
-        }
+        } catch (_: Throwable) { }
         try {
             if (mode == MODE_NOT_SET && tryHTTP) {
                 val factory = SocketFactory.getDefault()
@@ -229,26 +227,22 @@ class Connection @JvmOverloads constructor(
                 }
                 mode = MODE_HTTP
             }
-        } catch (t: Throwable) {
-        }
+        } catch (_: Throwable) { }
         check(mode != MODE_NOT_SET) { "Failed to connect" }
         if (soTimeout > 0) {
             try {
                 socket!!.soTimeout = soTimeout
-            } catch (t: Throwable) {
-            }
+            } catch (_: Throwable) { }
         }
         if (recvBuffer > 0) {
             try {
                 socket!!.receiveBufferSize = recvBuffer
-            } catch (t: Throwable) {
-            }
+            } catch (_: Throwable) { }
         }
         if (sendBuffer > 0) {
             try {
                 socket!!.sendBufferSize = sendBuffer
-            } catch (t: Throwable) {
-            }
+            } catch (_: Throwable) { }
         }
     }
 }

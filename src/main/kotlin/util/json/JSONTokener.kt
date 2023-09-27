@@ -199,7 +199,7 @@ class JSONTokener(`in`: String?) {
     @Throws(JSONException::class)
     private fun readLiteral(): Any {
         val literal = nextToInternal("{}[]/\\:,=;# \t\u000c")
-        if (literal.length == 0) {
+        if (literal.isEmpty()) {
             throw syntaxError("Expected literal value")
         } else if ("null".equals(literal, ignoreCase = true)) {
             return JSONObject.NULL
@@ -277,14 +277,10 @@ class JSONTokener(`in`: String?) {
         while (true) {
             val name = nextValue()
             if (name !is String) {
-                if (name == null) {
-                    throw syntaxError("Names cannot be null")
-                } else {
-                    throw syntaxError(
-                        "Names must be strings, but " + name
-                                + " is of type " + name.javaClass.getName()
-                    )
-                }
+                throw syntaxError(
+                    "Names must be strings, but " + name
+                            + " is of type " + name.javaClass.getName()
+                )
             }
 
             /*

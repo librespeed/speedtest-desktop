@@ -510,8 +510,8 @@ class JSONArray {
         stringer.endArray()
     }
 
-    override fun equals(o: Any?): Boolean {
-        return o is JSONArray && o.values == values
+    override fun equals(other: Any?): Boolean {
+        return other is JSONArray && other.values == values
     }
 
     override fun hashCode(): Int {
