@@ -14,7 +14,6 @@ abstract class Uploader(private val c: Connection, private val path: String, ckS
             val s = path
             var lastProgressEvent = System.currentTimeMillis()
             val out = c.outputStream
-            val buf = ByteArray(BUFFER_SIZE)
             while (true) {
                 if (stopASAP) break
                 c.POST(s, true, "application/octet-stream", garbage.size.toLong())
@@ -36,13 +35,13 @@ abstract class Uploader(private val c: Connection, private val path: String, ckS
                     offset += BUFFER_SIZE
                 }
                 if (stopASAP) break
-                while (!c.readLineUnbuffered()!!.trim { it <= ' ' }.isEmpty());
+                while (c.readLineUnbuffered()!!.trim { it <= ' ' }.isNotEmpty());
             }
             c.close()
         } catch (t: Throwable) {
             try {
                 c.close()
-            } catch (t1: Throwable) {
+            } catch (_: Throwable) {
             }
             onError(t.toString())
         }

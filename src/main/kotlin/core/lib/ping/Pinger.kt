@@ -7,7 +7,6 @@ abstract class Pinger(private val c: Connection, private val path: String) : Thr
     override fun run() {
         try {
             val s = path
-            val `in` = c.inputStream
             while (true) {
                 if (stopASAP) break
                 c.GET(s, true)
@@ -17,7 +16,7 @@ abstract class Pinger(private val c: Connection, private val path: String) : Thr
                 var ok = false
                 while (true) {
                     var l = c.readLineUnbuffered() ?: break
-                    l = l.trim { it <= ' ' }.toLowerCase()
+                    l = l.trim { it <= ' ' }.lowercase()
                     if (l == "transfer-encoding: chunked") chunked = true
                     if (l.contains("200 ok")) ok = true
                     if (l.trim { it <= ' ' }.isEmpty()) {
@@ -37,7 +36,7 @@ abstract class Pinger(private val c: Connection, private val path: String) : Thr
         } catch (t: Throwable) {
             try {
                 c.close()
-            } catch (t1: Throwable) {
+            } catch (_: Throwable) {
             }
             onError(t.toString())
         }

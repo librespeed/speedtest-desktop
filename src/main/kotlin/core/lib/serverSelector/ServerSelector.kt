@@ -11,7 +11,7 @@ abstract class ServerSelector(servers: Array<TestPoint>, timeout: Int) {
     private var state = NOT_STARTED
     private val timeout: Int
     private var stopASAP = false
-    fun addTestPoint(t: TestPoint?) {
+    private fun addTestPoint(t: TestPoint?) {
         check(state == NOT_STARTED) { "Cannot add test points at this time" }
         if (t == null) return
         servers.add(t)
@@ -27,12 +27,11 @@ abstract class ServerSelector(servers: Array<TestPoint>, timeout: Int) {
         for (i in 0 until a.length()) {
             try {
                 servers.add(TestPoint().fromJson(a.getJSONObject(i)))
-            } catch (e: Exception) {
-            }
+            } catch (_: Exception) { }
         }
     }
 
-    fun addTestPoints(servers: Array<TestPoint>) {
+    private fun addTestPoints(servers: Array<TestPoint>) {
         check(state == NOT_STARTED) { "Cannot add test points at this time" }
         for (t in servers) addTestPoint(t)
     }
@@ -64,7 +63,7 @@ abstract class ServerSelector(servers: Array<TestPoint>, timeout: Int) {
                 return
             }
             val tp = servers[tpPointer++]
-            val ps: PingStream = object : PingStream(
+            object : PingStream(
                 tp.server!!,
                 tp.pingURL!!,
                 PINGS,

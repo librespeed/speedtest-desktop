@@ -550,8 +550,8 @@ class JSONObject {
          * method returns "null".
          */
         val NULL: Any = object : Any() {
-            override fun equals(o: Any?): Boolean {
-                return o === this || o == null // API specifies this broken equals implementation
+            override fun equals(other: Any?): Boolean {
+                return other === this || other == null // API specifies this broken equals implementation
             }
 
             override fun toString(): String {

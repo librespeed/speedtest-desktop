@@ -13,6 +13,7 @@ import core.lib.telemetry.Telemetry
 import core.lib.upload.UploadStream
 import util.json.JSONObject
 import java.util.*
+import kotlin.math.abs
 
 abstract class SpeedtestWorker(
     private val backend: TestPoint,
@@ -45,18 +46,17 @@ abstract class SpeedtestWorker(
         }
         try {
             sendTelemetry()
-        } catch (t: Throwable) {
+        } catch (_: Throwable) {
         }
         onEnd()
     }
 
     private var getIPCalled = false
     private val iP: Unit
-        private get() {
+        get() {
             getIPCalled = if (getIPCalled) return else true
             val start = System.currentTimeMillis()
-            var c: Connection? = null
-            c = try {
+            val c: Connection? = try {
                 Connection(backend.server!!, config.ping_connectTimeout, config.ping_soTimeout, -1, -1)
             } catch (t: Throwable) {
                 if (config.getErrorHandlingMode() == SpeedtestConfig.ONERROR_FAIL) {
@@ -71,7 +71,7 @@ abstract class SpeedtestWorker(
                     ipIsp = data
                     try {
                         data = JSONObject(data!!)["processedString"].toString()
-                    } catch (t: Throwable) {
+                    } catch (_: Throwable) {
                     }
                     log.l("GetIP: " + data + " (took " + (System.currentTimeMillis() - start) + "ms)")
                     onIPInfoUpdate(data)
@@ -244,7 +244,7 @@ abstract class SpeedtestWorker(
                 jitter = if (prevPing == -1.0) {
                     0.0
                 } else {
-                    val j = Math.abs(ms - prevPing)
+                    val j = abs(ms - prevPing)
                     if (j > jitter) jitter * 0.3 + j * 0.7 else jitter * 0.8 + j * 0.2
                 }
                 prevPing = ms
