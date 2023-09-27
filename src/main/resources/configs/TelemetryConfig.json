@@ -1,0 +1,6 @@
+{
+  "telemetryLevel":"full",
+  "server":"//librespeed.org",
+  "path":"results/telemetry.php",
+  "shareURL": "results/?id=%s"
+}

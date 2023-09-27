@@ -1,0 +1,3 @@
+-keep class kotlinx.coroutines.swing.SwingDispatcherFactory
+-dontwarn kotlinx.serialization.**
+-keep class kotlinx.serialization.** { *; }
