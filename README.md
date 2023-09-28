@@ -2,9 +2,11 @@
 
 # LibreSpeed Desktop App (Compose)
 
+<p>
 <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="linux" />
 <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="linux" />
 <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" alt="kotlin" />
+</p>
 
 This is a Compose Desktop based client for LibreSpeed servers, a template similar to the Android app.
 
