@@ -31,7 +31,7 @@ cd speedtest-desktop
 
 ## License
 Copyright (C) 2016-2021 Federico Dossena\
-Copyright (C) 2021 Sudo Dios
+Copyright (C) 2021-2023 Sudo Dios
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
