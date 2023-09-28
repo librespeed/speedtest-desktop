@@ -10,7 +10,7 @@
 
 This is a Compose Desktop based client for LibreSpeed servers, a template similar to the Android app.
 
-It is still WIP, it's not documented yet, but it works and it can be configured by editing the configuration files in `LibreSpeed/src/main/resources/configs/`.
+It is still WIP, it's not documented yet, but it works and it can be configured by editing the configuration files in `src/main/resources/configs/`.
 
 This application is developed and maintained by Sudo Dios.
 
