@@ -15,9 +15,9 @@ It is still WIP, it's not documented yet, but it works and it can be configured 
 This application is developed and maintained by Sudo Dios.
 
 ## Screenshots
-|                                                  |                                                  |
-|--------------------------------------------------|--------------------------------------------------|
-| <img src="assets/screen-shot-1.png" alt="ss1" /> | <img src="assets/screen-shot-2.png" alt="ss1" /> |
+|                                                |                                                |
+|------------------------------------------------|------------------------------------------------|
+| <img src="assets/screenshot1.png" alt="ss1" /> | <img src="assets/screenshot2.png" alt="ss1" /> |
 
 ## Installation
 you can download latest version of this from [release page](https://github.com/librespeed/speedtest-desktop/releases)
