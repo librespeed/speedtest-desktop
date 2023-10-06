@@ -29,6 +29,11 @@ cd speedtest-desktop
 ./gradlew run
 ```
 
+## Libraries
+
+- [Precompose](https://github.com/Tlaster/PreCompose) (for navigation)
+- [Markdown](https://github.com/mikepenz/multiplatform-markdown-renderer) (show markdown)
+
 ## License
 Copyright (C) 2016-2021 Federico Dossena\
 Copyright (C) 2021-2023 Sudo Dios
