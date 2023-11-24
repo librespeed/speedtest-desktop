@@ -18,8 +18,8 @@ dependencies {
     implementation(compose.desktop.currentOs)
     api(compose.foundation)
     api(compose.animation)
-    api("moe.tlaster:precompose:1.5.3")
-    implementation("org.jetbrains.compose.material3:material3-desktop:1.5.2")
+    api("moe.tlaster:precompose:1.5.7")
+    implementation("org.jetbrains.compose.material3:material3-desktop:1.5.10")
     implementation("dev.icerock.moko:mvvm-livedata-compose:0.16.1")
     implementation("com.mikepenz:multiplatform-markdown-renderer:0.8.0")
 }

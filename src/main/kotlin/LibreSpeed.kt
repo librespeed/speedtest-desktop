@@ -9,10 +9,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import core.Service
-import moe.tlaster.precompose.PreComposeWindow
+import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.rememberNavigator
 import moe.tlaster.precompose.navigation.transition.NavTransition
@@ -28,34 +29,36 @@ import java.awt.Dimension
 fun App() {
     Service.init()
 
-    val navigator = rememberNavigator()
+    PreComposeApp {
+        val navigator = rememberNavigator()
 
-    MaterialTheme(
-        typography = Fonts.getTypography()
-    ) {
-        CompositionLocalProvider(LocalRippleTheme provides AppRippleTheme) {
-            NavHost(
-                navigator = navigator,
-                navTransition = NavTransition(),
-                initialRoute = Route.SPLASH,
-            ) {
-                scene(
-                    route = Route.SPLASH,
+        MaterialTheme(
+            typography = Fonts.getTypography()
+        ) {
+            CompositionLocalProvider(LocalRippleTheme provides AppRippleTheme) {
+                NavHost(
+                    navigator = navigator,
                     navTransition = NavTransition(),
+                    initialRoute = Route.SPLASH,
                 ) {
-                    SplashScene(navigator)
-                }
-                scene(
-                    route = Route.HOME,
-                    navTransition = NavTransition()
-                ) {
-                    HomeScene(navigator)
-                }
-                scene(
-                    route = Route.RESULT,
-                    navTransition = NavTransition()
-                ) {
-                    ResultScene(navigator)
+                    scene(
+                        route = Route.SPLASH,
+                        navTransition = NavTransition(),
+                    ) {
+                        SplashScene(navigator)
+                    }
+                    scene(
+                        route = Route.HOME,
+                        navTransition = NavTransition()
+                    ) {
+                        HomeScene(navigator)
+                    }
+                    scene(
+                        route = Route.RESULT,
+                        navTransition = NavTransition()
+                    ) {
+                        ResultScene(navigator)
+                    }
                 }
             }
         }
@@ -64,7 +67,7 @@ fun App() {
 }
 
 fun main() = application {
-    PreComposeWindow(
+    Window(
         onCloseRequest = ::exitApplication,
         resizable = false,
         state = WindowState(width = 440.dp, height = 720.dp),
