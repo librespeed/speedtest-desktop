@@ -20,7 +20,7 @@ This application is developed and maintained by Sudo Dios.
 | <img src="assets/screenshot1.png" alt="ss1" /> | <img src="assets/screenshot2.png" alt="ss1" /> |
 
 ## Installation
-you can download latest version of this from [release page](https://github.com/librespeed/speedtest-desktop/releases)
+you can download latest version of this from [releases page](https://github.com/librespeed/speedtest-desktop/releases)
 
 ## Build
 ```shell
