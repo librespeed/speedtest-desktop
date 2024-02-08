@@ -28,12 +28,12 @@ fun CustomBottomSheet(
     scope: CoroutineScope,
     state: BottomSheetState,
     sheetContent : @Composable BoxScope.() -> Unit,
-    content : @Composable () -> Unit
+    content : @Composable BoxWithConstraintsScope.() -> Unit
 ) {
 
     val slideAnim = animateFloatAsState(if (state.isOpen) 1f else 0f)
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         content()
         DimView(
             slideAnim.value,
