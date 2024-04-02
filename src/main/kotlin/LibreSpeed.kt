@@ -69,7 +69,7 @@ fun App() {
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
-        resizable = true,
+        resizable = false,
         state = WindowState(width = 440.dp, height = 720.dp),
         title = "LibreSpeed"
     ) {
