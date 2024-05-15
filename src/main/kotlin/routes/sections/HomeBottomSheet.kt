@@ -60,12 +60,12 @@ fun BoxScope.HomeBottomSheet(
                     modifier = Modifier.size(20.dp),
                     painter = painterResource("icons/check-circle.svg"),
                     contentDescription = null,
-                    tint = ColorBox.text.copy(0.9f)
+                    tint = ColorBox.COLOR_TEXT_NIGHT.copy(0.9f)
                 )
                 Text(
                     modifier = Modifier.padding(start = 8.dp, end = 2.dp),
                     text = "Done",
-                    color = ColorBox.text.copy(0.9f),
+                    color = ColorBox.COLOR_TEXT_NIGHT.copy(0.9f),
                     style = MaterialTheme.typography.bodySmall
                 )
             }
