@@ -43,13 +43,13 @@ fun SplashScene(navigator: Navigator) {
                     Modifier.size(18.dp),
                     strokeCap = StrokeCap.Round,
                     strokeWidth = 2.dp,
-                    color = ColorBox.text
+                    color = ColorBox.COLOR_TEXT_NIGHT
                 )
-                Spacer(Modifier.padding(3.dp))
+                Spacer(Modifier.padding(6.dp))
                 Text(
                     text = "Finding best servers ...",
                     fontSize = 13.sp,
-                    color = ColorBox.text.copy(0.8f)
+                    color = ColorBox.COLOR_TEXT_NIGHT.copy(0.8f)
                 )
             }
         }
