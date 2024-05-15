@@ -75,9 +75,9 @@ object Fonts {
     val TitleSmallTracking = 0.1.sp
     val TitleSmallWeight = WeightMedium
 
-    val jetbrains = FontFamily(
+    val open_sans = FontFamily(
         Font(
-            resource = "fonts/jetbrains-mono.ttf"
+            resource = "fonts/open-sans.ttf"
         )
     )
 
@@ -85,105 +85,105 @@ object Fonts {
     fun getTypography () : Typography {
         return MaterialTheme.typography.copy(
             displayLarge = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = DisplayLargeWeight,
                 fontSize = DisplayLargeSize,
                 lineHeight = DisplayLargeLineHeight,
                 letterSpacing = DisplayLargeTracking,
             ),
             displayMedium = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = DisplayMediumWeight,
                 fontSize = DisplayMediumSize,
                 lineHeight = DisplayMediumLineHeight,
                 letterSpacing = DisplayMediumTracking,
             ),
             displaySmall = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = DisplaySmallWeight,
                 fontSize = DisplaySmallSize,
                 lineHeight = DisplaySmallLineHeight,
                 letterSpacing = DisplaySmallTracking,
             ),
             headlineLarge = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = HeadlineLargeWeight,
                 fontSize = HeadlineLargeSize,
                 lineHeight = HeadlineLargeLineHeight,
                 letterSpacing = HeadlineLargeTracking,
             ),
             headlineMedium = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = HeadlineMediumWeight,
                 fontSize = HeadlineMediumSize,
                 lineHeight = HeadlineMediumLineHeight,
                 letterSpacing = HeadlineMediumTracking,
             ),
             headlineSmall = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = HeadlineSmallWeight,
                 fontSize = HeadlineSmallSize,
                 lineHeight = HeadlineSmallLineHeight,
                 letterSpacing = HeadlineSmallTracking,
             ),
             titleLarge = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = TitleLargeWeight,
                 fontSize = TitleLargeSize,
                 lineHeight = TitleLargeLineHeight,
                 letterSpacing = TitleLargeTracking,
             ),
             titleMedium = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = TitleMediumWeight,
                 fontSize = TitleMediumSize,
                 lineHeight = TitleMediumLineHeight,
                 letterSpacing = TitleMediumTracking,
             ),
             titleSmall = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = TitleSmallWeight,
                 fontSize = TitleSmallSize,
                 lineHeight = TitleSmallLineHeight,
                 letterSpacing = TitleSmallTracking,
             ),
             bodyLarge = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = BodyLargeWeight,
                 fontSize = BodyLargeSize,
                 lineHeight = BodyLargeLineHeight,
                 letterSpacing = BodyLargeTracking,
             ),
             bodyMedium = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = BodyMediumWeight,
                 fontSize = BodyMediumSize,
                 lineHeight = BodyMediumLineHeight,
                 letterSpacing = BodyMediumTracking,
             ),
             bodySmall = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = BodySmallWeight,
                 fontSize = BodySmallSize,
                 lineHeight = BodySmallLineHeight,
                 letterSpacing = BodySmallTracking,
             ),
             labelLarge = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = LabelLargeWeight,
                 fontSize = LabelLargeSize,
                 lineHeight = LabelLargeLineHeight,
                 letterSpacing = LabelLargeTracking,
             ),
             labelMedium = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = LabelMediumWeight,
                 fontSize = LabelMediumSize,
                 lineHeight = LabelMediumLineHeight,
                 letterSpacing = LabelMediumTracking,
             ),
             labelSmall = TextStyle(
-                fontFamily = jetbrains,
+                fontFamily = open_sans,
                 fontWeight = LabelSmallWeight,
                 fontSize = LabelSmallSize,
                 lineHeight = LabelSmallLineHeight,
