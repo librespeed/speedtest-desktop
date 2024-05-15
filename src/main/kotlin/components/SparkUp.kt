@@ -69,12 +69,11 @@ private fun calcPoints(
     points.clear()
     val bottomY = size.height
     val xDiff = size.width / (data.size - 1)
-    val maxData = data.maxBy { it }
+    val maxData = data.max()
     for (i in data.indices) {
         val y = bottomY - (data[i] / maxData * bottomY)
         points.add(Point(xDiff * i, y.toFloat()))
     }
-
 }
 
 private fun calcCons(

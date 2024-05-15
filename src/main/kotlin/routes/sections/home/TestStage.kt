@@ -64,7 +64,7 @@ fun TestStage(onCancel : () -> Unit,goToResult : () -> Unit) {
             "jitter" -> progressPing.value
             else -> 0.0
         }
-        SparkUp(modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth().height(90.dp), data = chartData)
+        SparkUp(modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth().height(90.dp), data = chartData.toList())
         Column(modifier = Modifier.fillMaxSize(),verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
             Box(contentAlignment = Alignment.Center) {
                 SpeedMeterView(speed = calcValuePercentage.value, modifier = Modifier.size(316.dp), progress = progress.toFloat())
