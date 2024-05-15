@@ -15,9 +15,10 @@ It is still WIP, it's not documented yet, but it works and it can be configured 
 This application is developed and maintained by Sudo Dios.
 
 ## Screenshots
-|                                                |                                                |
-|------------------------------------------------|------------------------------------------------|
-| <img src="assets/screenshot1.png" alt="ss1" /> | <img src="assets/screenshot2.png" alt="ss1" /> |
+|                                                 |                                                     |
+|-------------------------------------------------|-----------------------------------------------------|
+| <img src="assets/start-stage.png" alt="ss1" />  | <img src="assets/test-stage.png" alt="ss1" />       |
+| <img src="assets/result-stage.png" alt="ss1" /> | <img src="assets/test-stage-light.png" alt="ss1" /> |                                                |
 
 ## Installation
 you can download latest version of this from [releases page](https://github.com/librespeed/speedtest-desktop/releases)
@@ -28,6 +29,12 @@ git clone -b compose-desktop --single-branch https://github.com/librespeed/speed
 cd speedtest-desktop
 ./gradlew run
 ```
+
+## TODO
+
+- [x] Redesign for desktop screen
+- [x] Dark-Light theme  
+- [ ] Handle errors on startup fetch server lists 
 
 ## License
 Copyright (C) 2016-2021 Federico Dossena\
