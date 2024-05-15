@@ -69,11 +69,11 @@ fun App() {
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
-        resizable = false,
-        state = WindowState(width = 440.dp, height = 720.dp),
+        resizable = true,
+        state = WindowState(width = 990.dp, height = 650.dp),
         title = "LibreSpeed"
     ) {
-        window.minimumSize = Dimension(440,720)
+        window.minimumSize = Dimension(990,650)
         val icon = painterResource("icons/icon_app.svg")
         val density = LocalDensity.current
         SideEffect {
