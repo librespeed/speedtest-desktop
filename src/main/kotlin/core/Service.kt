@@ -1,5 +1,6 @@
 package core
 
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import core.lib.LibreSpeed
 import core.lib.serverSelector.TestPoint
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
@@ -36,10 +37,10 @@ object Service {
     val progressDownload = MutableLiveData(0.0)
     val progressUpload = MutableLiveData(0.0)
 
-    val pingChart = ArrayList<Double>()
-    val jitterChart = ArrayList<Double>()
-    val downloadChart = ArrayList<Double>()
-    val uploadChart = ArrayList<Double>()
+    val pingChart = SnapshotStateList<Double>()
+    val jitterChart = SnapshotStateList<Double>()
+    val downloadChart = SnapshotStateList<Double>()
+    val uploadChart = SnapshotStateList<Double>()
 
     var testPoint = MutableLiveData<TestPoint?>(null)
     var running = MutableLiveData(false)
@@ -55,6 +56,8 @@ object Service {
     }
 
     fun reset () {
+        speedTestHandler.stopTest()
+        running.value = false
         pingChart.clear()
         jitterChart.clear()
         downloadChart.clear()
