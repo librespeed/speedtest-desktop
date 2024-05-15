@@ -19,7 +19,6 @@ import moe.tlaster.precompose.navigation.rememberNavigator
 import moe.tlaster.precompose.navigation.transition.NavTransition
 import routes.Route
 import routes.scenes.HomeScene
-import routes.scenes.ResultScene
 import routes.scenes.SplashScene
 import theme.AppRippleTheme
 import theme.Fonts
@@ -52,12 +51,6 @@ fun App() {
                         navTransition = NavTransition()
                     ) {
                         HomeScene(navigator)
-                    }
-                    scene(
-                        route = Route.RESULT,
-                        navTransition = NavTransition()
-                    ) {
-                        ResultScene(navigator)
                     }
                 }
             }
