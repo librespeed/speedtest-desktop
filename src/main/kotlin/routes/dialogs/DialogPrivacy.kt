@@ -28,7 +28,7 @@ fun DialogPrivacy(
 
     val scrollState = rememberScrollState()
 
-    Box(modifier = Modifier.width(380.dp).heightIn(max = 600.dp)) {
+    Box(modifier = Modifier.width(460.dp).heightIn(max = 600.dp)) {
         Column(modifier = Modifier.fillMaxSize()) {
             Row(
                 modifier = Modifier.fillMaxWidth().height(64.dp).background(color = ColorBox.card.copy(0.5f)),
@@ -58,11 +58,11 @@ fun DialogPrivacy(
                 content = privacy,
                 colors = markdownColor(text = ColorBox.text),
                 typography = markdownTypography(
-                    h4 = TextStyle(fontFamily = Fonts.jetbrains, fontSize = 20.sp, fontWeight = FontWeight.Bold),
-                    text = TextStyle(fontFamily = Fonts.jetbrains, fontSize = 14.sp),
-                    paragraph = TextStyle(fontFamily = Fonts.jetbrains, fontSize = 14.sp),
-                    bullet = TextStyle(fontFamily = Fonts.jetbrains, fontSize = 14.sp),
-                    h6 = TextStyle(fontFamily = Fonts.jetbrains, fontSize = 14.sp),
+                    h4 = TextStyle(fontFamily = Fonts.open_sans, fontSize = 20.sp, fontWeight = FontWeight.Bold),
+                    text = TextStyle(fontFamily = Fonts.open_sans, fontSize = 14.sp),
+                    paragraph = TextStyle(fontFamily = Fonts.open_sans, fontSize = 14.sp),
+                    bullet = TextStyle(fontFamily = Fonts.open_sans, fontSize = 14.sp),
+                    h6 = TextStyle(fontFamily = Fonts.open_sans, fontSize = 14.sp),
                 )
             )
 
