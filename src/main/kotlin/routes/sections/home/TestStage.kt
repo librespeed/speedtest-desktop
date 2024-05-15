@@ -15,9 +15,10 @@ import components.SpeedMeterView
 import core.Service
 import core.Service.toValidString
 import dev.icerock.moko.mvvm.livedata.compose.observeAsState
-import kotlinx.coroutines.delay
 import theme.ColorBox
 import util.Utils.roundPlace
+import java.util.Timer
+import java.util.TimerTask
 
 @Composable
 fun TestStage(onCancel : () -> Unit,goToResult : () -> Unit) {
@@ -48,8 +49,13 @@ fun TestStage(onCancel : () -> Unit,goToResult : () -> Unit) {
         Service.onError = {
             onCancel.invoke()
         }
-        delay(3000)
-        enablecancelation = true
+        Service.onEnableAbort = {
+            Timer().schedule(object : TimerTask() {
+                override fun run() {
+                    enablecancelation = true
+                }
+            },2000)
+        }
     }
 
     Box(Modifier.fillMaxSize()) {

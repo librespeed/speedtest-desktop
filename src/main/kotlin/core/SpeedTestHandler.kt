@@ -64,12 +64,8 @@ class SpeedTestHandler {
         }
         if (data.startsWith("\"") || data.startsWith("'")) { //fetch server list from URL
             if (!libreSpeed!!.loadServerList(data.subSequence(1, data.length - 1).toString())) {
-                try {
-                    throw Exception("Failed to load server list")
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
                 onServerSelectListener?.onError()
+                return
             }
         } else {
             val testPoints = JSONArray(data)

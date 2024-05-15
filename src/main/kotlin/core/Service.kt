@@ -47,6 +47,7 @@ object Service {
 
     var goToResult : () -> Unit = {}
     var onError : (String?) -> Unit = {}
+    var onEnableAbort : () -> Unit = {}
 
     fun init () {
         speedTestHandler = SpeedTestHandler()
@@ -80,10 +81,9 @@ object Service {
 
     fun startFetchServers (finished : () -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            speedTestHandler.startup()
             speedTestHandler.setOnServerSelectListener(object : SpeedTestHandler.OnServerSelectListener{
                 override fun onError() {
-
+                    println("Error")
                 }
                 override fun onServerSelected(testPoint: TestPoint?) {
                     this@Service.testPoint.value = testPoint
@@ -92,6 +92,7 @@ object Service {
                     }
                 }
             })
+            speedTestHandler.startup()
         }
     }
 
@@ -139,6 +140,7 @@ object Service {
                         this@Service.jitter.value = jitter.roundPlace(1).toString()
                         pingChart.add(ping)
                         jitterChart.add(jitter)
+                        onEnableAbort.invoke()
                     }
                     override fun onIPInfoUpdate(ipInfo: String?) {
                         this@Service.ipInfo.value = ipInfo.toString()
