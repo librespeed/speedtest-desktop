@@ -45,6 +45,9 @@ fun TestStage(onCancel : () -> Unit,goToResult : () -> Unit) {
         Service.goToResult = {
             goToResult.invoke()
         }
+        Service.onError = {
+            onCancel.invoke()
+        }
         delay(3000)
         enablecancelation = true
     }

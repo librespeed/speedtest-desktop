@@ -46,6 +46,7 @@ object Service {
     var running = MutableLiveData(false)
 
     var goToResult : () -> Unit = {}
+    var onError : (String?) -> Unit = {}
 
     fun init () {
         speedTestHandler = SpeedTestHandler()
@@ -151,6 +152,7 @@ object Service {
                         running.value = false
                     }
                     override fun onCriticalFailure(err: String?) {
+                        onError.invoke(err)
                         currentStep.value = "FAILED"
                         running.value = false
                     }
