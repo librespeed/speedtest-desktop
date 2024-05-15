@@ -5,13 +5,16 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.LinearGradientShader
 import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.lerp
 import org.jetbrains.skia.FilterBlurMode
 import org.jetbrains.skia.MaskFilter
 import org.jetbrains.skia.PaintMode
@@ -22,7 +25,8 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 @Composable
-fun ProgressView(
+fun SpeedMeterView(
+    speed : Float = 0f,
     progress : Float = 0f,
     modifier: Modifier = Modifier
 ) {
@@ -34,7 +38,8 @@ fun ProgressView(
     frameworkPaint.strokeCap = PaintStrokeCap.ROUND
     frameworkPaint.maskFilter = MaskFilter.makeBlur(FilterBlurMode.SOLID, 10f)
 
-    val animateFrac = animateFloatAsState(progress)
+    val animateFrac = animateFloatAsState(speed)
+    val progressFrac = animateFloatAsState(progress)
 
     Canvas(modifier) {
 
@@ -46,28 +51,57 @@ fun ProgressView(
 
         val radius = (size.width / 2)
 
-        rotate(155f) {
-            var lineHeight: Float
-            for (i in 0..230 step 6) {
-                lineHeight = if (i % 12 == 0) {
+        var lineHeight: Float
+        for (i in 155..385 step 5) {
+            lineHeight = if (i % 4 == 0) {
+                16f
+            } else {
+                10f
+            }
+            drawLines(i.toFloat(),radius, lineHeight)
+        }
+        if (animateFrac.value > 0f) {
+            val progressVal = lerp(155f,385f,animateFrac.value).toInt()
+            for (i in 155..progressVal step 5) {
+                lineHeight = if (i % 4 == 0) {
                     16f
                 } else {
                     10f
                 }
-                drawLines(i.toFloat(),radius, lineHeight)
-            }
-            if (animateFrac.value > 0f) {
-                val progressVal = (230f * animateFrac.value).toInt()
-                for (i in 0..progressVal step 6) {
-                    lineHeight = if (i % 12 == 0) {
-                        16f
-                    } else {
-                        10f
-                    }
-                    drawLinesProgress(i.toFloat(),radius, lineHeight, paint)
-                }
+                drawLinesProgress(i.toFloat(),radius, lineHeight, paint)
             }
         }
+        drawArc(
+            color = ColorBox.text,
+            startAngle = 155f,
+            sweepAngle = 230f,
+            useCenter = false,
+            topLeft = Offset(
+                x = 35f,
+                y = 35f
+            ),
+            size = Size(
+                width = size.width - 70f,
+                height = size.height - 70f
+            ),
+            style = Stroke(1.dp.toPx(), cap = StrokeCap.Round),
+            alpha = 0.2f
+        )
+        drawArc(
+            color = ColorBox.text,
+            startAngle = 155f,
+            sweepAngle = progressFrac.value * 230f,
+            useCenter = false,
+            topLeft = Offset(
+                x = 35f,
+                y = 35f
+            ),
+            size = Size(
+                width = size.width - 70f,
+                height = size.height - 70f
+            ),
+            style = Stroke(2.dp.toPx(), cap = StrokeCap.Round),
+        )
     }
 
 }
