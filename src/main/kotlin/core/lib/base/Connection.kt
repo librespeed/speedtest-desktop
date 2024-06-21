@@ -70,15 +70,9 @@ class Connection @JvmOverloads constructor(
             ps!!.print("GET $path2 HTTP/1.1\r\n")
             ps.print("Host: $host\r\n")
             ps.print("User-Agent: $USER_AGENT")
-            ps.print(
-                """Connection: ${if (keepAlive) "keep-alive" else "close"}
-"""
-            )
+            ps.print("Connection: ${if (keepAlive) "keep-alive\r\n" else "close\r\n"}")
             ps.print("Accept-Encoding: identity\r\n")
-            if (Locale.getDefault() != null) ps.print(
-                """Accept-Language: ${Locale.getDefault()}
-"""
-            )
+            if (Locale.getDefault() != null) ps.print("Accept-Language: ${Locale.getDefault()}\r\n")
             ps.print("\r\n")
             ps.flush()
         } catch (t: Throwable) {
@@ -94,19 +88,10 @@ class Connection @JvmOverloads constructor(
             val ps = printStream
             ps!!.print("POST $path2 HTTP/1.1\r\n")
             ps.print("Host: $host\r\n")
-            ps.print(
-                """User-Agent: $USER_AGENT
-"""
-            )
-            ps.print(
-                """Connection: ${if (keepAlive) "keep-alive" else "close"}
-"""
-            )
+            ps.print("User-Agent: $USER_AGENT\r\n")
+            ps.print("Connection: ${if (keepAlive) "keep-alive\r\n" else "close\r\n"}")
             ps.print("Accept-Encoding: identity\r\n")
-            if (Locale.getDefault() != null) ps.print(
-                """Accept-Language: ${Locale.getDefault()}
-"""
-            )
+            if (Locale.getDefault() != null) ps.print("Accept-Language: ${Locale.getDefault()}\r\n")
             if (contentType != null) ps.print("Content-Type: $contentType\r\n")
             ps.print("Content-Encoding: identity\r\n")
             if (contentLength >= 0) ps.print("Content-Length: $contentLength\r\n")
