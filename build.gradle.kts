@@ -29,7 +29,6 @@ dependencies {
 compose.desktop {
     application {
         mainClass = "LibreSpeedKt"
-
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             modules("java.sql")
@@ -40,6 +39,9 @@ compose.desktop {
                 iconFile.set(iconsRoot.resolve("icons/icon_app.png"))
             }
             windows {
+                iconFile.set(iconsRoot.resolve("icons/icon_app.ico"))
+            }
+            macOS {
                 iconFile.set(iconsRoot.resolve("icons/icon_app.ico"))
             }
         }
