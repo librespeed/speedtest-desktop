@@ -8,6 +8,9 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import core.ModelHistory
 import core.Service.toValidString
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.awt.Desktop
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
@@ -50,18 +53,27 @@ object Utils {
         clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {}
     )
 
+    fun File.systemOpenFile() {
+        if (Desktop.isDesktopSupported()) {
+            Desktop.getDesktop().open(this)
+        }
+    }
+
     private fun String.escapeCsvValue(): String = "\"${replace("\"", "\"\"")}\""
-    fun exportHistoryToCSV(input : SnapshotStateList<ModelHistory>) {
-        val exportFile = File("${System.getProperty("user.home")}/Downloads","librespeed-history.csv")
-        exportFile.parentFile.mkdirs()
-        exportFile.createNewFile()
-        BufferedWriter(FileWriter(exportFile)).use {
-            it.write("id,netAdapter,ping,jitter,download,upload,ispInfo,testPoint,date\n")
-            for (model in input) {
-                it.write("${model.id},${model.netAdapter.escapeCsvValue()}," +
-                        "${model.ping},${model.jitter},${model.download.toValidString()}," +
-                        "${model.upload.toValidString()},${model.ispInfo.escapeCsvValue()}," +
-                        "${model.testPoint.escapeCsvValue()},${model.date.formatToDate("dd-MMM-yyyy HH:mm:ss")}\n")
+    suspend fun exportHistoryToCSV(input : SnapshotStateList<ModelHistory>,onSuccess : (File) -> Unit) {
+        withContext(Dispatchers.IO) {
+            val exportFile = File("${System.getProperty("user.home")}${File.separator}Downloads","librespeed-history.csv")
+            exportFile.parentFile.mkdirs()
+            exportFile.createNewFile()
+            BufferedWriter(FileWriter(exportFile)).use {
+                it.write("id,netAdapter,ping,jitter,download,upload,ispInfo,testPoint,date\n")
+                for (model in input) {
+                    it.write("${model.id},${model.netAdapter.escapeCsvValue()}," +
+                            "${model.ping},${model.jitter},${model.download.toValidString()}," +
+                            "${model.upload.toValidString()},${model.ispInfo.escapeCsvValue()}," +
+                            "${model.testPoint.escapeCsvValue()},${model.date.formatToDate("dd-MMM-yyyy HH:mm:ss")}\n")
+                }
+                onSuccess.invoke(exportFile)
             }
         }
     }

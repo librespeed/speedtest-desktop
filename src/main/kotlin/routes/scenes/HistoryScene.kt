@@ -1,5 +1,6 @@
 package routes.scenes
 
+import App
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -29,6 +30,7 @@ import core.ModelHistory
 import core.Service
 import core.Service.toValidString
 import dev.icerock.moko.mvvm.livedata.compose.observeAsState
+import kotlinx.coroutines.launch
 import moe.tlaster.precompose.navigation.Navigator
 import routes.dialogs.DialogDelete
 import theme.ColorBox
@@ -36,6 +38,7 @@ import theme.Fonts
 import util.Utils
 import util.Utils.formatToDate
 import util.Utils.suffixItems
+import util.Utils.systemOpenFile
 
 @Composable
 fun HistoryScene(navigator: Navigator) {
@@ -43,6 +46,7 @@ fun HistoryScene(navigator: Navigator) {
     val historyList = remember { SnapshotStateList<ModelHistory>() }
     val unitSetting = Service.unitSetting.observeAsState()
 
+    val coroutineScope = rememberCoroutineScope()
     var showClearDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -76,7 +80,13 @@ fun HistoryScene(navigator: Navigator) {
                     icon = "icons/export.svg",
                     enabled = historyList.isNotEmpty(),
                     onClick = {
-                        Utils.exportHistoryToCSV(historyList)
+                        App.showLoading.value = true
+                        coroutineScope.launch {
+                            Utils.exportHistoryToCSV(historyList, onSuccess = {
+                                App.showLoading.value = false
+                                it.systemOpenFile()
+                            })
+                        }
                     }
                 )
                 MyIconButton(
