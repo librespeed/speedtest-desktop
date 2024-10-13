@@ -2,7 +2,9 @@ package routes.scenes
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import components.CustomBottomSheet
@@ -12,6 +14,7 @@ import components.rememberBottomSheetState
 import core.Service
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.navigation.Navigator
+import routes.Route
 import routes.sections.HomeBottomSheet
 import routes.sections.home.Appbar
 import routes.sections.home.ResultStage
@@ -24,13 +27,13 @@ enum class Stage {
     Result
 }
 
+var selectedStage = mutableStateOf(Stage.Start)
+
 @Composable
 fun HomeScene(navigator: Navigator) {
 
     val bottomSheetState = rememberBottomSheetState()
     val scope = rememberCoroutineScope()
-
-    var selectedStage by remember { mutableStateOf(Stage.Start) }
 
     CustomBottomSheet(
         scope = scope,
@@ -46,16 +49,18 @@ fun HomeScene(navigator: Navigator) {
         },
         content = {
             Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-                Appbar()
+                Appbar(onHistoryClicked = {
+                    navigator.navigate(Route.HISTORY)
+                })
                 TabSwitcher(
                     modifier = Modifier.fillMaxSize(),
-                    selectedTab = selectedStage.name,
+                    selectedTab = selectedStage.value.name,
                     tabs = arrayOf(
                         Tab(name = Stage.Start.name) {
                             StartStage(
                                 onStartClicked = {
                                     Service.startTesting()
-                                    selectedStage = Stage.Test
+                                    selectedStage.value = Stage.Test
                                 },
                                 onChooseServerClicked = {
                                     scope.launch {
@@ -68,10 +73,10 @@ fun HomeScene(navigator: Navigator) {
                             TestStage(
                                 onCancel = {
                                     Service.reset()
-                                    selectedStage = Stage.Start
+                                    selectedStage.value = Stage.Start
                                 },
                                 goToResult = {
-                                    selectedStage = Stage.Result
+                                    selectedStage.value = Stage.Result
                                 }
                             )
                         },
@@ -79,7 +84,7 @@ fun HomeScene(navigator: Navigator) {
                             ResultStage(
                                 newTestClicked = {
                                     Service.reset()
-                                    selectedStage = Stage.Start
+                                    selectedStage.value = Stage.Start
                                 }
                             )
                         }

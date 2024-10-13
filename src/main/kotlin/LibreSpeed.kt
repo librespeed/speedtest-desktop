@@ -2,7 +2,9 @@ import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.toAwtImage
 import androidx.compose.ui.platform.LocalDensity
@@ -12,15 +14,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
+import core.Database
 import core.Service
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.rememberNavigator
 import moe.tlaster.precompose.navigation.transition.NavTransition
 import routes.Route
+import routes.scenes.HistoryScene
 import routes.scenes.HomeScene
 import routes.scenes.SplashScene
 import theme.AppRippleTheme
+import theme.ColorBox
 import theme.Fonts
 import java.awt.Dimension
 
@@ -36,6 +41,7 @@ fun App() {
         ) {
             CompositionLocalProvider(LocalRippleTheme provides AppRippleTheme) {
                 NavHost(
+                    modifier = Modifier.background(ColorBox.primaryDark),
                     navigator = navigator,
                     navTransition = NavTransition(),
                     initialRoute = Route.SPLASH,
@@ -52,6 +58,12 @@ fun App() {
                     ) {
                         HomeScene(navigator)
                     }
+                    scene(
+                        route = Route.HISTORY,
+                        navTransition = NavTransition()
+                    ) {
+                        HistoryScene(navigator)
+                    }
                 }
             }
         }
@@ -60,6 +72,9 @@ fun App() {
 }
 
 fun main() = application {
+    LaunchedEffect(Unit) {
+        Database.initDB()
+    }
     Window(
         onCloseRequest = ::exitApplication,
         resizable = true,

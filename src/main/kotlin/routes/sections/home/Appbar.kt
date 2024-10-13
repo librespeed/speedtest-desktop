@@ -22,7 +22,7 @@ import routes.dialogs.DialogPrivacy
 import theme.ColorBox
 
 @Composable
-fun Appbar() {
+fun Appbar(onHistoryClicked : () -> Unit) {
 
     var showPrivacyDialog by remember { mutableStateOf(false) }
     val unitSetting = Service.unitSetting.observeAsState()
@@ -38,6 +38,12 @@ fun Appbar() {
             text = "LibreSpeed",
             color = ColorBox.text,
             style = MaterialTheme.typography.titleMedium
+        )
+        MyIconButton(
+            icon = "icons/history.svg",
+            onClick = {
+                onHistoryClicked.invoke()
+            }
         )
         DayNightAnimationIcon(
             modifier = Modifier.size(48.dp).clip(RoundedCornerShape(50)).clickable {

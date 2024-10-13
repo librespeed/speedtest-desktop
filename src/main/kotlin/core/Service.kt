@@ -7,6 +7,7 @@ import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import util.NetUtils
 import util.Utils.roundPlace
 import util.Utils.toMegabyte
 import util.Utils.validate
@@ -19,6 +20,7 @@ object Service {
     const val UNIT_MBIT = "mbps"
 
     val unitSetting = MutableLiveData(UNIT_MBIT)
+    val networkAdapter = MutableLiveData("")
 
     val currentStep = MutableLiveData("")
     val currentCalValue = MutableLiveData(0.0)
@@ -103,6 +105,12 @@ object Service {
         } else {
             running.value = true
             CoroutineScope(Dispatchers.IO).launch {
+                val netInterface = NetUtils.getDefaultNetworkInterface()
+                if (netInterface != null) {
+                    networkAdapter.value = "${netInterface.name} (${NetUtils.parseMacAddress(netInterface.hardwareAddress)})"
+                } else {
+                    networkAdapter.value = "Unknown"
+                }
                 speedTestHandler.startTest(this@Service.testPoint.value,object : LibreSpeed.SpeedtestHandler() {
                     override fun onDownloadUpdate(dl: Double, progress: Double) {
                         currentStep.value = "DOWNLOAD"
@@ -150,7 +158,21 @@ object Service {
                     }
                     override fun onEnd() {
                         currentStep.value = "ENDED"
-                        if (!running.value) reset() else goToResult.invoke()
+                        if (!running.value) reset() else {
+                            goToResult.invoke()
+                            Database.saveHistory(
+                                ModelHistory(
+                                    netAdapter = networkAdapter.value,
+                                    ping = ping.value.toDouble(),
+                                    jitter = jitter.value.toDouble(),
+                                    download = download.value,
+                                    upload = upload.value,
+                                    ispInfo = ipInfo.value,
+                                    testPoint = testPoint.value?.name.toString(),
+                                    date = System.currentTimeMillis()
+                                )
+                            )
+                        }
                         running.value = false
                     }
                     override fun onCriticalFailure(err: String?) {
