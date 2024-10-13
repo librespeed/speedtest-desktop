@@ -1,3 +1,4 @@
+import androidx.compose.foundation.background
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -78,10 +79,10 @@ fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
         resizable = true,
-        state = WindowState(width = 990.dp, height = 650.dp),
+        state = WindowState(width = 750.dp, height = 650.dp),
         title = "LibreSpeed"
     ) {
-        window.minimumSize = Dimension(990,650)
+        window.minimumSize = Dimension(750,650)
         val icon = painterResource("icons/icon_app.svg")
         val density = LocalDensity.current
         SideEffect {

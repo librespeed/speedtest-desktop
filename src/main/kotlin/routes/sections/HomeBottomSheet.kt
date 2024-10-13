@@ -6,10 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -102,7 +99,8 @@ private fun ServerCell (testPoint: TestPoint, isChecked : Boolean,onClicked : ()
     }.padding(12.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
         RadioButton(
             selected = isChecked,
-            onClick = null
+            onClick = null,
+            colors = RadioButtonDefaults.colors().copy(selectedColor = ColorBox.primary)
         )
         Column(Modifier.padding(start = 12.dp).weight(1f)) {
             Text(

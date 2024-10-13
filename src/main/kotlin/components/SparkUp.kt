@@ -9,6 +9,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onSizeChanged
@@ -19,6 +20,8 @@ import theme.ColorBox
 fun SparkUp(
     modifier: Modifier = Modifier,
     data : List<Double>,
+    drawGradient : Boolean = true,
+    color : Color = ColorBox.primary
 ) {
 
     val points = remember { ArrayList<Point>() }
@@ -42,41 +45,55 @@ fun SparkUp(
             calcCons(points,conPoint1,conPoint2)
         }
     }) {
-        path.reset()
-        if (points.isNotEmpty()) {
-            path.moveTo(points.first().x, points.first().y)
-            for (i in 1 until points.size) {
-                path.cubicTo(
-                    conPoint1[i - 1].x, conPoint1[i - 1].y, conPoint2[i - 1].x, conPoint2[i - 1].y,
-                    points[i].x, points[i].y
-                )
-            }
-            drawPath(path, color = ColorBox.primary.copy(0.4f), style = Stroke(width = 3f))
-            path.lineTo(size.width,size.height)
-            path.lineTo(0f,size.height)
-            path.lineTo(points.first().x, points.first().y)
-            drawPath(path, brush = Brush.verticalGradient(colors = listOf(ColorBox.primary.copy(0.2f),Color.Transparent)), style = Fill)
-        }
+        drawSparkLine(path, points, conPoint1, conPoint2, color, drawGradient)
     }
 
 }
 
-private fun calcPoints(
+fun DrawScope.drawSparkLine(
+    path : Path,
+    points : List<Point>,
+    conPoint1 : List<Point>,
+    conPoint2 : List<Point>,
+    color: Color,
+    drawGradient: Boolean
+) {
+    path.reset()
+    if (points.isNotEmpty()) {
+        path.moveTo(points.first().x, points.first().y)
+        for (i in 1 until points.size) {
+            path.cubicTo(
+                conPoint1[i - 1].x, conPoint1[i - 1].y, conPoint2[i - 1].x, conPoint2[i - 1].y,
+                points[i].x, points[i].y
+            )
+        }
+        drawPath(path, color = color.copy(0.4f), style = Stroke(width = 3f))
+        if (drawGradient) {
+            path.lineTo(size.width,size.height)
+            path.lineTo(0f,size.height)
+            path.lineTo(points.first().x, points.first().y)
+            drawPath(path, brush = Brush.verticalGradient(colors = listOf(color.copy(0.2f),Color.Transparent)), style = Fill)
+        }
+    }
+}
+
+fun calcPoints(
     size: Size,
     data: List<Double>,
-    points : ArrayList<Point>
+    points : ArrayList<Point>,
+    vPadding : Float = 0f
 ) {
     points.clear()
-    val bottomY = size.height
+    val bottomY = size.height - vPadding
     val xDiff = size.width / (data.size - 1)
     val maxData = data.max()
     for (i in data.indices) {
-        val y = bottomY - (data[i] / maxData * bottomY)
+        val y = bottomY - (data[i] / maxData * bottomY) + (vPadding / 2f)
         points.add(Point(xDiff * i, y.toFloat()))
     }
 }
 
-private fun calcCons(
+fun calcCons(
     points: ArrayList<Point>,
     conPoint1 : ArrayList<Point>,
     conPoint2 : ArrayList<Point>

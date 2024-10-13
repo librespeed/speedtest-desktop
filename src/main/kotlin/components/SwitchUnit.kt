@@ -68,14 +68,14 @@ fun SwitchUnit(modifier: Modifier, isMbps : Boolean, onClicked : (Int) -> Unit) 
         drawText(
             textLayoutResult = textMbps,
             topLeft = Offset(
-                x = 20f,
+                x = 20f.dp.toPx(),
                 y = center.y - textMbps.size.height / 2,
             )
         )
         drawText(
             textLayoutResult = textMbs,
             topLeft = Offset(
-                x = 40f + textMbps.size.width + 20f,
+                x = 40f.dp.toPx() + textMbps.size.width + 20f.dp.toPx(),
                 y = center.y - textMbs.size.height / 2,
             )
         )

@@ -2,14 +2,18 @@ package routes.sections.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import components.AnimatedText
+import components.SimpleButton
 import components.SparkUp
 import components.SpeedMeterView
 import core.Service
@@ -17,8 +21,7 @@ import core.Service.toValidString
 import dev.icerock.moko.mvvm.livedata.compose.observeAsState
 import theme.ColorBox
 import util.Utils.roundPlace
-import java.util.Timer
-import java.util.TimerTask
+import java.util.*
 
 @Composable
 fun TestStage(onCancel : () -> Unit,goToResult : () -> Unit) {
@@ -120,20 +123,15 @@ fun TestStage(onCancel : () -> Unit,goToResult : () -> Unit) {
                     }
                 }
             }
-            Button(
-                modifier = Modifier.padding(top = 16.dp),
-                enabled = enablecancelation,
+            SimpleButton(
+                modifier = Modifier.padding(top = 16.dp).width(120.dp),
                 onClick = {
                     onCancel.invoke()
                 },
-                colors = ButtonDefaults.buttonColors(
-                    contentColor = ColorBox.COLOR_TEXT_NIGHT, containerColor = ColorBox.error,
-                    disabledContentColor = ColorBox.text.copy(0.4f),
-                    disabledContainerColor = ColorBox.text.copy(0.1f)
-                )
-            ) {
-                Text("Stop Test")
-            }
+                text = "Stop Test",
+                backgroundColor = ColorBox.error,
+                textColor = Color.White
+            )
             Row(modifier = Modifier.padding(top = 32.dp).height(120.dp),verticalAlignment = Alignment.CenterVertically) {
                 Column(modifier = Modifier.width(180.dp),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                     Text(

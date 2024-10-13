@@ -20,10 +20,7 @@ import org.jetbrains.skia.MaskFilter
 import org.jetbrains.skia.PaintMode
 import org.jetbrains.skia.PaintStrokeCap
 import theme.ColorBox
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.min
-import kotlin.math.sin
+import kotlin.math.*
 
 @Composable
 fun SpeedMeterView(
@@ -39,7 +36,7 @@ fun SpeedMeterView(
     frameworkPaint.strokeCap = PaintStrokeCap.ROUND
     frameworkPaint.maskFilter = MaskFilter.makeBlur(FilterBlurMode.SOLID, 10f)
 
-    val animateFrac = animateFloatAsState(min(speed,1f))
+    val animateFrac = animateFloatAsState(max(min(speed,1f),0f))
     val progressFrac = animateFloatAsState(progress)
 
     Canvas(modifier) {

@@ -8,17 +8,17 @@ import util.Settings
 
 object ColorBox {
 
-    val COLOR_PRIMARY = Color(0xFF6060AA)
+    val COLOR_PRIMARY = Color(0xFF6e6ec4)
 
     val COLOR_PRIMARY_DARK_NIGHT = Color(0xFF1f2733)
     val COLOR_CARD_NIGHT = Color(0xFF2A3341)
     val COLOR_TEXT_NIGHT = Color.White
-    val COLOR_ERROR_NIGHT = Color(0xFFB00020)
+    val COLOR_ERROR_NIGHT = Color(0xFFff7b63)
 
-    val COLOR_PRIMARY_DARK_DAY = Color(0xFFFFFFFF)
-    val COLOR_CARD_DAY = Color(0xFFE3E3E3)
+    val COLOR_PRIMARY_DARK_DAY = Color(0xFFfafafa)
+    val COLOR_CARD_DAY = Color(0xFFEBEBEB)
     val COLOR_TEXT_DAY = Color.Black
-    val COLOR_ERROR_DAY = Color(0xFFCF6679)
+    val COLOR_ERROR_DAY = Color(0xFFc01c28)
 
     var isNightTheme by mutableStateOf(Settings.isNightTheme)
 
