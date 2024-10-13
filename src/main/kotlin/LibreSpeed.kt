@@ -1,12 +1,16 @@
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ripple.LocalRippleTheme
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.toAwtImage
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -22,6 +26,7 @@ import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.rememberNavigator
 import moe.tlaster.precompose.navigation.transition.NavTransition
 import routes.Route
+import routes.dialogs.BaseDialog
 import routes.scenes.HistoryScene
 import routes.scenes.HomeScene
 import routes.scenes.SplashScene
@@ -29,6 +34,12 @@ import theme.AppRippleTheme
 import theme.ColorBox
 import theme.Fonts
 import java.awt.Dimension
+
+object App {
+
+    val showLoading = mutableStateOf(false)
+
+}
 
 @Composable
 fun App() {
@@ -64,6 +75,18 @@ fun App() {
                         navTransition = NavTransition()
                     ) {
                         HistoryScene(navigator)
+                    }
+                }
+
+                BaseDialog(expanded = App.showLoading.value) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator(Modifier.padding(20.dp), strokeCap = StrokeCap.Round)
+                        Text(
+                            modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
+                            text = "Please wait ...",
+                            color = ColorBox.text,
+                            style = MaterialTheme.typography.bodySmall.copy(fontFamily = Fonts.open_sans),
+                        )
                     }
                 }
             }
