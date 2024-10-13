@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.dosse.speedtest"
-version = "1.1.0"
+version = "1.2.0"
 
 repositories {
     mavenCentral()
@@ -33,7 +33,7 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             modules("java.sql")
             packageName = "LibreSpeed"
-            packageVersion = "1.1.0"
+            packageVersion = "1.2.0"
             val iconsRoot = project.file("src/main/resources")
             linux {
                 iconFile.set(iconsRoot.resolve("icons/icon_app.png"))
