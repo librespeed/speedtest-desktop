@@ -15,11 +15,11 @@ import java.net.URISyntaxException
 
 class SpeedTestHandler {
 
-    private var onServerSelectListener: OnServerSelectListener? = null
+    private var onServerSelectListener: ServerSelectedHandler? = null
     private var libreSpeed : LibreSpeed? = null
 
     @OptIn(ExperimentalComposeUiApi::class)
-    fun startup() {
+    fun startup() : Boolean {
         libreSpeed = LibreSpeed()
         try {
             val telemetryConfig = TelemetryConfig(JSONObject(ResourceLoader.Default.load("/configs/TelemetryConfig.json").bufferedReader().use { it.readText() }))
@@ -38,7 +38,7 @@ class SpeedTestHandler {
             e.printStackTrace()
         }
         libreSpeed!!.setSpeedtestConfig(SpeedtestConfig())
-        fetchServers()
+        return fetchServers()
     }
 
     fun startTest(testPoint: TestPoint?, speedTestHandler: SpeedtestHandler?) {
@@ -51,42 +51,30 @@ class SpeedTestHandler {
     }
 
     @OptIn(ExperimentalComposeUiApi::class)
-    private fun fetchServers() {
-        var data = ""
+    private fun fetchServers() : Boolean {
+        val data: String
         try {
             data = ResourceLoader.Default.load("/configs/ServerList.json").bufferedReader().use { it.readText() }
-        } catch (e: URISyntaxException) {
-            e.printStackTrace()
-            onServerSelectListener?.onError()
-        } catch (e: IOException) {
-            e.printStackTrace()
-            onServerSelectListener?.onError()
+        } catch (e: Exception) {
+            return false
         }
         if (data.startsWith("\"") || data.startsWith("'")) { //fetch server list from URL
             if (!libreSpeed!!.loadServerList(data.subSequence(1, data.length - 1).toString())) {
-                onServerSelectListener?.onError()
-                return
+                return false
             }
         } else {
             val testPoints = JSONArray(data)
             libreSpeed!!.addTestPoints(testPoints)
         }
-        libreSpeed!!.selectServer(object : ServerSelectedHandler() {
-            override fun onServerSelected(server: TestPoint?) {
-                onServerSelectListener!!.onServerSelected(server)
-            }
-        })
+        libreSpeed!!.selectServer(onServerSelectListener)
+        return true
     }
 
     val servers: ArrayList<TestPoint>
         get() = ArrayList(listOf(*libreSpeed!!.testPoints))
 
-    fun setOnServerSelectListener(onServerSelectListener: OnServerSelectListener?) {
+    fun setOnServerSelectListener(onServerSelectListener: ServerSelectedHandler?) {
         this.onServerSelectListener = onServerSelectListener
     }
 
-    interface OnServerSelectListener {
-        fun onError ()
-        fun onServerSelected(testPoint: TestPoint?)
-    }
 }

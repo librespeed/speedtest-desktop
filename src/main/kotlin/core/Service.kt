@@ -4,9 +4,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import core.lib.LibreSpeed
 import core.lib.serverSelector.TestPoint
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import util.NetUtils
 import util.Utils.roundPlace
 import util.Utils.toMegabyte
@@ -50,9 +48,16 @@ object Service {
     var goToResult : () -> Unit = {}
     var onError : (String?) -> Unit = {}
     var onEnableAbort : () -> Unit = {}
+    var onServerSelected : () -> Unit = {}
 
     fun init () {
         speedTestHandler = SpeedTestHandler()
+        speedTestHandler.setOnServerSelectListener(object : LibreSpeed.ServerSelectedHandler() {
+            override fun onServerSelected(server: TestPoint?) {
+                this@Service.testPoint.value = server
+                onServerSelected.invoke()
+            }
+        })
     }
 
     fun serverList () : ArrayList<TestPoint> {
@@ -81,21 +86,28 @@ object Service {
         progressUpload.value = 0.0
     }
 
-    fun startFetchServers (finished : () -> Unit) {
-        CoroutineScope(Dispatchers.IO).launch {
-            speedTestHandler.setOnServerSelectListener(object : SpeedTestHandler.OnServerSelectListener{
-                override fun onError() {
-                    println("Error")
-                }
-                override fun onServerSelected(testPoint: TestPoint?) {
-                    this@Service.testPoint.value = testPoint
-                    CoroutineScope(Dispatchers.Main).launch {
-                        finished.invoke()
+    suspend fun startFetchServers (result : (Boolean,String) -> Unit) {
+        withContext(Dispatchers.IO) {
+            while (true) {
+                result.invoke(false,"Finding best servers ...")
+                val serversSelectionResult = speedTestHandler.startup()
+                if (serversSelectionResult) {
+                    result.invoke(true,"Finding best servers ...")
+                    break
+                } else {
+                    startCountdown(10) {
+                        result.invoke(false,"Server selection failed !\nretrying in $it sec")
                     }
                 }
-            })
-            speedTestHandler.startup()
+            }
         }
+    }
+    private suspend fun startCountdown(seconds: Int,callback : (Int) -> Unit) {
+        for (i in seconds downTo 1) {
+            delay(1000)
+            callback.invoke(i)
+        }
+        delay(1000)
     }
 
     fun startTesting () {

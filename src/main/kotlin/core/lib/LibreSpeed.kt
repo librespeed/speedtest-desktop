@@ -120,7 +120,7 @@ class LibreSpeed {
             synchronized(mutex) { return servers.toTypedArray() }
         }
     private var ss: ServerSelector? = null
-    fun selectServer(callback: ServerSelectedHandler) {
+    fun selectServer(callback: ServerSelectedHandler?) {
         synchronized(mutex) {
             check(state != 0) { "No test points added" }
             check(state != 2) { "Server selection is in progress" }
@@ -130,7 +130,7 @@ class LibreSpeed {
                 override fun onServerSelected(server: TestPoint?) {
                     selectedServer = server
                     synchronized(mutex) { state = if (server != null) 3 else 1 }
-                    callback.onServerSelected(server)
+                    callback?.onServerSelected(server)
                 }
             }
             ss!!.start()

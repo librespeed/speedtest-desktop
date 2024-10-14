@@ -9,7 +9,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.toAwtImage
 import androidx.compose.ui.platform.LocalDensity
@@ -43,11 +42,8 @@ object App {
 
 @Composable
 fun App() {
-    Service.init()
-
     PreComposeApp {
         val navigator = rememberNavigator()
-
         MaterialTheme(
             typography = Fonts.getTypography()
         ) {
@@ -98,6 +94,7 @@ fun App() {
 fun main() = application {
     LaunchedEffect(Unit) {
         Database.initDB()
+        Service.init()
     }
     Window(
         onCloseRequest = ::exitApplication,
