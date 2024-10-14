@@ -23,10 +23,15 @@ object NetUtils {
         if (remoteAddress != null) {
             try {
                 DatagramSocket().use { s ->
-                    s.connect(remoteAddress, 80)
-                    result = NetworkInterface.getByInetAddress(s.localAddress)
+                    try {
+                        s.connect(remoteAddress, 80)
+                        result = NetworkInterface.getByInetAddress(s.localAddress)
+                    } catch (e : Exception) {
+                        return null
+                    }
                 }
             } catch (ignored: SocketException) {
+                return null
             }
         }
         return result
