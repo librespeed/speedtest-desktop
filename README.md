@@ -27,14 +27,9 @@ you can download latest version of this from [releases page](https://github.com/
 ```shell
 git clone -b compose-desktop --single-branch https://github.com/librespeed/speedtest-desktop.git
 cd speedtest-desktop
+# Edit your configs & servers in src/main/resources/configs/ folder
 ./gradlew run
 ```
-
-## TODO
-
-- [x] Redesign for desktop screen
-- [x] Dark-Light theme  
-- [ ] Handle errors on startup fetch server lists 
 
 ## License
 Copyright (C) 2016-2021 Federico Dossena\
