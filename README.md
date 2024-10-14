@@ -15,10 +15,10 @@ It is still WIP, it's not documented yet, but it works and it can be configured 
 This application is developed and maintained by Sudo Dios.
 
 ## Screenshots
-|                                                 |                                                     |
-|-------------------------------------------------|-----------------------------------------------------|
-| <img src="assets/start-stage.png" alt="ss1" />  | <img src="assets/test-stage.png" alt="ss1" />       |
-| <img src="assets/result-stage.png" alt="ss1" /> | <img src="assets/test-stage-light.png" alt="ss1" /> |                                                |
+|                                                     |                                               |                                                 |
+|-----------------------------------------------------|-----------------------------------------------|-------------------------------------------------|
+| <img src="assets/start-stage.png" alt="ss1" />      | <img src="assets/test-stage.png" alt="ss1" /> | <img src="assets/result-stage.png" alt="ss1" /> |
+| <img src="assets/test-stage-light.png" alt="ss1" /> | <img src="assets/history-stage.png">          |                                                 |
 
 ## Installation
 you can download latest version of this from [releases page](https://github.com/librespeed/speedtest-desktop/releases)
