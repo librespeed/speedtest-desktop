@@ -4,3 +4,4 @@
 -keep class org.sqlite.** { *; }
 
 -dontwarn org.apache.log4j.**
+-dontwarn moe.tlaster.precompose.navigation.**
