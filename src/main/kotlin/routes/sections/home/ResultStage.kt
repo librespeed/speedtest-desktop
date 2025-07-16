@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,8 +18,8 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.platform.ClipEntry
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
@@ -29,15 +30,18 @@ import components.drawSparkLine
 import core.Service
 import core.Service.toValidString
 import dev.icerock.moko.mvvm.livedata.compose.observeAsState
+import kotlinx.coroutines.launch
 import org.jetbrains.skia.Point
 import theme.ColorBox
 import theme.Fonts
+import java.awt.datatransfer.StringSelection
 
 @Composable
 fun ResultStage(newTestClicked: () -> Unit) {
 
-    val clipboardManager = LocalClipboardManager.current
+    val clipboardManager = LocalClipboard.current
     val unitSetting = Service.unitSetting.observeAsState()
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier.widthIn(max = 720.dp).fillMaxSize().background(ColorBox.primaryDark),
@@ -110,7 +114,9 @@ fun ResultStage(newTestClicked: () -> Unit) {
                 modifier = Modifier.padding(end = 6.dp).width(160.dp),
                 text = "Copy Result URL",
                 onClick = {
-                    clipboardManager.setText(AnnotatedString(Service.testIDShare.value.toString()))
+                    scope.launch {
+                        clipboardManager.setClipEntry(clipEntry = ClipEntry(StringSelection(Service.testIDShare.value.toString())))
+                    }
                 }
             )
             SimpleButton(
