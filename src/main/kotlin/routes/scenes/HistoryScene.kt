@@ -16,11 +16,16 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.drawscope.translate
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.dosse.speedtest.res.Res
+import com.dosse.speedtest.res.arrow_left
+import com.dosse.speedtest.res.export
+import com.dosse.speedtest.res.history
+import com.dosse.speedtest.res.trash
 import components.MyIconButton
 import components.SwitchUnit
 import components.TableItemRow
@@ -59,7 +64,7 @@ fun HistoryScene(navigator: Navigator) {
             Row(modifier = Modifier.padding(start = 12.dp, end = 12.dp).fillMaxWidth().height(72.dp), verticalAlignment = Alignment.CenterVertically) {
                 MyIconButton(
                     padding = PaddingValues(start = 6.dp),
-                    icon = "icons/arrow-left.svg",
+                    icon = Res.drawable.arrow_left,
                     onClick = {
                         navigator.goBack()
                     }
@@ -77,7 +82,7 @@ fun HistoryScene(navigator: Navigator) {
                     )
                 }
                 MyIconButton(
-                    icon = "icons/export.svg",
+                    icon = Res.drawable.export,
                     enabled = historyList.isNotEmpty(),
                     onClick = {
                         App.showLoading.value = true
@@ -91,7 +96,7 @@ fun HistoryScene(navigator: Navigator) {
                 )
                 MyIconButton(
                     padding = PaddingValues(end = 8.dp),
-                    icon = "icons/trash.svg",
+                    icon = Res.drawable.trash,
                     enabled = historyList.isNotEmpty(),
                     onClick = {
                         showClearDialog = true
@@ -106,7 +111,7 @@ fun HistoryScene(navigator: Navigator) {
                 )
             }
             if (historyList.isEmpty()) {
-                val emptyIcon = painterResource("icons/history.svg")
+                val emptyIcon = painterResource(Res.drawable.history)
                 val emptyText = rememberTextMeasurer().measure("History is empty !", style = MaterialTheme.typography.headlineSmall.copy(fontFamily = Fonts.open_sans))
                 Canvas(Modifier.fillMaxSize()) {
                     translate(size.width / 2 - 55f.dp.toPx(), size.height / 2 - 75f.dp.toPx() - emptyText.size.height) {

@@ -9,9 +9,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dosse.speedtest.res.Res
+import com.dosse.speedtest.res.server_change
 import components.AnimatedText
 import components.SimpleButton
 import components.SparkUp
@@ -110,7 +112,7 @@ fun TestStage(onCancel : () -> Unit,goToResult : () -> Unit) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
                             modifier = Modifier.size(24.dp),
-                            painter = painterResource("icons/server-change.svg"),
+                            painter = painterResource(Res.drawable.server_change),
                             contentDescription = null,
                             tint = ColorBox.text.copy(0.7f)
                         )

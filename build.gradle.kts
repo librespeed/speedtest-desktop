@@ -18,6 +18,7 @@ repositories {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(compose.desktop.currentOs)
+    implementation(compose.components.resources)
     api(compose.foundation)
     api(compose.animation)
     api("moe.tlaster:precompose:1.6.0")
@@ -25,6 +26,16 @@ dependencies {
     implementation("dev.icerock.moko:mvvm-livedata-compose:0.16.1")
     implementation("com.mikepenz:multiplatform-markdown-renderer:0.8.0")
     implementation("org.slf4j:slf4j-log4j12:2.0.9")
+}
+
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "com.dosse.speedtest.res"
+    generateResClass = auto
+    customDirectory(
+        sourceSetName = "main",
+        directoryProvider = provider { layout.projectDirectory.dir("src/main/resources") },
+    )
 }
 
 compose.desktop {
@@ -37,13 +48,13 @@ compose.desktop {
             packageVersion = "1.2.0"
             val iconsRoot = project.file("src/main/resources")
             linux {
-                iconFile.set(iconsRoot.resolve("icons/icon_app.png"))
+                iconFile.set(iconsRoot.resolve("files/icon_app.png"))
             }
             windows {
-                iconFile.set(iconsRoot.resolve("icons/icon_app.ico"))
+                iconFile.set(iconsRoot.resolve("files/icon_app.ico"))
             }
             macOS {
-                iconFile.set(iconsRoot.resolve("icons/icon_app.ico"))
+                iconFile.set(iconsRoot.resolve("files/icon_app.ico"))
             }
         }
         buildTypes.release.proguard {

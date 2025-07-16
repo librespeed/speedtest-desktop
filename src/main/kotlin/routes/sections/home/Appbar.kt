@@ -10,8 +10,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.unit.dp
+import com.dosse.speedtest.res.Res
+import com.dosse.speedtest.res.history
+import com.dosse.speedtest.res.icon_app
+import com.dosse.speedtest.res.security
 import components.DayNightAnimationIcon
 import components.MyIconButton
 import components.SwitchUnit
@@ -30,7 +34,7 @@ fun Appbar(onHistoryClicked : () -> Unit) {
     Row(modifier = Modifier.widthIn(max = 1200.dp).fillMaxWidth().height(76.dp), verticalAlignment = Alignment.CenterVertically) {
         Image(
             modifier = Modifier.padding(start = 16.dp).size(44.dp),
-            painter = painterResource("icons/icon_app.svg"),
+            painter = painterResource(Res.drawable.icon_app),
             contentDescription = null
         )
         Text(
@@ -40,7 +44,7 @@ fun Appbar(onHistoryClicked : () -> Unit) {
             style = MaterialTheme.typography.titleMedium
         )
         MyIconButton(
-            icon = "icons/history.svg",
+            icon = Res.drawable.history,
             onClick = {
                 onHistoryClicked.invoke()
             }
@@ -54,7 +58,7 @@ fun Appbar(onHistoryClicked : () -> Unit) {
         )
         MyIconButton(
             padding = PaddingValues(end = 8.dp),
-            icon = "icons/security.svg",
+            icon = Res.drawable.security,
             onClick = {
                 showPrivacyDialog = true
             }

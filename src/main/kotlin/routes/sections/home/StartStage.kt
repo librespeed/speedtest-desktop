@@ -18,9 +18,13 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.dosse.speedtest.res.Res
+import com.dosse.speedtest.res.arrow_right
+import com.dosse.speedtest.res.network
+import com.dosse.speedtest.res.server_change
 import components.AnimatedText
 import components.StartButton
 import core.Service
@@ -86,7 +90,7 @@ fun StartStage(onStartClicked: () -> Unit, onChooseServerClicked: () -> Unit) {
         ) {
             Icon(
                 modifier = Modifier.padding(16.dp).size(24.dp),
-                painter = painterResource("icons/server-change.svg"),
+                painter = painterResource(Res.drawable.server_change),
                 contentDescription = null,
                 tint = ColorBox.text.copy(0.7f)
             )
@@ -100,7 +104,7 @@ fun StartStage(onStartClicked: () -> Unit, onChooseServerClicked: () -> Unit) {
             )
             Icon(
                 modifier = Modifier.padding(end = 16.dp).size(18.dp).rotate(-90f),
-                painter = painterResource("icons/arrow-right.svg"),
+                painter = painterResource(Res.drawable.arrow_right),
                 contentDescription = null,
                 tint = ColorBox.text.copy(0.8f)
             )
@@ -109,7 +113,7 @@ fun StartStage(onStartClicked: () -> Unit, onChooseServerClicked: () -> Unit) {
         Row(modifier = Modifier.padding(top = 20.dp),verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 modifier = Modifier.size(18.dp),
-                painter = painterResource("icons/network.svg"),
+                painter = painterResource(Res.drawable.network),
                 contentDescription = null,
                 tint = ColorBox.text.copy(0.6f)
             )

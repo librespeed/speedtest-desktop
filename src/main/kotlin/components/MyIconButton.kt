@@ -14,10 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.DrawableResource
 import theme.ColorBox
 
 @Composable
@@ -25,7 +26,7 @@ fun MyIconButton(
     size : Dp = 48.dp,
     enabled: Boolean = true,
     rotate : Float = 0f,
-    icon : String,
+    icon : DrawableResource,
     background : Color = Color.Transparent,
     padding : PaddingValues = PaddingValues(0.dp),
     contentPadding : Dp = 12.dp,

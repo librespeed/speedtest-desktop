@@ -11,9 +11,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.dosse.speedtest.res.Res
+import com.dosse.speedtest.res.icon_app
 import core.Service
 import moe.tlaster.precompose.navigation.Navigator
 import routes.Route
@@ -42,7 +44,7 @@ fun SplashScene(navigator: Navigator) {
         ) {
             Image(
                 modifier = Modifier.size(120.dp),
-                painter = painterResource("icons/icon_app.svg"),
+                painter = painterResource(Res.drawable.icon_app),
                 contentDescription = null
             )
             Column(modifier = Modifier.padding(top = 32.dp).animateContentSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {

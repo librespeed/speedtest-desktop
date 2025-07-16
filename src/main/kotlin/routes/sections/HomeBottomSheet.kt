@@ -11,8 +11,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.unit.dp
+import com.dosse.speedtest.res.Res
+import com.dosse.speedtest.res.arrow_right
+import com.dosse.speedtest.res.check_circle
 import components.MyIconButton
 import core.Service
 import core.lib.serverSelector.TestPoint
@@ -38,7 +41,7 @@ fun BoxScope.HomeBottomSheet(
                 contentPadding = 14.dp,
                 rotate = 90f,
                 colorFilter = ColorBox.text.copy(0.6f),
-                icon = "icons/arrow-right.svg",
+                icon = Res.drawable.arrow_right,
                 onClick = {
                     closeClicked.invoke()
                 }
@@ -55,7 +58,7 @@ fun BoxScope.HomeBottomSheet(
             }.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     modifier = Modifier.size(20.dp),
-                    painter = painterResource("icons/check-circle.svg"),
+                    painter = painterResource(Res.drawable.check_circle),
                     contentDescription = null,
                     tint = ColorBox.COLOR_TEXT_NIGHT.copy(0.9f)
                 )

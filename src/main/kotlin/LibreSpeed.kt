@@ -1,8 +1,9 @@
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -12,12 +13,14 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.toAwtImage
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
+import com.dosse.speedtest.res.Res
+import com.dosse.speedtest.res.icon_app
 import core.Database
 import core.Service
 import moe.tlaster.precompose.PreComposeApp
@@ -29,9 +32,9 @@ import routes.dialogs.BaseDialog
 import routes.scenes.HistoryScene
 import routes.scenes.HomeScene
 import routes.scenes.SplashScene
-import theme.AppRippleTheme
 import theme.ColorBox
 import theme.Fonts
+import theme.rippleConfiguration
 import java.awt.Dimension
 
 object App {
@@ -40,6 +43,7 @@ object App {
 
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
     PreComposeApp {
@@ -47,7 +51,7 @@ fun App() {
         MaterialTheme(
             typography = Fonts.getTypography()
         ) {
-            CompositionLocalProvider(LocalRippleTheme provides AppRippleTheme) {
+            CompositionLocalProvider(LocalRippleConfiguration provides rippleConfiguration) {
                 NavHost(
                     modifier = Modifier.background(ColorBox.primaryDark),
                     navigator = navigator,
@@ -103,7 +107,7 @@ fun main() = application {
         title = "LibreSpeed"
     ) {
         window.minimumSize = Dimension(750,650)
-        val icon = painterResource("icons/icon_app.svg")
+        val icon = painterResource(Res.drawable.icon_app)
         val density = LocalDensity.current
         SideEffect {
             window.iconImage = icon.toAwtImage(density,LayoutDirection.Ltr, Size(128f,128f))

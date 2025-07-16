@@ -1,7 +1,7 @@
 package core
 
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.res.ResourceLoader
+import com.dosse.speedtest.res.Res
 import core.lib.LibreSpeed
 import core.lib.LibreSpeed.ServerSelectedHandler
 import core.lib.LibreSpeed.SpeedtestHandler
@@ -19,10 +19,10 @@ class SpeedTestHandler {
     private var libreSpeed : LibreSpeed? = null
 
     @OptIn(ExperimentalComposeUiApi::class)
-    fun startup() : Boolean {
+    suspend fun startup() : Boolean {
         libreSpeed = LibreSpeed()
         try {
-            val telemetryConfig = TelemetryConfig(JSONObject(ResourceLoader.Default.load("/configs/TelemetryConfig.json").bufferedReader().use { it.readText() }))
+            val telemetryConfig = TelemetryConfig(JSONObject(String(Res.readBytes("files/TelemetryConfig.json"), Charsets.UTF_8)))
             libreSpeed?.setTelemetryConfig(telemetryConfig)
         } catch (e: URISyntaxException) {
             e.printStackTrace()
@@ -30,7 +30,7 @@ class SpeedTestHandler {
             e.printStackTrace()
         }
         try {
-            val speedTestConfig = SpeedtestConfig(JSONObject(ResourceLoader.Default.load("/configs/SpeedtestConfig.json").bufferedReader().use { it.readText() }))
+            val speedTestConfig = SpeedtestConfig(JSONObject(String(Res.readBytes("files/SpeedtestConfig.json"), Charsets.UTF_8)))
             libreSpeed?.setSpeedtestConfig(speedTestConfig)
         } catch (e: URISyntaxException) {
             e.printStackTrace()
@@ -51,11 +51,11 @@ class SpeedTestHandler {
     }
 
     @OptIn(ExperimentalComposeUiApi::class)
-    private fun fetchServers() : Boolean {
+    private suspend fun fetchServers() : Boolean {
         val data: String
         try {
-            data = ResourceLoader.Default.load("/configs/ServerList.json").bufferedReader().use { it.readText() }
-        } catch (e: Exception) {
+            data = String(Res.readBytes("files/ServerList.json"), Charsets.UTF_8)
+        } catch (_: Exception) {
             return false
         }
         if (data.startsWith("\"") || data.startsWith("'")) { //fetch server list from URL
