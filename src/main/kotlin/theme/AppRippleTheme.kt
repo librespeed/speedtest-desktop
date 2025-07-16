@@ -1,32 +1,15 @@
 package theme
 
 import androidx.compose.material.ripple.RippleAlpha
-import androidx.compose.material.ripple.RippleTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.RippleConfiguration
 
-object AppRippleTheme : RippleTheme {
-
-    private const val DraggedStateLayerOpacity = 0.16f
-    private const val FocusStateLayerOpacity = 0.12f
-    private const val HoverStateLayerOpacity = 0.08f
-    private const val PressedStateLayerOpacity = 0.10f
-
-    @Composable
-    override fun defaultColor(): Color {
-        return ColorBox.text.copy(0.8f)
-    }
-
-    @Composable
-    override fun rippleAlpha(): RippleAlpha {
-        return DefaultRippleAlpha
-    }
-
-    private val DefaultRippleAlpha = RippleAlpha(
-        pressedAlpha = PressedStateLayerOpacity,
-        focusedAlpha = FocusStateLayerOpacity,
-        draggedAlpha = DraggedStateLayerOpacity,
-        hoveredAlpha = HoverStateLayerOpacity
+@OptIn(ExperimentalMaterial3Api::class)
+val rippleConfiguration = RippleConfiguration(
+    color = ColorBox.text.copy(0.8f), RippleAlpha(
+        pressedAlpha = 0.10f,
+        focusedAlpha = 0.12f,
+        draggedAlpha = 0.16f,
+        hoveredAlpha = 0.08f
     )
-
-}
+)
