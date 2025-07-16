@@ -3,6 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     kotlin("jvm")
     id("org.jetbrains.compose")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 group = "com.dosse.speedtest"
@@ -20,7 +21,7 @@ dependencies {
     api(compose.foundation)
     api(compose.animation)
     api("moe.tlaster:precompose:1.6.0")
-    implementation("org.jetbrains.compose.material3:material3-desktop:1.6.11")
+    implementation("org.jetbrains.compose.material3:material3-desktop:1.8.2")
     implementation("dev.icerock.moko:mvvm-livedata-compose:0.16.1")
     implementation("com.mikepenz:multiplatform-markdown-renderer:0.8.0")
     implementation("org.slf4j:slf4j-log4j12:2.0.9")
