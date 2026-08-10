@@ -31,7 +31,7 @@ import core.Service
 import dev.icerock.moko.mvvm.livedata.compose.observeAsState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.launch
 import theme.ColorBox
 import theme.Fonts
 import util.NetUtils
@@ -44,12 +44,14 @@ fun StartStage(onStartClicked: () -> Unit, onChooseServerClicked: () -> Unit) {
     var networkAdapter by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
-        withContext(Dispatchers.IO) {
+        //resolve the interface name right away, upgrade to the full description when detection finishes
+        launch(Dispatchers.IO) {
             val netInterface = NetUtils.getDefaultNetworkInterface()
-            networkAdapter = if (netInterface != null) {
-                "${netInterface.name} (${NetUtils.parseMacAddress(netInterface.hardwareAddress)})"
+            if (netInterface == null) {
+                networkAdapter = "Unknown"
             } else {
-                "Unknown"
+                networkAdapter = netInterface.name
+                networkAdapter = NetUtils.describeInterface(netInterface)
             }
         }
         delay(2000)
