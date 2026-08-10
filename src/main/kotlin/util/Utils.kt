@@ -4,10 +4,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import core.ModelHistory
-import core.Service.toValidString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.awt.Desktop
@@ -59,22 +57,45 @@ object Utils {
         }
     }
 
+    fun String.openInBrowser() {
+        try {
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(java.net.URI(this))
+                return
+            }
+        } catch (_: Throwable) { }
+        //Desktop.browse is not reliable everywhere; fall back to the platform opener
+        try {
+            val os = System.getProperty("os.name").lowercase(Locale.getDefault())
+            val command = when {
+                os.contains("mac") -> listOf("open", this)
+                os.contains("windows") -> listOf("rundll32", "url.dll,FileProtocolHandler", this)
+                else -> listOf("xdg-open", this)
+            }
+            ProcessBuilder(command).start()
+        } catch (_: Throwable) { }
+    }
+
     private fun String.escapeCsvValue(): String = "\"${replace("\"", "\"\"")}\""
-    suspend fun exportHistoryToCSV(input : SnapshotStateList<ModelHistory>,onSuccess : (File) -> Unit) {
+    suspend fun exportHistoryToCSV(input : List<ModelHistory>,onSuccess : (File) -> Unit) {
         withContext(Dispatchers.IO) {
             val exportFile = File("${System.getProperty("user.home")}${File.separator}Downloads","librespeed-history.csv")
             exportFile.parentFile.mkdirs()
             exportFile.createNewFile()
+            //raw stored values and a fixed date format, so exports compare across UI settings and machine locales
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ROOT)
             BufferedWriter(FileWriter(exportFile)).use {
-                it.write("id,netAdapter,ping,jitter,download,upload,ispInfo,testPoint,date\n")
+                it.write("id,netAdapter,ping,jitter,download (mbps),upload (mbps),ispInfo,testPoint,date,shareUrl\n")
                 for (model in input) {
                     it.write("${model.id},${model.netAdapter.escapeCsvValue()}," +
-                            "${model.ping},${model.jitter},${model.download.toValidString()}," +
-                            "${model.upload.toValidString()},${model.ispInfo.escapeCsvValue()}," +
-                            "${model.testPoint.escapeCsvValue()},${model.date.formatToDate("dd-MMM-yyyy HH:mm:ss")}\n")
+                            "${model.ping},${model.jitter},${model.download}," +
+                            "${model.upload},${model.ispInfo.escapeCsvValue()}," +
+                            "${model.testPoint.escapeCsvValue()},${dateFormat.format(Date(model.date))}," +
+                            "${(model.shareUrl ?: "").escapeCsvValue()}\n")
                 }
-                onSuccess.invoke(exportFile)
             }
+            //the callback opens the file in an external viewer; it must not run before the writer is closed
+            onSuccess.invoke(exportFile)
         }
     }
 
