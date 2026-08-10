@@ -63,21 +63,19 @@ class LibreSpeed {
     }
 
     private object ServerListLoader {
+        private const val FETCH_TIMEOUT = 5000
         private fun read(url: String): String? {
             return try {
-                val u = URL(url)
-                val `in` = u.openStream()
-                val br = BufferedReader(InputStreamReader(u.openStream()))
-                var s: String? = ""
-                try {
+                val conn = URL(url).openConnection()
+                conn.connectTimeout = FETCH_TIMEOUT
+                conn.readTimeout = FETCH_TIMEOUT
+                BufferedReader(InputStreamReader(conn.getInputStream())).use { br ->
+                    val s = StringBuilder()
                     while (true) {
-                        val r = br.readLine()
-                        s += r ?: break
+                        s.append(br.readLine() ?: break)
                     }
-                } catch (_: Throwable) { }
-                br.close()
-                `in`.close()
-                s
+                    s.toString()
+                }
             } catch (t: Throwable) {
                 null
             }
@@ -104,15 +102,14 @@ class LibreSpeed {
     }
 
     fun loadServerList(url: String): Boolean {
+        //the fetch can block for seconds; it must not hold the facade mutex
         synchronized(mutex) {
             if (state == 0) state = 1
             check(state <= 1) { "Cannot add test points at this moment" }
-            val pts = ServerListLoader.loadServerList(url)
-            return if (pts != null) {
-                addTestPoints(pts)
-                true
-            } else false
         }
+        val pts = ServerListLoader.loadServerList(url) ?: return false
+        addTestPoints(pts)
+        return true
     }
 
     val testPoints: Array<TestPoint>
@@ -146,8 +143,16 @@ class LibreSpeed {
         }
     }
 
-    private var st: SpeedtestWorker? = null
+    @Volatile private var st: SpeedtestWorker? = null
     fun start(callback: SpeedtestHandler) {
+        //abort() only flags the worker; wait for the previous one so two tests never
+        //overlap. Clear the field first: the callbacks below ignore anything that is
+        //no longer the current worker, and an aborted one usually dies during this
+        //very wait -- its final onEnd would otherwise still pass that check and
+        //navigate to a result, save a bogus row and invert the running flag.
+        val previous = st
+        st = null
+        previous?.let { old -> try { old.join(3000) } catch (_: InterruptedException) { } }
         synchronized(mutex) {
             check(state >= 3) { "Server hasn't been selected yet" }
             check(state != 4) { "Test already running" }
@@ -159,56 +164,61 @@ class LibreSpeed {
                 config.telemetry_extra = extra.toString()
             } catch (_: Throwable) { }
             st = object : SpeedtestWorker(selectedServer!!, config, telemetryConfig) {
+                //a worker replaced by a newer test run must not reach the callback anymore
                 override fun onDownloadUpdate(dl: Double, progress: Double) {
+                    if (st !== this) return
                     callback.onDownloadUpdate(dl, progress)
                 }
 
                 override fun onUploadUpdate(ul: Double, progress: Double) {
+                    if (st !== this) return
                     callback.onUploadUpdate(ul, progress)
                 }
 
                 override fun onPingJitterUpdate(ping: Double, jitter: Double, progress: Double) {
+                    if (st !== this) return
                     callback.onPingJitterUpdate(ping, jitter, progress)
                 }
 
                 override fun onIPInfoUpdate(ipInfo: String?) {
+                    if (st !== this) return
                     callback.onIPInfoUpdate(ipInfo)
                 }
 
-                override fun onTestIDReceived(id: String?) {
-                    var shareURL = prepareShareURL(telemetryConfig)
-                    if (shareURL != null) shareURL = String.format(shareURL, id)
+                override fun onTestIDReceived(id: String?, shareURLTemplate: String?) {
+                    if (st !== this) return
+                    var shareURL = shareURLTemplate
+                    //the template is built from server-supplied URLs; a format call would choke on their '%' bytes
+                    if (shareURL != null && id != null) shareURL = shareURL.replace("%s", id)
                     callback.onTestIDReceived(id, shareURL)
                 }
 
                 override fun onEnd() {
-                    synchronized(mutex) { this@LibreSpeed.state = 5 }
+                    synchronized(mutex) {
+                        if (st !== this) return
+                        this@LibreSpeed.state = 5
+                    }
                     callback.onEnd()
                 }
 
                 override fun onCriticalFailure(err: String?) {
-                    synchronized(mutex) { this@LibreSpeed.state = 5 }
+                    synchronized(mutex) {
+                        if (st !== this) return
+                        this@LibreSpeed.state = 5
+                    }
                     callback.onCriticalFailure(err)
                 }
             }
         }
     }
 
-    private fun prepareShareURL(c: TelemetryConfig?): String? {
-        if (c == null) return null
-        var server = c.server
-        var shareURL = c.shareURL
-        if (server.isNullOrEmpty() || shareURL.isNullOrEmpty()) return null
-        if (!server.endsWith("/")) server = "$server/"
-        while (shareURL!!.startsWith("/")) shareURL = shareURL.substring(1)
-        if (server.startsWith("//")) server = "https:$server"
-        return server + shareURL
-    }
-
     fun abort() {
         synchronized(mutex) {
             if (state == 2) ss!!.stopASAP()
-            if (state == 4) st!!.abort()
+            if (state == 4) {
+                st!!.abort()
+                st!!.interrupt() //wake blocking sleeps so the worker notices stopASAP promptly
+            }
             state = 5
         }
     }

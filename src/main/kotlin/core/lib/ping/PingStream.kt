@@ -17,18 +17,29 @@ abstract class PingStream(
     sendBuffer: Int,
     log: Logger?
 ) {
+    @Volatile
     private var remainingPings = 10
     private val connectTimeout: Int
     private val soTimeout: Int
     private val recvBuffer: Int
     private val sendBuffer: Int
     private var c: Connection? = null
+    @Volatile
     private var pinger: Pinger? = null
     private var errorHandlingMode = SpeedtestConfig.ONERROR_ATTEMPT_RESTART
+    @Volatile
     private var stopASAP = false
+
+    //set when init() gave up without publishing a pinger; join() must not wait
+    //for one that will never arrive, and unlike download/upload nothing calls
+    //stopASAP() on this stream before joining it
+    @Volatile
+    private var dead = false
     private val log: Logger?
+    val usedIPv6: Boolean?
+        get() = c?.isIPv6
     private fun init() {
-        if (stopASAP) return
+        if (stopASAP || dead) return
         if (c != null) {
             try {
                 c!!.close()
@@ -69,6 +80,9 @@ abstract class PingStream(
                             }
                         }
                     }
+                    //stopASAP() may have run before the pinger was published; both fields
+                    //are volatile, so one of the two writers is guaranteed to see the other
+                    if (stopASAP) pinger!!.stopASAP()
                 } catch (t: Throwable) {
                     log("A pinger failed hard")
                     try {
@@ -78,7 +92,10 @@ abstract class PingStream(
                     if (errorHandlingMode == SpeedtestConfig.ONERROR_MUST_RESTART) {
                         Utils.sleep(100)
                         init()
-                    } else onError(t.toString())
+                    } else {
+                        dead = true
+                        onError(t.toString())
+                    }
                 }
             }
         }.start()
@@ -93,7 +110,11 @@ abstract class PingStream(
     }
 
     fun join() {
-        while (pinger == null) sleep(0, 100)
+        //pinger stays null when init() failed hard or bailed on stopASAP; don't wait for it then
+        while (pinger == null) {
+            if (stopASAP || dead) return
+            sleep(0, 100)
+        }
         try {
             pinger!!.join()
         } catch (t: Throwable) {

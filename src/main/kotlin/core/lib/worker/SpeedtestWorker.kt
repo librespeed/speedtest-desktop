@@ -23,10 +23,15 @@ abstract class SpeedtestWorker(
     Thread() {
     private val config: SpeedtestConfig
     private val telemetryConfig: TelemetryConfig
+    @Volatile
     private var stopASAP = false
+    @Volatile
     private var dl = -1.0
+    @Volatile
     private var ul = -1.0
+    @Volatile
     private var ping = -1.0
+    @Volatile
     private var jitter = -1.0
     private var ipIsp: String? = ""
     private val log = Logger()
@@ -52,12 +57,14 @@ abstract class SpeedtestWorker(
     }
 
     private var getIPCalled = false
+    //kept so that abort() can cut the IP lookup short instead of waiting out its timeouts
+    @Volatile private var ipConnection: Connection? = null
     private val iP: Unit
         get() {
             getIPCalled = if (getIPCalled) return else true
             val start = System.currentTimeMillis()
             val c: Connection? = try {
-                Connection(backend.server!!, config.ping_connectTimeout, config.ping_soTimeout, -1, -1)
+                Connection(backend.server!!, config.ping_connectTimeout, config.ping_soTimeout, -1, -1).also { ipConnection = it }
             } catch (t: Throwable) {
                 if (config.getErrorHandlingMode() == SpeedtestConfig.ONERROR_FAIL) {
                     abort()
@@ -264,13 +271,37 @@ abstract class SpeedtestWorker(
     private fun sendTelemetry() {
         if (telemetryConfig.telemetryLevel == TelemetryConfig.LEVEL_DISABLED) return
         if (stopASAP && telemetryConfig.telemetryLevel == TelemetryConfig.LEVEL_BASIC) return
-        try {
-            val c = Connection(telemetryConfig.server!!, -1, -1, -1, -1)
+        //the tested server may run its own results backend (this is what the web client uses);
+        //try it first, then fall back to the centrally configured endpoint
+        val serverBase = testServerTelemetryBase()
+        val localId = submitTelemetry(backend.server, if (serverBase.isEmpty()) "results/telemetry.php" else "$serverBase/results/telemetry.php")
+        if (localId != null) {
+            onTestIDReceived(localId, shareUrlTemplate(backend.server, if (serverBase.isEmpty()) "results/?id=%s" else "$serverBase/results/?id=%s"))
+            return
+        }
+        val centralId = submitTelemetry(telemetryConfig.server, telemetryConfig.path)
+        if (centralId != null) {
+            onTestIDReceived(centralId, shareUrlTemplate(telemetryConfig.server, telemetryConfig.shareURL))
+        }
+    }
+
+    //endpoints usually live in <base>/backend/, the results backend in <base>/results/
+    private fun testServerTelemetryBase(): String {
+        var dir = (backend.pingURL ?: "").substringBeforeLast('/', "")
+        if (dir.endsWith("backend")) dir = dir.removeSuffix("backend")
+        return dir.trim('/')
+    }
+
+    private fun submitTelemetry(server: String?, path: String?): String? {
+        if (server.isNullOrEmpty() || path.isNullOrEmpty()) return null
+        return try {
+            val c = Connection(server, config.ping_connectTimeout, config.ping_soTimeout, -1, -1)
+            var result: String? = null
             val t: Telemetry = object : Telemetry(
                 c,
-                telemetryConfig.path!!,
+                path,
                 telemetryConfig.telemetryLevel,
-                ipIsp!!,
+                ipIsp ?: "",
                 config.telemetry_extra,
                 if (dl == -1.0) "" else String.format(Locale.ENGLISH, "%.2f", dl),
                 if (ul == -1.0) "" else String.format(Locale.ENGLISH, "%.2f", ul),
@@ -279,33 +310,47 @@ abstract class SpeedtestWorker(
                 log.getLog()
             ) {
                 override fun onDataReceived(data: String?) {
-                    if (data!!.startsWith("id")) {
-                        onTestIDReceived(data.split(" ").toTypedArray()[1])
+                    if (data != null && data.startsWith("id")) {
+                        val parts = data.split(" ")
+                        if (parts.size > 1) result = parts[1]
                     }
                 }
 
                 override fun onError(err: String?) {
-                    System.err.println("Telemetry error: $err")
+                    System.err.println("Telemetry error ($server): $err")
                 }
             }
-            t.join()
+            //bounded: a wedged server must not keep onEnd() from ever running
+            t.join(config.ping_connectTimeout + 2L * config.ping_soTimeout)
+            result
         } catch (t: Throwable) {
-            System.err.println("Failed to send telemetry: $t")
-            t.printStackTrace(System.err)
+            System.err.println("Failed to send telemetry to $server: $t")
+            null
         }
+    }
+
+    private fun shareUrlTemplate(serverBase: String?, sharePath: String?): String? {
+        if (serverBase.isNullOrEmpty() || sharePath.isNullOrEmpty()) return null
+        var server = serverBase
+        if (!server.endsWith("/")) server = "$server/"
+        var path = sharePath
+        while (path!!.startsWith("/")) path = path.substring(1)
+        if (server.startsWith("//")) server = "https:$server"
+        return server + path
     }
 
     fun abort() {
         if (stopASAP) return
         log.l("Manually aborted")
         stopASAP = true
+        try { ipConnection?.close() } catch (_: Throwable) { }
     }
 
     abstract fun onDownloadUpdate(dl: Double, progress: Double)
     abstract fun onUploadUpdate(ul: Double, progress: Double)
     abstract fun onPingJitterUpdate(ping: Double, jitter: Double, progress: Double)
     abstract fun onIPInfoUpdate(ipInfo: String?)
-    abstract fun onTestIDReceived(id: String?)
+    abstract fun onTestIDReceived(id: String?, shareURLTemplate: String?)
     abstract fun onEnd()
     abstract fun onCriticalFailure(err: String?)
 
