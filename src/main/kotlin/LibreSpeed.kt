@@ -18,6 +18,8 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.toAwtImage
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyShortcut
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.platform.LocalDensity
@@ -25,6 +27,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.MenuBar
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
@@ -34,8 +37,12 @@ import com.dosse.speedtest.res.icon_app_tile
 import components.SimpleButton
 import core.Database
 import core.Service
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.NavHost
+import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.rememberNavigator
 import moe.tlaster.precompose.navigation.transition.NavTransition
 import routes.Route
@@ -47,7 +54,9 @@ import theme.ColorBox
 import theme.Fonts
 import theme.rippleConfiguration
 import util.UpdateChecker
+import util.Utils
 import util.Utils.openInBrowser
+import util.Utils.systemOpenFile
 import java.awt.Desktop
 import java.awt.Dimension
 
@@ -55,6 +64,8 @@ object App {
 
     val showLoading = mutableStateOf(false)
     val showAbout = mutableStateOf(false)
+    val errorMessage = mutableStateOf<String?>(null)
+    var navigateToHistory : () -> Unit = {}
 
 }
 
@@ -63,6 +74,11 @@ object App {
 fun App() {
     PreComposeApp {
         val navigator = rememberNavigator()
+        SideEffect {
+            App.navigateToHistory = {
+                navigator.navigate(Route.HISTORY, NavOptions(launchSingleTop = true))
+            }
+        }
         MaterialTheme(
             typography = Fonts.getTypography()
         ) {
@@ -101,6 +117,28 @@ fun App() {
                             text = "Please wait ...",
                             color = ColorBox.text,
                             style = MaterialTheme.typography.bodySmall.copy(fontFamily = Fonts.open_sans),
+                        )
+                    }
+                }
+
+                BaseDialog(
+                    expanded = App.errorMessage.value != null,
+                    onDismissRequest = {
+                        App.errorMessage.value = null
+                    }
+                ) {
+                    Column(modifier = Modifier.width(320.dp).padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = App.errorMessage.value.orEmpty(),
+                            color = ColorBox.text,
+                            style = MaterialTheme.typography.bodySmall.copy(fontFamily = Fonts.open_sans),
+                        )
+                        SimpleButton(
+                            modifier = Modifier.padding(top = 20.dp).width(140.dp),
+                            text = "Close",
+                            onClick = {
+                                App.errorMessage.value = null
+                            }
                         )
                     }
                 }
@@ -163,8 +201,14 @@ fun App() {
 
 fun main() = application {
     LaunchedEffect(Unit) {
-        Database.initDB()
+        //before anything can suspend: the home screen starts fetching servers as
+        //soon as it composes, and that call needs the handler this creates
         Service.init()
+        try {
+            withContext(Dispatchers.IO) { Database.initDB() }
+        } catch (t: Throwable) {
+            App.errorMessage.value = "Test history is unavailable:\n${t.message ?: t}"
+        }
         try {
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.APP_ABOUT)) {
                 Desktop.getDesktop().setAboutHandler { App.showAbout.value = true }
@@ -182,6 +226,36 @@ fun main() = application {
         val density = LocalDensity.current
         SideEffect {
             window.iconImage = icon.toAwtImage(density,LayoutDirection.Ltr, Size(128f,128f))
+        }
+        val menuScope = rememberCoroutineScope()
+        //meta is Cmd only on macOS; Windows/Linux reserve the meta/super key for the OS
+        val isMac = remember { System.getProperty("os.name").contains("mac", ignoreCase = true) }
+        MenuBar {
+            Menu("History") {
+                Item(
+                    text = "Show History",
+                    shortcut = KeyShortcut(Key.Y, meta = isMac, ctrl = !isMac),
+                    onClick = {
+                        App.navigateToHistory.invoke()
+                    }
+                )
+                Item(
+                    text = "Export to CSV",
+                    shortcut = KeyShortcut(Key.E, meta = isMac, ctrl = !isMac),
+                    onClick = {
+                        menuScope.launch {
+                            try {
+                                val list = withContext(Dispatchers.IO) { Database.readHistory() }
+                                if (list.isNotEmpty()) {
+                                    Utils.exportHistoryToCSV(list, onSuccess = { it.systemOpenFile() })
+                                }
+                            } catch (t: Throwable) {
+                                App.errorMessage.value = "Export failed:\n${t.message ?: t}"
+                            }
+                        }
+                    }
+                )
+            }
         }
         App()
     }
