@@ -21,7 +21,8 @@ fun SparkUp(
     modifier: Modifier = Modifier,
     data : List<Double>,
     drawGradient : Boolean = true,
-    color : Color = ColorBox.primary
+    color : Color = ColorBox.primary,
+    vPadding : Float = 0f
 ) {
 
     val points = remember { ArrayList<Point>() }
@@ -33,7 +34,7 @@ fun SparkUp(
 
     LaunchedEffect(data.toList()) {
         if (data.isNotEmpty()) {
-            calcPoints(canvasSize,data,points)
+            calcPoints(canvasSize,data,points,vPadding)
             calcCons(points,conPoint1,conPoint2)
         }
     }
@@ -41,7 +42,7 @@ fun SparkUp(
     Canvas(modifier = modifier.onSizeChanged {
         canvasSize = Size(it.width.toFloat(),it.height.toFloat())
         if (data.isNotEmpty()) {
-            calcPoints(canvasSize,data,points)
+            calcPoints(canvasSize,data,points,vPadding)
             calcCons(points,conPoint1,conPoint2)
         }
     }) {
@@ -84,11 +85,13 @@ fun calcPoints(
     vPadding : Float = 0f
 ) {
     points.clear()
-    val bottomY = size.height - vPadding
+    val top = vPadding / 2f
+    val bottomY = size.height - (vPadding / 2f)
+    val usableHeight = bottomY - top
     val xDiff = size.width / (data.size - 1)
     val maxData = data.max()
     for (i in data.indices) {
-        val y = bottomY - (data[i] / maxData * bottomY) + (vPadding / 2f)
+        val y = bottomY - (data[i] / maxData * usableHeight)
         points.add(Point(xDiff * i, y.toFloat()))
     }
 }

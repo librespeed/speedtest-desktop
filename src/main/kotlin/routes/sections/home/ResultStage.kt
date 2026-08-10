@@ -6,34 +6,28 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import components.SimpleButton
-import components.calcCons
-import components.calcPoints
-import components.drawSparkLine
+import components.SparkUp
 import core.Service
 import core.Service.toValidString
 import dev.icerock.moko.mvvm.livedata.compose.observeAsState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.skia.Point
 import theme.ColorBox
 import theme.Fonts
+import util.Utils.openInBrowser
 import java.awt.datatransfer.StringSelection
 
 @Composable
@@ -41,7 +35,16 @@ fun ResultStage(newTestClicked: () -> Unit) {
 
     val clipboardManager = LocalClipboard.current
     val unitSetting = Service.unitSetting.observeAsState()
+    val shareUrl = Service.testIDShare.observeAsState()
     val scope = rememberCoroutineScope()
+    var copied by remember { mutableStateOf(false) }
+
+    LaunchedEffect(copied) {
+        if (copied) {
+            delay(2000)
+            copied = false
+        }
+    }
 
     Column(
         modifier = Modifier.widthIn(max = 720.dp).fillMaxSize().background(ColorBox.primaryDark),
@@ -110,15 +113,25 @@ fun ResultStage(newTestClicked: () -> Unit) {
             value = Service.networkAdapter.value
         )
         Row(modifier = Modifier.padding(top = 32.dp)) {
-            SimpleButton(
-                modifier = Modifier.padding(end = 6.dp).width(160.dp),
-                text = "Copy Result URL",
-                onClick = {
-                    scope.launch {
-                        clipboardManager.setClipEntry(clipEntry = ClipEntry(StringSelection(Service.testIDShare.value.toString())))
+            shareUrl.value?.let { url ->
+                SimpleButton(
+                    modifier = Modifier.padding(end = 6.dp).width(160.dp),
+                    text = "Open Result URL",
+                    onClick = {
+                        url.openInBrowser()
                     }
-                }
-            )
+                )
+                SimpleButton(
+                    modifier = Modifier.padding(end = 6.dp).width(160.dp),
+                    text = if (copied) "Copied ✓" else "Copy Result URL",
+                    onClick = {
+                        scope.launch {
+                            clipboardManager.setClipEntry(clipEntry = ClipEntry(StringSelection(url)))
+                            copied = true
+                        }
+                    }
+                )
+            }
             SimpleButton(
                 modifier = Modifier.padding(start = 6.dp).width(160.dp),
                 text = "New Test",
@@ -141,69 +154,35 @@ private fun ResultItem(
     suffix: String,
     chartData: List<Double>
 ) {
-
-    val textMeasurer = rememberTextMeasurer()
-
-    val titleText =
-        textMeasurer.measure(title, style = MaterialTheme.typography.bodySmall.copy(fontFamily = Fonts.open_sans))
-    val valueText =
-        textMeasurer.measure(value, style = MaterialTheme.typography.headlineMedium.copy(fontFamily = Fonts.open_sans))
-    val suffixText =
-        textMeasurer.measure(suffix, style = MaterialTheme.typography.labelSmall.copy(fontFamily = Fonts.open_sans))
-
-    val points = remember { ArrayList<Point>() }
-    val conPoint1 = remember { ArrayList<Point>() }
-    val conPoint2 = remember { ArrayList<Point>() }
-
-    val path = remember { Path() }
-    var canvasSize = remember { Size.Zero }
-
-    LaunchedEffect(chartData.toList()) {
-        if (chartData.isNotEmpty()) {
-            calcPoints(canvasSize, chartData, points, vPadding = 16f)
-            calcCons(points, conPoint1, conPoint2)
-        }
-    }
-
-    Canvas(
-        modifier = modifier.onSizeChanged {
-            canvasSize = Size(it.width.toFloat(), it.height.toFloat())
-            if (chartData.isNotEmpty()) {
-                calcPoints(canvasSize, chartData, points, vPadding = 16f)
-                calcCons(points, conPoint1, conPoint2)
-            }
-        }.height((12f + titleText.size.height + 4f + valueText.size.height + 12f).dp).clip(RoundedCornerShape(12.dp))
-            .background(color.copy(0.1f))
-    ) {
-        drawSparkLine(
-            path = path,
-            points = points,
-            conPoint1 = conPoint1,
-            conPoint2 = conPoint2,
+    Box(modifier = modifier.height(112.dp).clip(RoundedCornerShape(12.dp)).background(color.copy(0.1f))) {
+        //chart lives in its own band at the bottom so it never overlaps the texts
+        SparkUp(
+            modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth().height(42.dp),
+            data = chartData,
+            drawGradient = true,
             color = color,
-            drawGradient = false
+            vPadding = 8f
         )
-        //title text
-        drawText(
-            textLayoutResult = titleText,
-            color = ColorBox.text.copy(0.7f),
-            topLeft = Offset(16f.dp.toPx(), 12f.dp.toPx()),
-        )
-        //value text
-        drawText(
-            textLayoutResult = valueText,
-            color = ColorBox.text,
-            topLeft = Offset(16f.dp.toPx(), (12f + titleText.size.height + 4f).dp.toPx()),
-        )
-        //suffix text
-        drawText(
-            textLayoutResult = suffixText,
-            color = ColorBox.text.copy(0.6f),
-            topLeft = Offset(
-                (16f + valueText.size.width + 6f).dp.toPx(),
-                (12f + titleText.size.height - suffixText.size.height + valueText.size.height).dp.toPx()
-            ),
-        )
+        Column(modifier = Modifier.padding(start = 16.dp, top = 12.dp, end = 16.dp)) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodySmall.copy(fontFamily = Fonts.open_sans),
+                color = ColorBox.text.copy(0.7f)
+            )
+            Row(verticalAlignment = Alignment.Bottom) {
+                Text(
+                    text = value,
+                    style = MaterialTheme.typography.headlineMedium.copy(fontFamily = Fonts.open_sans),
+                    color = ColorBox.text
+                )
+                Text(
+                    modifier = Modifier.padding(start = 6.dp, bottom = 5.dp),
+                    text = suffix,
+                    style = MaterialTheme.typography.labelSmall.copy(fontFamily = Fonts.open_sans),
+                    color = ColorBox.text.copy(0.6f)
+                )
+            }
+        }
     }
 }
 
