@@ -19,9 +19,14 @@ class Connection @JvmOverloads constructor(
     sendBuffer: Int = -1
 ) {
     private var socket: Socket? = null
+    //the part of the server URL after the host: a server list may point at
+    //"https://host/backend", and every relative endpoint then lives under it
+    private var basePath = ""
     private var host: String? = null
     private var port = 0
     private var mode = MODE_NOT_SET
+    val isIPv6: Boolean
+        get() = socket?.inetAddress is java.net.Inet6Address
     val inputStream: InputStream?
         get() = try {
             socket!!.getInputStream()
@@ -61,19 +66,25 @@ class Connection @JvmOverloads constructor(
             return isr
         }
 
+    private fun resolvePath(path: String) = if (path.startsWith("/")) path else "$basePath/$path"
+
     @Throws(Exception::class)
     fun GET(path: String, keepAlive: Boolean) {
-        var path2 = path
+        val path2 = resolvePath(path)
         try {
-            if (!path.startsWith("/")) path2 = "/$path"
+            //one write per request: with Nagle's algorithm every further small write
+            //waits for the ACK of the previous one, which added a whole round trip to every ping
+            val request = buildString {
+                append("GET $path2 HTTP/1.1\r\n")
+                append("Host: $host\r\n")
+                append("User-Agent: $USER_AGENT\r\n")
+                append("Connection: ${if (keepAlive) "keep-alive" else "close"}\r\n")
+                append("Accept-Encoding: identity\r\n")
+                if (Locale.getDefault() != null) append("Accept-Language: ${Locale.getDefault()}\r\n")
+                append("\r\n")
+            }
             val ps = printStream
-            ps!!.print("GET $path2 HTTP/1.1\r\n")
-            ps.print("Host: $host\r\n")
-            ps.print("User-Agent: $USER_AGENT")
-            ps.print("Connection: ${if (keepAlive) "keep-alive\r\n" else "close\r\n"}")
-            ps.print("Accept-Encoding: identity\r\n")
-            if (Locale.getDefault() != null) ps.print("Accept-Language: ${Locale.getDefault()}\r\n")
-            ps.print("\r\n")
+            ps!!.print(request)
             ps.flush()
         } catch (t: Throwable) {
             throw Exception("Failed to send GET request")
@@ -82,20 +93,22 @@ class Connection @JvmOverloads constructor(
 
     @Throws(Exception::class)
     fun POST(path: String, keepAlive: Boolean, contentType: String?, contentLength: Long) {
-        var path2 = path
+        val path2 = resolvePath(path)
         try {
-            if (!path.startsWith("/")) path2 = "/$path"
+            val request = buildString {
+                append("POST $path2 HTTP/1.1\r\n")
+                append("Host: $host\r\n")
+                append("User-Agent: $USER_AGENT\r\n")
+                append("Connection: ${if (keepAlive) "keep-alive" else "close"}\r\n")
+                append("Accept-Encoding: identity\r\n")
+                if (Locale.getDefault() != null) append("Accept-Language: ${Locale.getDefault()}\r\n")
+                if (contentType != null) append("Content-Type: $contentType\r\n")
+                append("Content-Encoding: identity\r\n")
+                if (contentLength >= 0) append("Content-Length: $contentLength\r\n")
+                append("\r\n")
+            }
             val ps = printStream
-            ps!!.print("POST $path2 HTTP/1.1\r\n")
-            ps.print("Host: $host\r\n")
-            ps.print("User-Agent: $USER_AGENT\r\n")
-            ps.print("Connection: ${if (keepAlive) "keep-alive\r\n" else "close\r\n"}")
-            ps.print("Accept-Encoding: identity\r\n")
-            if (Locale.getDefault() != null) ps.print("Accept-Language: ${Locale.getDefault()}\r\n")
-            if (contentType != null) ps.print("Content-Type: $contentType\r\n")
-            ps.print("Content-Encoding: identity\r\n")
-            if (contentLength >= 0) ps.print("Content-Length: $contentLength\r\n")
-            ps.print("\r\n")
+            ps!!.print(request)
             ps.flush()
         } catch (t: Throwable) {
             throw Exception("Failed to send POST request")
@@ -123,7 +136,8 @@ class Connection @JvmOverloads constructor(
         return try {
             val ret = HashMap<String, String>()
             var s = readLineUnbuffered()
-            if (!s!!.contains("200 OK")) throw Exception("Did not receive an HTTP 200 (" + s.trim { it <= ' ' } + ")")
+            val statusCode = s!!.trim { it <= ' ' }.split(" ").getOrNull(1)
+            if (statusCode == null || !statusCode.startsWith("2")) throw Exception("Did not receive an HTTP 2xx (" + s.trim { it <= ' ' } + ")")
             while (true) {
                 s = readLineUnbuffered()
                 if (s!!.trim { it <= ' ' }.isEmpty()) break
@@ -164,6 +178,7 @@ class Connection @JvmOverloads constructor(
                 val u = URL(url)
                 host = u.host
                 port = u.port
+                basePath = u.path.trimEnd('/')
             } catch (t: Throwable) {
                 throw IllegalArgumentException("Malformed URL (HTTP)")
             }
@@ -173,6 +188,7 @@ class Connection @JvmOverloads constructor(
                 val u = URL(url)
                 host = u.host
                 port = u.port
+                basePath = u.path.trimEnd('/')
             } catch (t: Throwable) {
                 throw IllegalArgumentException("Malformed URL (HTTPS)")
             }
@@ -183,6 +199,7 @@ class Connection @JvmOverloads constructor(
                 val u = URL("http:$url")
                 host = u.host
                 port = u.port
+                basePath = u.path.trimEnd('/')
             } catch (t: Throwable) {
                 throw IllegalArgumentException("Malformed URL (HTTP/HTTPS)")
             }

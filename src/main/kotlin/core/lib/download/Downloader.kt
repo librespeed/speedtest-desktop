@@ -6,8 +6,11 @@ import core.lib.base.Utils.url_sep
 abstract class Downloader(private val c: Connection, private val path: String, ckSize: Int) :
     Thread() {
     private val ckSize: Int
+    @Volatile
     private var stopASAP = false
+    @Volatile
     private var resetASAP = false
+    @Volatile
     private var totDownloaded: Long = 0
     override fun run() {
         try {
@@ -27,6 +30,8 @@ abstract class Downloader(private val c: Connection, private val path: String, c
                 }
                 if (stopASAP) break
                 val l = `in`!!.read(buf)
+                //EOF: the server closed the keep-alive connection; surface it so the stream restarts
+                if (l < 0) throw Exception("Connection closed by server")
                 if (stopASAP) break
                 bytesLeft -= l.toLong()
                 if (resetASAP) {
