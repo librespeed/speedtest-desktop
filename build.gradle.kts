@@ -72,6 +72,11 @@ dependencies {
     implementation("dev.icerock.moko:mvvm-livedata-compose:0.16.1")
     implementation("com.mikepenz:multiplatform-markdown-renderer:0.8.0")
     implementation("org.slf4j:slf4j-log4j12:2.0.9")
+    testImplementation(kotlin("test"))
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 compose.resources {

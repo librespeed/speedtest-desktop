@@ -9,6 +9,7 @@ import java.net.Socket
 import java.net.URL
 import java.util.*
 import javax.net.SocketFactory
+import javax.net.ssl.SSLSocket
 import javax.net.ssl.SSLSocketFactory
 
 class Connection @JvmOverloads constructor(
@@ -163,7 +164,37 @@ class Connection @JvmOverloads constructor(
         private const val MODE_NOT_SET = 0
         private const val MODE_HTTP = 1
         private const val MODE_HTTPS = 2
-        private const val USER_AGENT = "Librespeed-Desktop/1.0"
+        /**
+         * Product and version, then the platform -- the shape the LibreSpeed
+         * CLIs and the Android client send, so a server sees one family across
+         * the clients. The version comes from the build rather than a
+         * constant, which would keep reporting a release the binary is not.
+         */
+        internal val USER_AGENT: String = buildUserAgent()
+
+        internal fun buildUserAgent(): String {
+            val version = System.getProperty("app.version")?.takeIf { it.isNotBlank() } ?: "dev"
+            return "librespeed-desktop/$version (${osName()}; ${tag(System.getProperty("os.arch"))})"
+        }
+
+        /** `Mac OS X` and `Windows 11` become the names the other clients use. */
+        private fun osName(): String {
+            val raw = System.getProperty("os.name").orEmpty().lowercase()
+            return when {
+                raw.startsWith("mac") -> "macos"
+                raw.startsWith("windows") -> "windows"
+                else -> tag(raw.substringBefore(' '))
+            }
+        }
+
+        /** Bounded and reduced to a conservative alphabet: this goes into a
+         * header, where a stray line break would split the request itself. */
+        private fun tag(value: String?): String =
+            value.orEmpty()
+                .lowercase()
+                .filter { it in 'a'..'z' || it in '0'..'9' || it in "._-" }
+                .take(24)
+                .ifEmpty { "unknown" }
         private const val DEFAULT_CONNECT_TIMEOUT = 2000
         private const val DEFAULT_SO_TIMEOUT = 5000
     }
@@ -209,7 +240,13 @@ class Connection @JvmOverloads constructor(
         try {
             if (mode == MODE_NOT_SET && tryHTTPS) {
                 val factory = SSLSocketFactory.getDefault()
-                socket = factory.createSocket()
+                val ssl = factory.createSocket() as SSLSocket
+                //an unconnected SSLSocket does not verify the peer's hostname unless told to;
+                //must be set before the (lazy) handshake or any CA-valid cert is accepted
+                val sp = ssl.sslParameters
+                sp.endpointIdentificationAlgorithm = "HTTPS"
+                ssl.sslParameters = sp
+                socket = ssl
                 if (connectTimeout > 0) {
                     socket!!.connect(InetSocketAddress(host, if (port == -1) 443 else port), connectTimeout)
                 } else {
@@ -217,7 +254,11 @@ class Connection @JvmOverloads constructor(
                 }
                 mode = MODE_HTTPS
             }
-        } catch (_: Throwable) { }
+        } catch (_: Throwable) {
+            //a failed connect can leave the fd open (e.g. UnknownHostException on JDK's NioSocketImpl)
+            try { socket?.close() } catch (_: Throwable) { }
+            socket = null
+        }
         try {
             if (mode == MODE_NOT_SET && tryHTTP) {
                 val factory = SocketFactory.getDefault()
@@ -229,7 +270,10 @@ class Connection @JvmOverloads constructor(
                 }
                 mode = MODE_HTTP
             }
-        } catch (_: Throwable) { }
+        } catch (_: Throwable) {
+            try { socket?.close() } catch (_: Throwable) { }
+            socket = null
+        }
         check(mode != MODE_NOT_SET) { "Failed to connect" }
         if (soTimeout > 0) {
             try {
