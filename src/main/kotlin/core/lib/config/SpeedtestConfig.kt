@@ -20,7 +20,9 @@ class SpeedtestConfig {
     var dl_recvBuffer = -1
     var dl_sendBuffer = -1
     var ul_recvBuffer = -1
-    var ul_sendBuffer = 16384
+    //a fixed 16 KB send buffer locked the kernel out of autotuning and capped each
+    //upload stream at roughly 32 KB per round trip; -1 leaves the socket default
+    var ul_sendBuffer = -1
     var ping_recvBuffer = -1
     var ping_sendBuffer = -1
     private var errorHandlingMode = ONERROR_ATTEMPT_RESTART

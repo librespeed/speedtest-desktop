@@ -5,8 +5,11 @@ import java.util.*
 
 abstract class Uploader(private val c: Connection, private val path: String, ckSize: Int) :
     Thread() {
+    @Volatile
     private var stopASAP = false
+    @Volatile
     private var resetASAP = false
+    @Volatile
     private var totUploaded: Long = 0
     private val garbage: ByteArray
     override fun run() {
@@ -62,12 +65,21 @@ abstract class Uploader(private val c: Connection, private val path: String, ckS
 
     companion object {
         private const val BUFFER_SIZE = 16384
+        private var shared: ByteArray? = null
+
+        //the payload is random so it cannot be compressed on the way; one copy per
+        //process is enough -- filling 20 MB per stream and per restart stalled the
+        //start of the upload phase and spiked the heap
+        @Synchronized
+        private fun sharedGarbage(ckSize: Int): ByteArray {
+            val size = ckSize * 1048576
+            return shared?.takeIf { it.size == size }
+                ?: ByteArray(size).also { Random(System.nanoTime()).nextBytes(it); shared = it }
+        }
     }
 
     init {
-        garbage = ByteArray(ckSize * 1048576)
-        val r = Random(System.nanoTime())
-        r.nextBytes(garbage)
+        garbage = sharedGarbage(ckSize)
         start()
     }
 }

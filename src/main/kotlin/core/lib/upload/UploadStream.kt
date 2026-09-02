@@ -22,10 +22,14 @@ abstract class UploadStream(
     private val recvBuffer: Int
     private val sendBuffer: Int
     private var c: Connection? = null
+    @Volatile
     private var uploader: Uploader? = null
     private var errorHandlingMode = SpeedtestConfig.ONERROR_ATTEMPT_RESTART
+    @Volatile
     private var currentUploaded: Long = 0
+    @Volatile
     private var previouslyUploaded: Long = 0
+    @Volatile
     private var stopASAP = false
     private val log: Logger?
     private fun init() {
@@ -67,6 +71,9 @@ abstract class UploadStream(
                             }
                         }
                     }
+                    //stopASAP() may have run before the uploader was published; both fields
+                    //are volatile, so one of the two writers is guaranteed to see the other
+                    if (stopASAP) uploader!!.stopASAP()
                 } catch (t: Throwable) {
                     log("An uploader failed hard")
                     try {
@@ -98,7 +105,11 @@ abstract class UploadStream(
     }
 
     fun join() {
-        while (uploader == null) sleep(0, 100)
+        //uploader stays null when init() failed hard or bailed on stopASAP; don't wait for it then
+        while (uploader == null) {
+            if (stopASAP) return
+            sleep(0, 100)
+        }
         try {
             uploader!!.join()
         } catch (t: Throwable) {

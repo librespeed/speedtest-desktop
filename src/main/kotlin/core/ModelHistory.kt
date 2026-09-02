@@ -9,5 +9,6 @@ data class ModelHistory(
     var upload : Double,
     var ispInfo : String,
     var testPoint : String,
-    var date : Long
+    var date : Long,
+    var shareUrl : String? = null
 )

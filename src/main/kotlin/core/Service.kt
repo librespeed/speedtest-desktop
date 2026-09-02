@@ -6,6 +6,7 @@ import core.lib.serverSelector.TestPoint
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import kotlinx.coroutines.*
 import util.NetUtils
+import javax.swing.SwingUtilities
 import util.Utils.roundPlace
 import util.Utils.toMegabyte
 import util.Utils.validate
@@ -44,17 +45,24 @@ object Service {
 
     var testPoint = MutableLiveData<TestPoint?>(null)
     var running = MutableLiveData(false)
+    val serversVersion = MutableLiveData(0)
 
     var goToResult : () -> Unit = {}
     var onError : (String?) -> Unit = {}
     var onEnableAbort : () -> Unit = {}
     var onServerSelected : () -> Unit = {}
 
+    //moko LiveData is not thread-safe; engine callbacks arrive on worker threads and must reach it on the EDT
+    private fun onUi(block: () -> Unit) {
+        if (SwingUtilities.isEventDispatchThread()) block() else SwingUtilities.invokeLater(block)
+    }
+
     fun init () {
         speedTestHandler = SpeedTestHandler()
         speedTestHandler.setOnServerSelectListener(object : LibreSpeed.ServerSelectedHandler() {
-            override fun onServerSelected(server: TestPoint?) {
+            override fun onServerSelected(server: TestPoint?) = onUi {
                 this@Service.testPoint.value = server
+                serversVersion.value = serversVersion.value + 1
                 onServerSelected.invoke()
             }
         })
@@ -117,14 +125,14 @@ object Service {
         } else {
             running.value = true
             CoroutineScope(Dispatchers.IO).launch {
-                val netInterface = NetUtils.getDefaultNetworkInterface()
-                if (netInterface != null) {
-                    networkAdapter.value = "${netInterface.name} (${NetUtils.parseMacAddress(netInterface.hardwareAddress)})"
-                } else {
-                    networkAdapter.value = "Unknown"
+                //adapter detection shells out to slow system tools; never let it delay the test itself
+                launch {
+                    val netInterface = NetUtils.getDefaultNetworkInterface()
+                    val description = if (netInterface != null) NetUtils.describeInterface(netInterface) else "Unknown"
+                    onUi { networkAdapter.value = description }
                 }
                 speedTestHandler.startTest(this@Service.testPoint.value,object : LibreSpeed.SpeedtestHandler() {
-                    override fun onDownloadUpdate(dl: Double, progress: Double) {
+                    override fun onDownloadUpdate(dl: Double, progress: Double) = onUi {
                         currentStep.value = "DOWNLOAD"
                         progressDownload.value = progress
                         if (unitSetting.value == UNIT_MBIT) {
@@ -137,7 +145,7 @@ object Service {
                         this@Service.download.value = dl
                         downloadChart.add(dl)
                     }
-                    override fun onUploadUpdate(ul: Double, progress: Double) {
+                    override fun onUploadUpdate(ul: Double, progress: Double) = onUi {
                         currentStep.value = "UPLOAD"
                         progressUpload.value = progress
                         if (unitSetting.value == UNIT_MBIT) {
@@ -150,7 +158,7 @@ object Service {
                         this@Service.upload.value = ul
                         uploadChart.add(ul)
                     }
-                    override fun onPingJitterUpdate(ping: Double, jitter: Double, progress: Double) {
+                    override fun onPingJitterUpdate(ping: Double, jitter: Double, progress: Double) = onUi {
                         currentStep.value = "PING"
                         progressPing.value = progress
                         unit.value = "ms"
@@ -162,32 +170,33 @@ object Service {
                         jitterChart.add(jitter)
                         onEnableAbort.invoke()
                     }
-                    override fun onIPInfoUpdate(ipInfo: String?) {
+                    override fun onIPInfoUpdate(ipInfo: String?) = onUi {
                         this@Service.ipInfo.value = ipInfo.toString()
                     }
-                    override fun onTestIDReceived(id: String?, shareURL: String?) {
+                    override fun onTestIDReceived(id: String?, shareURL: String?) = onUi {
                         testIDShare.value = shareURL
                     }
-                    override fun onEnd() {
+                    override fun onEnd() = onUi {
                         currentStep.value = "ENDED"
                         if (!running.value) reset() else {
                             goToResult.invoke()
-                            Database.saveHistory(
-                                ModelHistory(
-                                    netAdapter = networkAdapter.value,
-                                    ping = ping.value.toDouble(),
-                                    jitter = jitter.value.toDouble(),
-                                    download = download.value,
-                                    upload = upload.value,
-                                    ispInfo = ipInfo.value,
-                                    testPoint = testPoint.value?.name.toString(),
-                                    date = System.currentTimeMillis()
-                                )
+                            val entry = ModelHistory(
+                                netAdapter = networkAdapter.value,
+                                ping = ping.value.toDouble(),
+                                jitter = jitter.value.toDouble(),
+                                download = download.value,
+                                upload = upload.value,
+                                ispInfo = ipInfo.value,
+                                testPoint = testPoint.value?.name.toString(),
+                                date = System.currentTimeMillis(),
+                                shareUrl = testIDShare.value
                             )
+                            //the insert goes off the UI thread; the result screen is already showing
+                            CoroutineScope(Dispatchers.IO).launch { Database.saveHistory(entry) }
                         }
                         running.value = false
                     }
-                    override fun onCriticalFailure(err: String?) {
+                    override fun onCriticalFailure(err: String?) = onUi {
                         onError.invoke(err)
                         currentStep.value = "FAILED"
                         running.value = false

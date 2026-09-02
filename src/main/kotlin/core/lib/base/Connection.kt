@@ -9,6 +9,7 @@ import java.net.Socket
 import java.net.URL
 import java.util.*
 import javax.net.SocketFactory
+import javax.net.ssl.SSLSocket
 import javax.net.ssl.SSLSocketFactory
 
 class Connection @JvmOverloads constructor(
@@ -19,9 +20,14 @@ class Connection @JvmOverloads constructor(
     sendBuffer: Int = -1
 ) {
     private var socket: Socket? = null
+    //the part of the server URL after the host: a server list may point at
+    //"https://host/backend", and every relative endpoint then lives under it
+    private var basePath = ""
     private var host: String? = null
     private var port = 0
     private var mode = MODE_NOT_SET
+    val isIPv6: Boolean
+        get() = socket?.inetAddress is java.net.Inet6Address
     val inputStream: InputStream?
         get() = try {
             socket!!.getInputStream()
@@ -61,19 +67,25 @@ class Connection @JvmOverloads constructor(
             return isr
         }
 
+    private fun resolvePath(path: String) = if (path.startsWith("/")) path else "$basePath/$path"
+
     @Throws(Exception::class)
     fun GET(path: String, keepAlive: Boolean) {
-        var path2 = path
+        val path2 = resolvePath(path)
         try {
-            if (!path.startsWith("/")) path2 = "/$path"
+            //one write per request: with Nagle's algorithm every further small write
+            //waits for the ACK of the previous one, which added a whole round trip to every ping
+            val request = buildString {
+                append("GET $path2 HTTP/1.1\r\n")
+                append("Host: $host\r\n")
+                append("User-Agent: $USER_AGENT\r\n")
+                append("Connection: ${if (keepAlive) "keep-alive" else "close"}\r\n")
+                append("Accept-Encoding: identity\r\n")
+                if (Locale.getDefault() != null) append("Accept-Language: ${Locale.getDefault()}\r\n")
+                append("\r\n")
+            }
             val ps = printStream
-            ps!!.print("GET $path2 HTTP/1.1\r\n")
-            ps.print("Host: $host\r\n")
-            ps.print("User-Agent: $USER_AGENT")
-            ps.print("Connection: ${if (keepAlive) "keep-alive\r\n" else "close\r\n"}")
-            ps.print("Accept-Encoding: identity\r\n")
-            if (Locale.getDefault() != null) ps.print("Accept-Language: ${Locale.getDefault()}\r\n")
-            ps.print("\r\n")
+            ps!!.print(request)
             ps.flush()
         } catch (t: Throwable) {
             throw Exception("Failed to send GET request")
@@ -82,20 +94,22 @@ class Connection @JvmOverloads constructor(
 
     @Throws(Exception::class)
     fun POST(path: String, keepAlive: Boolean, contentType: String?, contentLength: Long) {
-        var path2 = path
+        val path2 = resolvePath(path)
         try {
-            if (!path.startsWith("/")) path2 = "/$path"
+            val request = buildString {
+                append("POST $path2 HTTP/1.1\r\n")
+                append("Host: $host\r\n")
+                append("User-Agent: $USER_AGENT\r\n")
+                append("Connection: ${if (keepAlive) "keep-alive" else "close"}\r\n")
+                append("Accept-Encoding: identity\r\n")
+                if (Locale.getDefault() != null) append("Accept-Language: ${Locale.getDefault()}\r\n")
+                if (contentType != null) append("Content-Type: $contentType\r\n")
+                append("Content-Encoding: identity\r\n")
+                if (contentLength >= 0) append("Content-Length: $contentLength\r\n")
+                append("\r\n")
+            }
             val ps = printStream
-            ps!!.print("POST $path2 HTTP/1.1\r\n")
-            ps.print("Host: $host\r\n")
-            ps.print("User-Agent: $USER_AGENT\r\n")
-            ps.print("Connection: ${if (keepAlive) "keep-alive\r\n" else "close\r\n"}")
-            ps.print("Accept-Encoding: identity\r\n")
-            if (Locale.getDefault() != null) ps.print("Accept-Language: ${Locale.getDefault()}\r\n")
-            if (contentType != null) ps.print("Content-Type: $contentType\r\n")
-            ps.print("Content-Encoding: identity\r\n")
-            if (contentLength >= 0) ps.print("Content-Length: $contentLength\r\n")
-            ps.print("\r\n")
+            ps!!.print(request)
             ps.flush()
         } catch (t: Throwable) {
             throw Exception("Failed to send POST request")
@@ -123,7 +137,8 @@ class Connection @JvmOverloads constructor(
         return try {
             val ret = HashMap<String, String>()
             var s = readLineUnbuffered()
-            if (!s!!.contains("200 OK")) throw Exception("Did not receive an HTTP 200 (" + s.trim { it <= ' ' } + ")")
+            val statusCode = s!!.trim { it <= ' ' }.split(" ").getOrNull(1)
+            if (statusCode == null || !statusCode.startsWith("2")) throw Exception("Did not receive an HTTP 2xx (" + s.trim { it <= ' ' } + ")")
             while (true) {
                 s = readLineUnbuffered()
                 if (s!!.trim { it <= ' ' }.isEmpty()) break
@@ -149,7 +164,37 @@ class Connection @JvmOverloads constructor(
         private const val MODE_NOT_SET = 0
         private const val MODE_HTTP = 1
         private const val MODE_HTTPS = 2
-        private const val USER_AGENT = "Librespeed-Desktop/1.0"
+        /**
+         * Product and version, then the platform -- the shape the LibreSpeed
+         * CLIs and the Android client send, so a server sees one family across
+         * the clients. The version comes from the build rather than a
+         * constant, which would keep reporting a release the binary is not.
+         */
+        internal val USER_AGENT: String = buildUserAgent()
+
+        internal fun buildUserAgent(): String {
+            val version = System.getProperty("app.version")?.takeIf { it.isNotBlank() } ?: "dev"
+            return "librespeed-desktop/$version (${osName()}; ${tag(System.getProperty("os.arch"))})"
+        }
+
+        /** `Mac OS X` and `Windows 11` become the names the other clients use. */
+        private fun osName(): String {
+            val raw = System.getProperty("os.name").orEmpty().lowercase()
+            return when {
+                raw.startsWith("mac") -> "macos"
+                raw.startsWith("windows") -> "windows"
+                else -> tag(raw.substringBefore(' '))
+            }
+        }
+
+        /** Bounded and reduced to a conservative alphabet: this goes into a
+         * header, where a stray line break would split the request itself. */
+        private fun tag(value: String?): String =
+            value.orEmpty()
+                .lowercase()
+                .filter { it in 'a'..'z' || it in '0'..'9' || it in "._-" }
+                .take(24)
+                .ifEmpty { "unknown" }
         private const val DEFAULT_CONNECT_TIMEOUT = 2000
         private const val DEFAULT_SO_TIMEOUT = 5000
     }
@@ -164,6 +209,7 @@ class Connection @JvmOverloads constructor(
                 val u = URL(url)
                 host = u.host
                 port = u.port
+                basePath = u.path.trimEnd('/')
             } catch (t: Throwable) {
                 throw IllegalArgumentException("Malformed URL (HTTP)")
             }
@@ -173,6 +219,7 @@ class Connection @JvmOverloads constructor(
                 val u = URL(url)
                 host = u.host
                 port = u.port
+                basePath = u.path.trimEnd('/')
             } catch (t: Throwable) {
                 throw IllegalArgumentException("Malformed URL (HTTPS)")
             }
@@ -183,6 +230,7 @@ class Connection @JvmOverloads constructor(
                 val u = URL("http:$url")
                 host = u.host
                 port = u.port
+                basePath = u.path.trimEnd('/')
             } catch (t: Throwable) {
                 throw IllegalArgumentException("Malformed URL (HTTP/HTTPS)")
             }
@@ -192,7 +240,13 @@ class Connection @JvmOverloads constructor(
         try {
             if (mode == MODE_NOT_SET && tryHTTPS) {
                 val factory = SSLSocketFactory.getDefault()
-                socket = factory.createSocket()
+                val ssl = factory.createSocket() as SSLSocket
+                //an unconnected SSLSocket does not verify the peer's hostname unless told to;
+                //must be set before the (lazy) handshake or any CA-valid cert is accepted
+                val sp = ssl.sslParameters
+                sp.endpointIdentificationAlgorithm = "HTTPS"
+                ssl.sslParameters = sp
+                socket = ssl
                 if (connectTimeout > 0) {
                     socket!!.connect(InetSocketAddress(host, if (port == -1) 443 else port), connectTimeout)
                 } else {
@@ -200,7 +254,11 @@ class Connection @JvmOverloads constructor(
                 }
                 mode = MODE_HTTPS
             }
-        } catch (_: Throwable) { }
+        } catch (_: Throwable) {
+            //a failed connect can leave the fd open (e.g. UnknownHostException on JDK's NioSocketImpl)
+            try { socket?.close() } catch (_: Throwable) { }
+            socket = null
+        }
         try {
             if (mode == MODE_NOT_SET && tryHTTP) {
                 val factory = SocketFactory.getDefault()
@@ -212,7 +270,10 @@ class Connection @JvmOverloads constructor(
                 }
                 mode = MODE_HTTP
             }
-        } catch (_: Throwable) { }
+        } catch (_: Throwable) {
+            try { socket?.close() } catch (_: Throwable) { }
+            socket = null
+        }
         check(mode != MODE_NOT_SET) { "Failed to connect" }
         if (soTimeout > 0) {
             try {

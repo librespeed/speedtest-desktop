@@ -20,10 +20,20 @@ abstract class GetIP(private val c: Connection, private val path: String, privat
             val h: HashMap<String, String> = c.parseResponseHeaders()
             val br = BufferedReader(c.inputStreamReader)
             if (h["content-length"] != null) {
-                //standard encoding
-                val buf = CharArray(h["content-length"]!!.toInt())
-                br.read(buf)
-                val data = String(buf)
+                //standard encoding. content-length counts bytes, the reader hands out chars;
+                //a UTF-8 char is at least one byte, so the buffer is large enough, and the
+                //body is complete once its chars encode back to content-length bytes --
+                //waiting for buf.size chars instead would hang on any multibyte body
+                val contentLength = h["content-length"]!!.toInt()
+                val buf = CharArray(contentLength)
+                var chars = 0
+                while (chars < buf.size) {
+                    val n = br.read(buf, chars, buf.size - chars)
+                    if (n < 0) break
+                    chars += n
+                    if (String(buf, 0, chars).toByteArray(Charsets.UTF_8).size >= contentLength) break
+                }
+                val data = String(buf, 0, chars)
                 onDataReceived(data)
             } else {
                 //chunked encoding hack. TODO: improve this garbage with proper chunked support

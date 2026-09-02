@@ -9,7 +9,8 @@ data class TestPoint(
     var ulURL: String? = null,
     var pingURL: String? = null,
     var getIpURL: String? = null,
-    var ping : Float = -1f
+    var ping : Float = -1f,
+    var ipVersion : Int = 0 //0=unknown, set from the socket used during ping
 ) {
 
     fun fromJson (json: JSONObject) : TestPoint {

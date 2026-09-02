@@ -1,5 +1,7 @@
 package routes.scenes
 
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.Dispatchers
 import App
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -27,6 +29,7 @@ import com.dosse.speedtest.res.export
 import com.dosse.speedtest.res.history
 import com.dosse.speedtest.res.trash
 import components.MyIconButton
+import components.SimpleButton
 import components.SwitchUnit
 import components.TableItemRow
 import components.TableView
@@ -37,11 +40,13 @@ import core.Service.toValidString
 import dev.icerock.moko.mvvm.livedata.compose.observeAsState
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.navigation.Navigator
+import routes.dialogs.BaseDialog
 import routes.dialogs.DialogDelete
 import theme.ColorBox
 import theme.Fonts
 import util.Utils
 import util.Utils.formatToDate
+import util.Utils.openInBrowser
 import util.Utils.suffixItems
 import util.Utils.systemOpenFile
 
@@ -53,10 +58,29 @@ fun HistoryScene(navigator: Navigator) {
 
     val coroutineScope = rememberCoroutineScope()
     var showClearDialog by remember { mutableStateOf(false) }
+    var selectedItem by remember { mutableStateOf<ModelHistory?>(null) }
+    var sortColumn by remember { mutableStateOf(6) }
+    var sortAscending by remember { mutableStateOf(false) }
+
+    val displayList = remember(historyList.toList(), sortColumn, sortAscending) {
+        val comparator: Comparator<ModelHistory> = when (sortColumn) {
+            0 -> compareBy { it.netAdapter.lowercase() }
+            1 -> compareBy { it.ping }
+            2 -> compareBy { it.jitter }
+            3 -> compareBy { it.download }
+            4 -> compareBy { it.upload }
+            5 -> compareBy { it.testPoint.lowercase() }
+            else -> compareBy { it.date }
+        }
+        if (sortAscending) historyList.sortedWith(comparator) else historyList.sortedWith(comparator.reversed())
+    }
+    fun sortMark(index: Int) = if (sortColumn == index) (if (sortAscending) " ▲" else " ▼") else ""
 
     LaunchedEffect(Unit) {
+        //the query runs off the UI thread; the transition into History stays smooth
+        val rows = withContext(Dispatchers.IO) { Database.readHistory() }
         historyList.clear()
-        historyList.addAll(Database.readHistory())
+        historyList.addAll(rows)
     }
 
     Box(modifier = Modifier.fillMaxSize().background(ColorBox.primaryDark), contentAlignment = Alignment.Center) {
@@ -87,10 +111,13 @@ fun HistoryScene(navigator: Navigator) {
                     onClick = {
                         App.showLoading.value = true
                         coroutineScope.launch {
-                            Utils.exportHistoryToCSV(historyList, onSuccess = {
+                            try {
+                                Utils.exportHistoryToCSV(historyList, onSuccess = { it.systemOpenFile() })
+                            } catch (t: Throwable) {
+                                App.errorMessage.value = "Export failed:\n${t.message ?: t}"
+                            } finally {
                                 App.showLoading.value = false
-                                it.systemOpenFile()
-                            })
+                            }
                         }
                     }
                 )
@@ -130,44 +157,55 @@ fun HistoryScene(navigator: Navigator) {
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 20.dp).fillMaxSize().clip(RoundedCornerShape(12.dp)),
                     tableRows = listOf(
                         TableItemRow(
+                            weight = .9f,
+                            title = "Net Adapter${sortMark(0)}",
+                            textAlign = TextAlign.Start,
+                        ),
+                        TableItemRow(
+                            weight = .6f,
+                            title = "Ping (ms)${sortMark(1)}",
+                            textAlign = TextAlign.Start,
+                        ),
+                        TableItemRow(
+                            weight = .6f,
+                            title = "Jitter (ms)${sortMark(2)}",
+                            textAlign = TextAlign.Start,
+                        ),
+                        TableItemRow(
+                            weight = .6f,
+                            title = "Download\n(${unitSetting.value})${sortMark(3)}",
+                            textAlign = TextAlign.Start,
+                        ),
+                        TableItemRow(
+                            weight = .6f,
+                            title = "Upload\n(${unitSetting.value})${sortMark(4)}",
+                            textAlign = TextAlign.Start,
+                        ),
+                        TableItemRow(
                             weight = 1f,
-                            title = "Net Adapter",
+                            title = "Test Point${sortMark(5)}",
                             textAlign = TextAlign.Start,
                         ),
                         TableItemRow(
-                            weight = .6f,
-                            title = "Ping (ms)",
-                            textAlign = TextAlign.Start,
-                        ),
-                        TableItemRow(
-                            weight = .6f,
-                            title = "Jitter (ms)",
-                            textAlign = TextAlign.Start,
-                        ),
-                        TableItemRow(
-                            weight = .6f,
-                            title = "Download\n(${unitSetting.value})",
-                            textAlign = TextAlign.Start,
-                        ),
-                        TableItemRow(
-                            weight = .6f,
-                            title = "Upload\n(${unitSetting.value})",
-                            textAlign = TextAlign.Start,
-                        ),
-                        TableItemRow(
-                            weight = 1f,
-                            title = "Test Point",
-                            textAlign = TextAlign.Start,
-                        ),
-                        TableItemRow(
-                            weight = .6f,
-                            title = "Date",
+                            weight = .8f,
+                            title = "Date${sortMark(6)}",
                             textAlign = TextAlign.Start,
                         )
                     ),
-                    columnCount = historyList.size
+                    columnCount = displayList.size,
+                    onRowClick = {
+                        selectedItem = displayList[it]
+                    },
+                    onHeaderClick = {
+                        if (sortColumn == it) {
+                            sortAscending = !sortAscending
+                        } else {
+                            sortColumn = it
+                            sortAscending = false
+                        }
+                    }
                 ) { column, row ->
-                    val item = historyList[column]
+                    val item = displayList[column]
                     return@TableView when(row) {
                         0 -> item.netAdapter
                         1 -> item.ping.toString()
@@ -175,7 +213,7 @@ fun HistoryScene(navigator: Navigator) {
                         3 -> item.download.toValidString()
                         4 -> item.upload.toValidString()
                         5 -> item.testPoint
-                        6 -> item.date.formatToDate()
+                        6 -> item.date.formatToDate("dd MMM yyyy\nHH:mm")
                         else -> ""
                     }
                 }
@@ -198,4 +236,74 @@ fun HistoryScene(navigator: Navigator) {
         }
     )
 
+    DialogHistoryDetail(
+        item = selectedItem,
+        unit = unitSetting.value,
+        onDismiss = {
+            selectedItem = null
+        }
+    )
+
+}
+
+@Composable
+private fun DialogHistoryDetail(item : ModelHistory?, unit : String, onDismiss : () -> Unit) {
+    BaseDialog(
+        expanded = item != null,
+        onDismissRequest = onDismiss
+    ) {
+        if (item != null) {
+            Column(modifier = Modifier.width(420.dp)) {
+                Text(
+                    modifier = Modifier.padding(20.dp),
+                    text = item.date.formatToDate("dd MMM yyyy  HH:mm:ss"),
+                    color = ColorBox.text,
+                    style = MaterialTheme.typography.titleMedium.copy(fontFamily = Fonts.open_sans)
+                )
+                DetailRow("Test Point", item.testPoint)
+                DetailRow("Network Adapter", item.netAdapter)
+                DetailRow("Ping", "${item.ping} ms")
+                DetailRow("Jitter", "${item.jitter} ms")
+                DetailRow("Download", "${item.download.toValidString()} $unit")
+                DetailRow("Upload", "${item.upload.toValidString()} $unit")
+                DetailRow("ISP Info", item.ispInfo)
+                Row(modifier = Modifier.padding(20.dp).fillMaxWidth()) {
+                    item.shareUrl?.let { url ->
+                        SimpleButton(
+                            modifier = Modifier.weight(1f).padding(end = 10.dp),
+                            text = "Open Result URL",
+                            onClick = {
+                                url.openInBrowser()
+                            }
+                        )
+                    }
+                    SimpleButton(
+                        modifier = Modifier.weight(1f),
+                        text = "Close",
+                        onClick = {
+                            onDismiss.invoke()
+                        }
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun DetailRow(title : String, value : String) {
+    Row(modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, top = 7.dp)) {
+        Text(
+            modifier = Modifier.width(140.dp),
+            text = title,
+            color = ColorBox.text.copy(0.5f),
+            style = MaterialTheme.typography.bodySmall.copy(fontFamily = Fonts.open_sans)
+        )
+        Text(
+            modifier = Modifier.weight(1f),
+            text = value,
+            color = ColorBox.text,
+            style = MaterialTheme.typography.bodySmall.copy(fontFamily = Fonts.open_sans)
+        )
+    }
 }

@@ -1,6 +1,7 @@
 package routes.sections.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,15 +22,23 @@ import components.MyIconButton
 import components.SwitchUnit
 import core.Service
 import dev.icerock.moko.mvvm.livedata.compose.observeAsState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import routes.dialogs.BaseDialog
 import routes.dialogs.DialogPrivacy
 import theme.ColorBox
+import util.UpdateChecker
 
 @Composable
 fun Appbar(onHistoryClicked : () -> Unit) {
 
     var showPrivacyDialog by remember { mutableStateOf(false) }
     val unitSetting = Service.unitSetting.observeAsState()
+    var updateVersion by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(Unit) {
+        updateVersion = withContext(Dispatchers.IO) { UpdateChecker.findUpdate() }
+    }
 
     Row(modifier = Modifier.widthIn(max = 1200.dp).fillMaxWidth().height(76.dp), verticalAlignment = Alignment.CenterVertically) {
         Image(
@@ -43,6 +52,20 @@ fun Appbar(onHistoryClicked : () -> Unit) {
             color = ColorBox.text,
             style = MaterialTheme.typography.titleMedium
         )
+        updateVersion?.let { version ->
+            Row(
+                modifier = Modifier.padding(end = 8.dp).clip(RoundedCornerShape(50)).background(ColorBox.primary.copy(0.15f)).clickable {
+                    UpdateChecker.openReleasesPage()
+                }.padding(horizontal = 12.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Update v$version",
+                    color = ColorBox.primary,
+                    style = MaterialTheme.typography.labelSmall
+                )
+            }
+        }
         MyIconButton(
             icon = Res.drawable.history,
             onClick = {

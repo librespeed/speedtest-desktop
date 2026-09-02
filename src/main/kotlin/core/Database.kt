@@ -18,7 +18,8 @@ object Database {
         } else if (osName.contains("mac")) {
             Paths.get(System.getProperty("user.home"), "Library", "Application Support", APP_NAME).toString()
         } else {
-            throw UnsupportedOperationException("Unsupported operating system")
+            //unknown OS (e.g. FreeBSD): fall back to the XDG default rather than refusing to start
+            Paths.get(System.getProperty("user.home"), ".local", "share", APP_NAME).toString()
         }
     }
 
@@ -32,9 +33,9 @@ object Database {
     }
 
     private fun createTables() {
-        val statement = connection.createStatement()
-        try {
-            statement.executeUpdate(
+        //a failed CREATE must reach initDB's caller: swallowing it here means saveHistory hits a missing table later
+        connection.createStatement().use {
+            it.executeUpdate(
                 "CREATE TABLE IF NOT EXISTS history (" +
                         "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "netAdapter TEXT," +
@@ -44,47 +45,62 @@ object Database {
                         "upload REAL," +
                         "ispInfo TEXT," +
                         "testPoint TEXT," +
-                        "date INTEGER" +
+                        "date INTEGER," +
+                        "shareUrl TEXT" +
                         ")"
             )
+        }
+        //migration for databases created before the shareUrl column existed
+        val migration = connection.createStatement()
+        try {
+            migration.executeUpdate("ALTER TABLE history ADD COLUMN shareUrl TEXT")
         } catch (_: Exception) {
         } finally {
-            statement.close()
+            migration.close()
         }
     }
     fun saveHistory(model: ModelHistory) {
-        val statement = connection.prepareStatement("INSERT INTO history (netAdapter,ping,jitter,download,upload,ispInfo,testPoint,date) VALUES (?,?,?,?,?,?,?,?)")
         try {
-            statement.setString(1, model.netAdapter)
-            statement.setDouble(2, model.ping)
-            statement.setDouble(3, model.jitter)
-            statement.setDouble(4, model.download)
-            statement.setDouble(5, model.upload)
-            statement.setString(6, model.ispInfo)
-            statement.setString(7, model.testPoint)
-            statement.setLong(8, model.date)
-            statement.executeUpdate()
-        } catch (_ : Exception) {} finally {
-            statement.close()
+            connection.prepareStatement("INSERT INTO history (netAdapter,ping,jitter,download,upload,ispInfo,testPoint,date,shareUrl) VALUES (?,?,?,?,?,?,?,?,?)").use { statement ->
+                statement.setString(1, model.netAdapter)
+                statement.setDouble(2, model.ping)
+                statement.setDouble(3, model.jitter)
+                statement.setDouble(4, model.download)
+                statement.setDouble(5, model.upload)
+                statement.setString(6, model.ispInfo)
+                statement.setString(7, model.testPoint)
+                statement.setLong(8, model.date)
+                statement.setString(9, model.shareUrl)
+                statement.executeUpdate()
+            }
+        } catch (e: Exception) {
+            System.err.println("Failed to save history entry: $e")
         }
     }
     fun readHistory() : MutableList<ModelHistory> {
-        val statement = connection.prepareStatement("SELECT * FROM history ORDER BY id DESC")
-        val resultSet = statement.executeQuery()
         val result = mutableListOf<ModelHistory>()
-        while (resultSet.next()) {
-            result.add(
-                ModelHistory(
-                id = resultSet.getInt("id"),
-                netAdapter = resultSet.getString("netAdapter"),
-                ping = resultSet.getDouble("ping"),
-                jitter = resultSet.getDouble("jitter"),
-                download = resultSet.getDouble("download"),
-                upload = resultSet.getDouble("upload"),
-                ispInfo = resultSet.getString("ispInfo"),
-                testPoint = resultSet.getString("testPoint"),
-                date = resultSet.getLong("date"))
-            )
+        try {
+            connection.prepareStatement("SELECT * FROM history ORDER BY id DESC").use { statement ->
+                statement.executeQuery().use { resultSet ->
+                    while (resultSet.next()) {
+                        result.add(
+                            ModelHistory(
+                            id = resultSet.getInt("id"),
+                            netAdapter = resultSet.getString("netAdapter"),
+                            ping = resultSet.getDouble("ping"),
+                            jitter = resultSet.getDouble("jitter"),
+                            download = resultSet.getDouble("download"),
+                            upload = resultSet.getDouble("upload"),
+                            ispInfo = resultSet.getString("ispInfo"),
+                            testPoint = resultSet.getString("testPoint"),
+                            date = resultSet.getLong("date"),
+                            shareUrl = resultSet.getString("shareUrl"))
+                        )
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            System.err.println("Failed to read history: $e")
         }
         return result
     }

@@ -22,10 +22,14 @@ abstract class DownloadStream(
     private val recvBuffer: Int
     private val sendBuffer: Int
     private var c: Connection? = null
+    @Volatile
     private var downloader: Downloader? = null
     private var errorHandlingMode = SpeedtestConfig.ONERROR_ATTEMPT_RESTART
+    @Volatile
     private var currentDownloaded: Long = 0
+    @Volatile
     private var previouslyDownloaded: Long = 0
+    @Volatile
     private var stopASAP = false
     private val log: Logger?
     private fun init() {
@@ -67,6 +71,9 @@ abstract class DownloadStream(
                             }
                         }
                     }
+                    //stopASAP() may have run before the downloader was published; both fields
+                    //are volatile, so one of the two writers is guaranteed to see the other
+                    if (stopASAP) downloader!!.stopASAP()
                 } catch (t: Throwable) {
                     log("A downloader failed hard")
                     try {
@@ -98,7 +105,11 @@ abstract class DownloadStream(
     }
 
     fun join() {
-        while (downloader == null) sleep(0, 100)
+        //downloader stays null when init() failed hard or bailed on stopASAP; don't wait for it then
+        while (downloader == null) {
+            if (stopASAP) return
+            sleep(0, 100)
+        }
         try {
             downloader!!.join()
         } catch (t: Throwable) {

@@ -21,9 +21,10 @@ import components.SpeedMeterView
 import core.Service
 import core.Service.toValidString
 import dev.icerock.moko.mvvm.livedata.compose.observeAsState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import theme.ColorBox
 import util.Utils.roundPlace
-import java.util.*
 
 @Composable
 fun TestStage(onCancel : () -> Unit,goToResult : () -> Unit) {
@@ -47,6 +48,8 @@ fun TestStage(onCancel : () -> Unit,goToResult : () -> Unit) {
     val progressUpload = Service.progressUpload.observeAsState()
 
     var enablecancelation by remember { mutableStateOf(false) }
+    val abortEnableScope = rememberCoroutineScope()
+    var abortEnableArmed by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         Service.goToResult = {
             goToResult.invoke()
@@ -54,12 +57,15 @@ fun TestStage(onCancel : () -> Unit,goToResult : () -> Unit) {
         Service.onError = {
             onCancel.invoke()
         }
+        //fires once per ping sample; only the first one needs to arm the delayed enable
         Service.onEnableAbort = {
-            Timer().schedule(object : TimerTask() {
-                override fun run() {
+            if (!abortEnableArmed) {
+                abortEnableArmed = true
+                abortEnableScope.launch {
+                    delay(2000)
                     enablecancelation = true
                 }
-            },2000)
+            }
         }
     }
 

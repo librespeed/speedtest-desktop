@@ -10,6 +10,13 @@ abstract class ServerSelector(servers: Array<TestPoint>, timeout: Int) {
     private var selectedTestPoint: TestPoint? = null
     private var state = NOT_STARTED
     private val timeout: Int
+
+    //lowest ping of any server that has finished; a server whose latest pong
+    //is already above it cannot win, so its remaining pings are not worth the
+    //wait -- selection ends when the slow servers have answered once, not thrice
+    @Volatile
+    private var bestDone = Float.MAX_VALUE
+    @Volatile
     private var stopASAP = false
     private fun addTestPoint(t: TestPoint?) {
         check(state == NOT_STARTED) { "Cannot add test points at this time" }
@@ -83,11 +90,16 @@ abstract class ServerSelector(servers: Array<TestPoint>, timeout: Int) {
                 override fun onPong(ns: Long): Boolean {
                     val p = ns / 1000000f
                     if (tp.ping == -1f || p < tp.ping) tp.ping = p
-                    return if (stopASAP) false else p < SLOW_THRESHOLD
+                    if (tp.ipVersion == 0) tp.ipVersion = if (usedIPv6 == true) 6 else 4
+                    if (stopASAP || p >= bestDone) return false
+                    return p < SLOW_THRESHOLD
                 }
 
                 override fun onDone() {
-                    synchronized(mutex) { activeStreams-- }
+                    synchronized(mutex) {
+                        activeStreams--
+                        if (tp.ping != -1f && tp.ping < bestDone) bestDone = tp.ping
+                    }
                     next()
                 }
             }
@@ -109,7 +121,7 @@ abstract class ServerSelector(servers: Array<TestPoint>, timeout: Int) {
     abstract fun onServerSelected(server: TestPoint?)
 
     companion object {
-        private const val PARALLELISM = 6
+        private const val PARALLELISM = 16
         private const val NOT_STARTED = 0
         private const val WORKING = 1
         private const val DONE = 2

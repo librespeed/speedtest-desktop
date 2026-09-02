@@ -37,7 +37,6 @@ class SpeedTestHandler {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        libreSpeed!!.setSpeedtestConfig(SpeedtestConfig())
         return fetchServers()
     }
 
@@ -52,20 +51,19 @@ class SpeedTestHandler {
 
     @OptIn(ExperimentalComposeUiApi::class)
     private suspend fun fetchServers() : Boolean {
-        val data: String
+        val customServers = CustomServers.load()
+        for (testPoint in customServers) libreSpeed!!.addTestPoint(testPoint)
+        var publicListLoaded = false
         try {
-            data = String(Res.readBytes("files/ServerList.json"), Charsets.UTF_8)
-        } catch (_: Exception) {
-            return false
-        }
-        if (data.startsWith("\"") || data.startsWith("'")) { //fetch server list from URL
-            if (!libreSpeed!!.loadServerList(data.subSequence(1, data.length - 1).toString())) {
-                return false
+            val data = String(Res.readBytes("files/ServerList.json"), Charsets.UTF_8)
+            publicListLoaded = if (data.startsWith("\"") || data.startsWith("'")) { //fetch server list from URL
+                libreSpeed!!.loadServerList(data.subSequence(1, data.length - 1).toString())
+            } else {
+                libreSpeed!!.addTestPoints(JSONArray(data))
+                true
             }
-        } else {
-            val testPoints = JSONArray(data)
-            libreSpeed!!.addTestPoints(testPoints)
-        }
+        } catch (_: Exception) { }
+        if (!publicListLoaded && customServers.isEmpty()) return false
         libreSpeed!!.selectServer(onServerSelectListener)
         return true
     }
