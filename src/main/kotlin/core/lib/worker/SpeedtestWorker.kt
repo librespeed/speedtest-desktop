@@ -6,12 +6,12 @@ import core.lib.config.SpeedtestConfig
 import core.lib.config.TelemetryConfig
 import core.lib.download.DownloadStream
 import core.lib.getIP.GetIP
+import core.lib.getIP.GetIPResponseParser
 import core.lib.log.Logger
 import core.lib.ping.PingStream
 import core.lib.serverSelector.TestPoint
 import core.lib.telemetry.Telemetry
 import core.lib.upload.UploadStream
-import util.json.JSONObject
 import java.util.*
 import kotlin.math.abs
 
@@ -67,14 +67,11 @@ abstract class SpeedtestWorker(
             }
             val g: GetIP = object : GetIP(c!!, backend.getIpURL!!, config.getIP_isp, config.getGetIP_distance()) {
                 override fun onDataReceived(data: String?) {
-                    var data = data
-                    ipIsp = data
-                    try {
-                        data = JSONObject(data!!)["processedString"].toString()
-                    } catch (_: Throwable) {
-                    }
-                    log.l("GetIP: " + data + " (took " + (System.currentTimeMillis() - start) + "ms)")
-                    onIPInfoUpdate(data)
+                    val response = GetIPResponseParser.parse(data)
+                    ipIsp = response.rawIspInfo
+                    val displayText = response.toDisplayText()
+                    log.l("GetIP: " + displayText + " (took " + (System.currentTimeMillis() - start) + "ms)")
+                    onIPInfoUpdate(displayText)
                 }
 
                 override fun onError(err: String?) {
