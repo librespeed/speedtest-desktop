@@ -9,10 +9,12 @@ data class ApproximateIPLocation(
     val region: String? = null,
     val country: String? = null,
     val latitude: Double? = null,
-    val longitude: Double? = null
+    val longitude: Double? = null,
+    val countryName: String? = null,
+    val countryCode: String? = null
 ) {
     fun toDisplayText(): String? {
-        val place = listOf(city, region, country)
+        val place = listOf(city, region, countryName ?: country)
             .mapNotNull { it?.trim()?.takeIf { value -> value.isNotEmpty() } }
             .distinctBy { it.lowercase(Locale.ROOT) }
             .joinToString(", ")
@@ -72,11 +74,8 @@ object GetIPResponseParser {
 
         return try {
             val root = JSONObject(rawIspInfo)
-            val processedString = if (!root.isNull("processedString")) {
-                root.optString("processedString", rawIspInfo)
-            } else {
-                rawIspInfo
-            }
+            val processedRaw = root.opt("processedString")
+            val processedString = processedRaw as? String ?: rawIspInfo
             GetIPResponse(processedString, rawIspInfo, parseLocation(root))
         } catch (_: Throwable) {
             GetIPResponse(rawIspInfo, rawIspInfo, null)
@@ -88,7 +87,9 @@ object GetIPResponseParser {
 
         val city = parsePlace(location, "city", "city_name")
         val region = parsePlace(location, "region", "state", "state_name")
-        val country = parsePlace(location, "country", "country_name", "countryCode", "country_code")
+        val countryName = parsePlace(location, "countryName", "country_name")
+        val countryCode = parsePlace(location, "countryCode", "country_code")
+        val country = countryName ?: countryCode ?: parsePlace(location, "country")
         val latitude = parseCoordinate(location, -90.0..90.0, "latitude", "lat")
         val longitude = parseCoordinate(location, -180.0..180.0, "longitude", "lon", "lng")
         val validCoordinates = if (latitude != null && longitude != null) {
@@ -107,16 +108,21 @@ object GetIPResponseParser {
             region = region,
             country = country,
             latitude = validCoordinates?.first,
-            longitude = validCoordinates?.second
+            longitude = validCoordinates?.second,
+            countryName = countryName,
+            countryCode = countryCode
         )
     }
 
     private fun parsePlace(location: JSONObject, vararg names: String): String? {
         for (name in names) {
             if (location.isNull(name)) continue
-            val value = location.optString(name, "").trim()
-            if (value.isNotEmpty() && !value.equals("null", ignoreCase = true)) {
-                return value
+            val value = location.opt(name)
+            if (value is String) {
+                val trimmed = value.trim()
+                if (trimmed.isNotEmpty() && !trimmed.equals("null", ignoreCase = true)) {
+                    return trimmed
+                }
             }
         }
         return null
@@ -129,8 +135,12 @@ object GetIPResponseParser {
     ): Double? {
         for (name in names) {
             if (location.isNull(name)) continue
-            val value = location.optDouble(name, Double.NaN)
-            if (value.isFinite() && value in range) {
+            val value = when (val raw = location.opt(name)) {
+                is Number -> raw.toDouble()
+                is String -> raw.trim().toDoubleOrNull()
+                else -> null
+            }
+            if (value != null && value.isFinite() && value in range) {
                 return value
             }
         }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -213,24 +214,18 @@ private fun InfoItem(
     title: String,
     value: String
 ) {
-    val textMeasurer = rememberTextMeasurer()
-    val titleText =
-        textMeasurer.measure(title, style = MaterialTheme.typography.labelSmall.copy(fontFamily = Fonts.open_sans))
-    val valueText =
-        textMeasurer.measure(value, style = MaterialTheme.typography.bodyMedium.copy(fontFamily = Fonts.open_sans))
-
-    Canvas(
-        modifier = modifier.height((titleText.size.height + valueText.size.height).dp)
-    ) {
-        drawText(
-            textLayoutResult = titleText,
+    Column(modifier = modifier) {
+        Text(
+            modifier = Modifier.padding(start = 12.dp),
+            text = title,
             color = ColorBox.text.copy(0.5f),
-            topLeft = Offset(12f.dp.toPx(), 0f)
+            style = MaterialTheme.typography.labelSmall.copy(fontFamily = Fonts.open_sans)
         )
-        drawText(
-            textLayoutResult = valueText,
+        Text(
+            modifier = Modifier.padding(start = 12.dp),
+            text = value,
             color = ColorBox.text,
-            Offset(12f.dp.toPx(), (titleText.size.height).dp.toPx())
+            style = MaterialTheme.typography.bodyMedium.copy(fontFamily = Fonts.open_sans)
         )
     }
 }

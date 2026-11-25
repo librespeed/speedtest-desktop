@@ -99,4 +99,46 @@ class GetIPResponseParserTest {
             response.toDisplayText()
         )
     }
+
+    @Test
+    fun malformedPlaceFieldsAreSkippedAndValidAliasesAreUsed() {
+        val raw = """{"processedString":"203.0.113.12 - Example ISP","location":{"city":false,"city_name":"Springfield","region":["Illinois"],"state":"Illinois","country":123,"countryName":"United States","lat":" 36.6676 ","lon":"-78.3875"}}"""
+
+        val response = GetIPResponseParser.parse(raw)
+
+        assertEquals("Springfield", response.location?.city)
+        assertEquals("Illinois", response.location?.region)
+        assertEquals("United States", response.location?.country)
+        assertEquals("United States", response.location?.countryName)
+        assertEquals(36.6676, response.location?.latitude)
+        assertEquals(-78.3875, response.location?.longitude)
+        assertEquals(
+            "203.0.113.12 - Example ISP\nApproximate IP-derived location: Springfield, Illinois, United States (Latitude 36.6676, Longitude -78.3875)",
+            response.toDisplayText()
+        )
+    }
+
+    @Test
+    fun countryCodeFallsBackWithoutAName() {
+        val raw = """{"processedString":"203.0.113.13 - Example ISP","location":{"country":"US","countryCode":"US","lat":36.6676,"lon":-78.3875}}"""
+
+        val response = GetIPResponseParser.parse(raw)
+
+        assertEquals("US", response.location?.country)
+        assertEquals("US", response.location?.countryCode)
+        assertEquals(
+            "203.0.113.13 - Example ISP\nApproximate IP-derived location: US (Latitude 36.6676, Longitude -78.3875)",
+            response.toDisplayText()
+        )
+    }
+
+    @Test
+    fun nonStringProcessedStringFallsBackToRawResponse() {
+        val raw = """{"processedString":false,"location":{"city":"Testville"}}"""
+
+        val response = GetIPResponseParser.parse(raw)
+
+        assertEquals(raw, response.processedString)
+        assertEquals("$raw\nApproximate IP-derived location: Testville", response.toDisplayText())
+    }
 }
