@@ -128,6 +128,8 @@ object GetIPResponseParser {
             topCountry
         } else if (countryName != null) {
             countryName
+        } else if (!hasTopCountryData && rawCountry != null) {
+            rawCountry
         } else if (topCountryCode != null) {
             topCountryCode
         } else if (countryCode != null) {

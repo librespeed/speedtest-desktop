@@ -167,6 +167,16 @@ class GetIPResponseParserTest {
     }
 
     @Test
+    fun legacyRawCountryNameIsPreferredOverCountryCode() {
+        val raw = """{"processedString":"203.0.113.16 - Example ISP","rawIspInfo":{"country":"United States","countryCode":"US","loc":"36.6676,-78.3875"}}"""
+
+        val response = GetIPResponseParser.parse(raw)
+
+        assertEquals("United States", response.location?.country)
+        assertEquals("US", response.location?.countryCode)
+    }
+
+    @Test
     fun coordinateCandidatesNeverMixAxesAcrossSources() {
         val raw = """{"processedString":"203.0.113.16 - Example ISP","location":{"latitude":10,"longitude":181},"rawIspInfo":{"loc":"50,120"}}"""
 
