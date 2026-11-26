@@ -141,4 +141,68 @@ class GetIPResponseParserTest {
         assertEquals(raw, response.processedString)
         assertEquals("$raw\nApproximate IP-derived location: Testville", response.toDisplayText())
     }
+
+    @Test
+    fun legacyRawIspInfoStillProvidesLocationFallback() {
+        val raw = """{"processedString":"128.94.2.134 - Microsoft Corporation, US","rawIspInfo":{"ip":"128.94.2.134","city":"Boydton","region":"Virginia","country":"US","country_name":"United States","loc":"36.6676,-78.3875","org":"AS8075 Microsoft Corporation","postal":"23917","timezone":"America/New_York"}}"""
+
+        val response = GetIPResponseParser.parse(raw)
+
+        assertEquals("128.94.2.134 - Microsoft Corporation, US", response.processedString)
+        assertEquals(raw, response.rawIspInfo)
+        assertEquals("Boydton", response.location?.city)
+        assertEquals("Virginia", response.location?.region)
+        assertEquals("United States", response.location?.countryName)
+        assertEquals("US", response.location?.countryCode)
+        assertEquals("23917", response.location?.postal)
+        assertEquals("America/New_York", response.location?.timezone)
+        assertEquals(36.6676, response.location?.latitude)
+        assertEquals(-78.3875, response.location?.longitude)
+    }
+
+    @Test
+    fun acceptsNestedCoordinatesAndTopLevelPostalTimezoneSource() {
+        val raw = """{"processedString":"203.0.113.14 - Example ISP","location":{"city":"Springfield","region":"Illinois","country":"United States","countryCode":"US","postal":"62701","timezone":"America/Chicago","source":"ipinfo","approximate":true,"coordinates":{"latitude":"39.7817","longitude":"-89.6501"}}}"""
+        val response = GetIPResponseParser.parse(raw)
+
+        assertEquals("Springfield", response.location?.city)
+        assertEquals("62701", response.location?.postal)
+        assertEquals("America/Chicago", response.location?.timezone)
+        assertEquals("ipinfo", response.location?.source)
+        assertEquals(true, response.location?.approximate)
+        assertEquals(39.7817, response.location?.latitude)
+        assertEquals(-89.6501, response.location?.longitude)
+    }
+
+    @Test
+    fun locationJsonExportUsesStructuredFieldsOnly() {
+        val location = ApproximateIPLocation(
+            city = "Boydton",
+            region = "Virginia",
+            country = "United States",
+            latitude = 36.6676,
+            longitude = -78.3875,
+            countryName = "United States",
+            countryCode = "US",
+            postal = "23917",
+            timezone = "America/New_York",
+            source = "ipinfo",
+            approximate = true
+        )
+
+        val exported = location.toJsonString()
+        val json = util.json.JSONObject(exported)
+
+        assertEquals("Boydton", json.getString("city"))
+        assertEquals("Virginia", json.getString("region"))
+        assertEquals("United States", json.getString("country"))
+        assertEquals("United States", json.getString("countryName"))
+        assertEquals("US", json.getString("countryCode"))
+        assertEquals(36.6676, json.getDouble("latitude"))
+        assertEquals(-78.3875, json.getDouble("longitude"))
+        assertEquals("23917", json.getString("postal"))
+        assertEquals("America/New_York", json.getString("timezone"))
+        assertEquals("ipinfo", json.getString("source"))
+        assertEquals(true, json.getBoolean("approximate"))
+    }
 }

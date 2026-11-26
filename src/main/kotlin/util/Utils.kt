@@ -66,11 +66,12 @@ object Utils {
             exportFile.parentFile.mkdirs()
             exportFile.createNewFile()
             BufferedWriter(FileWriter(exportFile)).use {
-                it.write("id,netAdapter,ping,jitter,download,upload,ispInfo,testPoint,date\n")
+                it.write("id,netAdapter,ping,jitter,download,upload,ispInfo,approximateLocation,testPoint,date\n")
                 for (model in input) {
                     it.write("${model.id},${model.netAdapter.escapeCsvValue()}," +
                             "${model.ping},${model.jitter},${model.download.toValidString()}," +
                             "${model.upload.toValidString()},${model.ispInfo.escapeCsvValue()}," +
+                            "${model.approximateLocation.escapeCsvValue()}," +
                             "${model.testPoint.escapeCsvValue()},${model.date.formatToDate("dd-MMM-yyyy HH:mm:ss")}\n")
                 }
                 onSuccess.invoke(exportFile)

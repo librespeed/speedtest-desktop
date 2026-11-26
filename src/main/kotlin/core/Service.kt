@@ -2,6 +2,7 @@ package core
 
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import core.lib.LibreSpeed
+import core.lib.getIP.ApproximateIPLocation
 import core.lib.serverSelector.TestPoint
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import kotlinx.coroutines.*
@@ -26,6 +27,8 @@ object Service {
     val unit = MutableLiveData("")
 
     val ipInfo = MutableLiveData("")
+    val processedIPInfo = MutableLiveData("")
+    val approximateLocationJson = MutableLiveData("")
     val testIDShare = MutableLiveData<String?>(null)
 
     val ping = MutableLiveData("00.0")
@@ -76,6 +79,8 @@ object Service {
         currentCalValuePr.value = 0f
         unit.value = ""
         ipInfo.value = ""
+        processedIPInfo.value = ""
+        approximateLocationJson.value = ""
         testIDShare.value = null
         ping.value = "00.0"
         jitter.value = "00.0"
@@ -165,6 +170,12 @@ object Service {
                     override fun onIPInfoUpdate(ipInfo: String?) {
                         this@Service.ipInfo.value = ipInfo.toString()
                     }
+                    override fun onIPProcessedInfoUpdate(processedString: String?) {
+                        this@Service.processedIPInfo.value = processedString ?: ""
+                    }
+                    override fun onIPLocationUpdate(location: ApproximateIPLocation?) {
+                        this@Service.approximateLocationJson.value = location?.toJsonString() ?: ""
+                    }
                     override fun onTestIDReceived(id: String?, shareURL: String?) {
                         testIDShare.value = shareURL
                     }
@@ -179,7 +190,8 @@ object Service {
                                     jitter = jitter.value.toDouble(),
                                     download = download.value,
                                     upload = upload.value,
-                                    ispInfo = ipInfo.value,
+                                    ispInfo = processedIPInfo.value.ifEmpty { ipInfo.value },
+                                    approximateLocation = approximateLocationJson.value,
                                     testPoint = testPoint.value?.name.toString(),
                                     date = System.currentTimeMillis()
                                 )
