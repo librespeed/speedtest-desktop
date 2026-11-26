@@ -190,7 +190,7 @@ object Service {
                                     jitter = jitter.value.toDouble(),
                                     download = download.value,
                                     upload = upload.value,
-                                    ispInfo = processedIPInfo.value.ifEmpty { ipInfo.value },
+                                    ispInfo = processedIPInfo.value,
                                     approximateLocation = approximateLocationJson.value,
                                     testPoint = testPoint.value?.name.toString(),
                                     date = System.currentTimeMillis()

@@ -143,6 +143,50 @@ class GetIPResponseParserTest {
     }
 
     @Test
+    fun explicitApproximateFalseIsExported() {
+        val location = ApproximateIPLocation(
+            city = "Testville",
+            approximate = false
+        )
+
+        val exported = location.toJsonString()
+        val json = util.json.JSONObject(exported)
+
+        assertEquals(false, json.getBoolean("approximate"))
+    }
+
+    @Test
+    fun topLevelCountryDataOverridesLegacyCountryAliases() {
+        val raw = """{"processedString":"203.0.113.15 - Example ISP","location":{"country":"France","countryCode":"FR"},"rawIspInfo":{"country_name":"United States","country_code":"US","loc":"36.6676,-78.3875"}}"""
+
+        val response = GetIPResponseParser.parse(raw)
+
+        assertEquals("France", response.location?.country)
+        assertEquals("FR", response.location?.countryCode)
+        assertNull(response.location?.countryName)
+    }
+
+    @Test
+    fun coordinateCandidatesNeverMixAxesAcrossSources() {
+        val raw = """{"processedString":"203.0.113.16 - Example ISP","location":{"latitude":10,"longitude":181},"rawIspInfo":{"loc":"50,120"}}"""
+
+        val response = GetIPResponseParser.parse(raw)
+
+        assertEquals(50.0, response.location?.latitude)
+        assertEquals(120.0, response.location?.longitude)
+    }
+
+    @Test
+    fun emptyProcessedStringRemainsEmpty() {
+        val raw = """{"processedString":"","location":{"city":"Springfield"}}"""
+
+        val response = GetIPResponseParser.parse(raw)
+
+        assertEquals("", response.processedString)
+        assertEquals("Approximate IP-derived location: Springfield", response.toDisplayText())
+    }
+
+    @Test
     fun legacyRawIspInfoStillProvidesLocationFallback() {
         val raw = """{"processedString":"128.94.2.134 - Microsoft Corporation, US","rawIspInfo":{"ip":"128.94.2.134","city":"Boydton","region":"Virginia","country":"US","country_name":"United States","loc":"36.6676,-78.3875","org":"AS8075 Microsoft Corporation","postal":"23917","timezone":"America/New_York"}}"""
 

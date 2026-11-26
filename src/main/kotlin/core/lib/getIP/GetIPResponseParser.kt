@@ -63,7 +63,7 @@ data class ApproximateIPLocation(
         postal?.trim()?.takeIf { it.isNotEmpty() }?.let { json.put("postal", it) }
         timezone?.trim()?.takeIf { it.isNotEmpty() }?.let { json.put("timezone", it) }
         source?.trim()?.takeIf { it.isNotEmpty() }?.let { json.put("source", it) }
-        if (approximate) json.put("approximate", true)
+        json.put("approximate", approximate)
         return json.toString()
     }
 }
@@ -111,31 +111,32 @@ object GetIPResponseParser {
         val region = parsePlace(location, "region", "state", "state_name")
             ?: parsePlace(location, "subdivision", "subdivision_name")
             ?: parsePlace(rawIspInfo, "region", "region_name", "state", "subdivision", "subdivision_name")
-        val countryName = parsePlace(location, "countryName", "country_name")
-            ?: parsePlace(rawIspInfo, "countryName", "country_name")
-        val countryCode = parsePlace(location, "countryCode", "country_code", "country_iso_code", "iso_code")
-            ?: parsePlace(rawIspInfo, "countryCode", "country_code", "country_iso_code", "iso_code")
-            ?: parseCountryCode(location, rawIspInfo)
         val topCountry = parsePlace(location, "country")
         val rawCountry = parsePlace(rawIspInfo, "country")
-        val country = countryName ?: topCountry ?: rawCountry ?: countryCode
-        val latitude = parseCoordinate(location, -90.0..90.0, "latitude", "lat")
-            ?: parseNestedCoordinate(location, "coordinates", -90.0..90.0, "latitude", "lat")
-            ?: parseLocationString(location, "loc")
-            ?: parseCoordinate(rawIspInfo, -90.0..90.0, "latitude", "lat")
-            ?: parseNestedCoordinate(rawIspInfo, "coordinates", -90.0..90.0, "latitude", "lat")
-            ?: parseLocationString(rawIspInfo, "loc")
-        val longitude = parseCoordinate(location, -180.0..180.0, "longitude", "lon", "lng")
-            ?: parseNestedCoordinate(location, "coordinates", -180.0..180.0, "longitude", "lon", "lng")
-            ?: parseLocationStringLongitude(location, "loc")
-            ?: parseCoordinate(rawIspInfo, -180.0..180.0, "longitude", "lon", "lng")
-            ?: parseNestedCoordinate(rawIspInfo, "coordinates", -180.0..180.0, "longitude", "lon", "lng")
-            ?: parseLocationStringLongitude(rawIspInfo, "loc")
-        val validCoordinates = if (latitude != null && longitude != null) {
-            latitude to longitude
+        val topCountryName = parsePlace(location, "countryName", "country_name")
+        val rawCountryName = parsePlace(rawIspInfo, "countryName", "country_name")
+        val topCountryCode = parsePlace(location, "countryCode", "country_code", "country_iso_code", "iso_code")
+            ?: parseCountryCode(location)
+        val rawCountryCode = parsePlace(rawIspInfo, "countryCode", "country_code", "country_iso_code", "iso_code")
+            ?: parseCountryCode(rawIspInfo)
+        val hasTopCountryData = topCountryName != null || topCountryCode != null || topCountry != null
+        val countryName = if (hasTopCountryData) topCountryName else rawCountryName
+        val countryCode = if (hasTopCountryData) topCountryCode else rawCountryCode
+        val country = if (topCountryName != null) {
+            topCountryName
+        } else if (topCountry != null) {
+            topCountry
+        } else if (countryName != null) {
+            countryName
+        } else if (topCountryCode != null) {
+            topCountryCode
+        } else if (countryCode != null) {
+            countryCode
         } else {
-            null
+            rawCountry
         }
+        val validCoordinates = parseCoordinatePair(location, "coordinates", "loc")
+            ?: parseCoordinatePair(rawIspInfo, "coordinates", "loc")
         val postal = parsePlace(location, "postal", "postal_code")
             ?: parsePlace(rawIspInfo, "postal", "postal_code")
         val timezone = parsePlace(location, "timezone")
@@ -231,6 +232,31 @@ object GetIPResponseParser {
             }
         }
         return null
+    }
+
+    private fun parseCoordinatePair(
+        location: JSONObject?,
+        nestedName: String,
+        locName: String
+    ): Pair<Double, Double>? {
+        if (location == null) return null
+
+        val latitude = parseCoordinate(location, -90.0..90.0, "latitude", "lat")
+        val longitude = parseCoordinate(location, -180.0..180.0, "longitude", "lon", "lng")
+        if (latitude != null && longitude != null) {
+            return latitude to longitude
+        }
+
+        val nested = location.optJSONObject(nestedName)
+        if (nested != null) {
+            val nestedLatitude = parseCoordinate(nested, -90.0..90.0, "latitude", "lat")
+            val nestedLongitude = parseCoordinate(nested, -180.0..180.0, "longitude", "lon", "lng")
+            if (nestedLatitude != null && nestedLongitude != null) {
+                return nestedLatitude to nestedLongitude
+            }
+        }
+
+        return parseLocationCoordinates(location, locName)
     }
 
     private fun parseNestedCoordinate(
