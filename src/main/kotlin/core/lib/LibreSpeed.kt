@@ -2,6 +2,7 @@ package core.lib
 
 import core.lib.config.SpeedtestConfig
 import core.lib.config.TelemetryConfig
+import core.lib.getIP.ApproximateIPLocation
 import core.lib.serverSelector.ServerSelector
 import core.lib.serverSelector.TestPoint
 import core.lib.worker.SpeedtestWorker
@@ -171,6 +172,14 @@ class LibreSpeed {
                     callback.onPingJitterUpdate(ping, jitter, progress)
                 }
 
+                override fun onIPProcessedInfoUpdate(processedString: String?) {
+                    callback.onIPProcessedInfoUpdate(processedString)
+                }
+
+                override fun onIPLocationUpdate(location: ApproximateIPLocation?) {
+                    callback.onIPLocationUpdate(location)
+                }
+
                 override fun onIPInfoUpdate(ipInfo: String?) {
                     callback.onIPInfoUpdate(ipInfo)
                 }
@@ -221,6 +230,8 @@ class LibreSpeed {
         abstract fun onDownloadUpdate(dl: Double, progress: Double)
         abstract fun onUploadUpdate(ul: Double, progress: Double)
         abstract fun onPingJitterUpdate(ping: Double, jitter: Double, progress: Double)
+        open fun onIPProcessedInfoUpdate(processedString: String?) {}
+        open fun onIPLocationUpdate(location: ApproximateIPLocation?) {}
         abstract fun onIPInfoUpdate(ipInfo: String?)
         abstract fun onTestIDReceived(id: String?, shareURL: String?)
         abstract fun onEnd()

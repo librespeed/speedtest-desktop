@@ -44,16 +44,36 @@ object Database {
                         "upload REAL," +
                         "ispInfo TEXT," +
                         "testPoint TEXT," +
-                        "date INTEGER" +
+                        "date INTEGER," +
+                        "approximateLocation TEXT" +
                         ")"
             )
+            ensureColumn("approximateLocation", "TEXT")
         } catch (_: Exception) {
         } finally {
             statement.close()
         }
     }
+
+    private fun ensureColumn(columnName: String, columnType: String) {
+        val result = connection.metaData.getColumns(null, null, "history", columnName)
+        val exists = try {
+            result.next()
+        } finally {
+            result.close()
+        }
+        if (!exists) {
+            val statement = connection.createStatement()
+            try {
+                statement.executeUpdate("ALTER TABLE history ADD COLUMN $columnName $columnType")
+            } finally {
+                statement.close()
+            }
+        }
+    }
+
     fun saveHistory(model: ModelHistory) {
-        val statement = connection.prepareStatement("INSERT INTO history (netAdapter,ping,jitter,download,upload,ispInfo,testPoint,date) VALUES (?,?,?,?,?,?,?,?)")
+        val statement = connection.prepareStatement("INSERT INTO history (netAdapter,ping,jitter,download,upload,ispInfo,testPoint,date,approximateLocation) VALUES (?,?,?,?,?,?,?,?,?)")
         try {
             statement.setString(1, model.netAdapter)
             statement.setDouble(2, model.ping)
@@ -63,6 +83,7 @@ object Database {
             statement.setString(6, model.ispInfo)
             statement.setString(7, model.testPoint)
             statement.setLong(8, model.date)
+            statement.setString(9, model.approximateLocation)
             statement.executeUpdate()
         } catch (_ : Exception) {} finally {
             statement.close()
@@ -83,7 +104,8 @@ object Database {
                 upload = resultSet.getDouble("upload"),
                 ispInfo = resultSet.getString("ispInfo"),
                 testPoint = resultSet.getString("testPoint"),
-                date = resultSet.getLong("date"))
+                date = resultSet.getLong("date"),
+                approximateLocation = resultSet.getString("approximateLocation") ?: "")
             )
         }
         return result
